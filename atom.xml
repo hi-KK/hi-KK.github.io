@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hi-kk.github.io/</id>
-    <title>KEYONE——PenTesting&amp;Security Research</title>
-    <updated>2019-07-23T09:12:18.240Z</updated>
+    <title>KEYONE</title>
+    <updated>2019-07-23T12:14:27.754Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hi-kk.github.io/"/>
     <link rel="self" href="https://hi-kk.github.io//atom.xml"/>
-    <subtitle>LOVE &amp; PEACE ❤️</subtitle>
+    <subtitle>PenTesting&amp;Security Research &lt;br&gt;
+LOVE &amp; PEACE ❤️JUST FOR FUN</subtitle>
     <logo>https://hi-kk.github.io//images/avatar.png</logo>
     <icon>https://hi-kk.github.io//favicon.ico</icon>
-    <rights>All rights reserved 2019, KEYONE——PenTesting&amp;Security Research</rights>
+    <rights>All rights reserved 2019, KEYONE</rights>
     <entry>
         <title type="html"><![CDATA[CentOS下安装KVM环境及VMWare与KVM互相转换]]></title>
         <id>https://hi-kk.github.io//post/centos-xia-an-zhuang-kvm-huan-jing-ji-vmware-yu-kvm-hu-xiang-zhuan-huan</id>
@@ -36,33 +37,34 @@
 <code>sudo yum install -y epel-release net-tools vim unzip zip wget ftp bridge-utils</code></p>
 </li>
 <li>
-<p>安装KVM及相关工具<br>
-<code>sudo yum install -y qemu-kvm libvirt</code><br>
-<code>sudo yum install -y libguestfs-tools libguestfs-tools libguestfs-tools-c</code></p>
+<p>安装KVM及相关工具</p>
 </li>
-<li>
-<p>验证安装结果</p>
-</li>
+</ol>
+<pre><code>sudo yum install -y qemu-kvm libvirt
+sudo yum install -y libguestfs-tools libguestfs-tools libguestfs-tools-c
+</code></pre>
+<ol start="4">
+<li>验证安装结果</li>
 </ol>
 <pre><code>$ lsmod | grep ^kvm
 kvm_intel             174250  0 
 kvm                   570658  1 kvm_intel
 </code></pre>
 <ol start="5">
-<li>
-<p>启动服务并设置为开机自动运行<br>
-<code>systemctl start libvirtd</code><br>
-<code>systemctl enable libvirtd</code></p>
-</li>
-<li>
-<p>检查服务状态<br>
-<code>systemctl status libvirtd</code><br>
-<code>systemctl is-enabled libvirtd</code></p>
-</li>
-<li>
-<p>创建网络环境<br>
-注意： 正常情况下，按之前的步骤一步步来是没有报错的，我这里实际测试也是如此，这时系统里已经有了virbr0这个网桥，则后面直接使用virbr0网桥即可。如果没有，就参看文末的引用链接原文寻找此处内容。</p>
-</li>
+<li>启动服务并设置为开机自动运行</li>
+</ol>
+<pre><code>systemctl start libvirtd
+systemctl enable libvirtd
+</code></pre>
+<ol start="6">
+<li>检查服务状态</li>
+</ol>
+<pre><code>systemctl status libvirtd
+systemctl is-enabled libvirtd
+</code></pre>
+<ol start="7">
+<li>创建网络环境<br>
+注意： 正常情况下，按之前的步骤一步步来是没有报错的，我这里实际测试也是如此，这时系统里已经有了virbr0这个网桥，则后面直接使用virbr0网桥即可。如果没有，就参看文末的引用链接原文寻找此处内容。</li>
 </ol>
 <h2 id="vmware转化kvm">VMware转化KVM</h2>
 <ol>
@@ -105,6 +107,170 @@ kvm                   570658  1 kvm_intel
 <p><a href="https://blog.csdn.net/sch0120/article/details/83508879">在CentOS7上运行KVM虚拟机</a><br>
 <a href="https://www.jianshu.com/p/eb8bccc28335">2019-02-21 VMware15在Ubuntu16.04安装使用及转换KVM</a><br>
 <a href="https://blog.csdn.net/tianci_zzz/article/details/73896955">vmware虚拟机迁移到kvm</a></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[OurPHP20180718前台getshell分析]]></title>
+        <id>https://hi-kk.github.io//post/ourphp20180718-qian-tai-getshell-fen-xi</id>
+        <link href="https://hi-kk.github.io//post/ourphp20180718-qian-tai-getshell-fen-xi">
+        </link>
+        <updated>2019-04-30T06:10:09.000Z</updated>
+        <summary type="html"><![CDATA[<blockquote>
+<p>影响范围：v1.7.5-v1.8.3</p>
+</blockquote>
+<p>先抛出payload，再进行代码分析</p>
+]]></summary>
+        <content type="html"><![CDATA[<blockquote>
+<p>影响范围：v1.7.5-v1.8.3</p>
+</blockquote>
+<p>先抛出payload，再进行代码分析</p>
+<!--more-->
+<h2 id="前台getshell">前台getshell</h2>
+<p>首先，访问http://127.0.0.1/ourphp20180718/function/editor/php/upload_json.php?upload_file=1<br>
+<img src="https://hi-kk.github.io//post-images/1563883458715.png" alt=""><br>
+获取到：</p>
+<pre><code>&lt;!--12345||7Hv9WqglWlPJZPgrFVUvpFnP4DmuTCn1--&gt;
+</code></pre>
+<p>构造出：</p>
+<pre><code>口令码：12345
+
+安全校验码：7Hv9WqglWlPJZPgrFVUvpFnP4DmuTCn1glWlPJ（跟上图比多了后面六个字符，具体看后面代码分析）
+</code></pre>
+<p>访问 <a href="http://127.0.0.1/ourphp20180718//client/manage/ourphp_filebox.php?op=home&amp;folder=./&amp;validation=12345&amp;code=7Hv9WqglWlPJZPgrFVUvpFnP4DmuTCn1glWlPJ">http://127.0.0.1/ourphp20180718//client/manage/ourphp_filebox.php?op=home&amp;folder=./&amp;validation=12345&amp;code=7Hv9WqglWlPJZPgrFVUvpFnP4DmuTCn1glWlPJ</a></p>
+<p><img src="https://hi-kk.github.io//post-images/1563883485140.png" alt=""><br>
+进行文件编辑，写入代码，修改后缀名，直接getshell</p>
+<p><img src="https://hi-kk.github.io//post-images/1563883511409.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1563883531172.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1563883544692.png" alt=""></p>
+<h2 id="代码分析">代码分析</h2>
+<p>跟进 <code>function\editor\php\upload_json.php</code></p>
+<p><img src="https://hi-kk.github.io//post-images/1563883560945.png" alt=""></p>
+<p>继续跟进<code>uploadsafe()</code>函数，在<code>function\editor\php\JSON.php</code>238行</p>
+<pre><code class="language-php">	function uploadsafe()
+    {
+		global $ourphp;
+		return '&lt;!--'.$ourphp['validation'].'||'.substr($ourphp['safecode'], 0, 32).'--&gt;';
+	}
+</code></pre>
+<p>由此可知，只要在前端给参数<code>upload_file</code>传任意值，就会返回<code>validation</code>口令码和<code>safecode</code>安全码的前32位</p>
+<p>继续跟，看安全码是如何生成的，在<code>function\install\index.php</code>288行</p>
+<pre><code class="language-php">$ourphp_safecode = getRandomString(32);
+$safecode6 = substr($ourphp_safecode , 6 , 6);
+$str_f = '$';
+$str_tmp = &quot;&lt;?php
+	/*
+	 * Ourphp - CMS建站系统
+	 * Copyright (C) 2014 ourphp.net
+	 * 开发者：哈尔滨伟成科技有限公司
+	 * -------------------------------
+	 * 网站配置文件 (2016-10-22)
+	 * -------------------------------
+	 */
+
+	define('OURPHPNO', true);
+	define('WEB_ROOT',substr(dirname(__FILE__), 0, -7));
+
+	include '&quot;.$mysql_file.&quot;';
+
+	&quot;.$str_f.&quot;ourphp = array(
+		'webpath' =&gt; '/',	// 网站路径
+		'validation' =&gt; '12345',	// 口令码
+		'adminpath' =&gt; 'client/manage',		// 管理员默认目录
+		'mysqlurl' =&gt; '&quot;.$ourphp_dburl.&quot;',	// 数据库链接地址
+		'mysqlname' =&gt; '&quot;.$ourphp_dbname.&quot;',	// 数据库登录账号
+		'mysqlpass' =&gt; '&quot;.$ourphp_dbpass.&quot;',	// 数据库登录密码
+		'mysqldb' =&gt; '&quot;.$ourphp_mydb.&quot;',	// 数据库表名
+		'filesize' =&gt; '5000000',	// 附件上传最大值
+		'safecode' =&gt; '&quot;.$ourphp_safecode.$safecode6.&quot;',	// 安全校验码
+		'mysqltype' =&gt; '&quot;.$mysql_type.&quot;',
+	);
+
+	&quot;.$str_f.&quot;db = new OurPHP_Mysql(
+		&quot;.$str_f.&quot;ourphp['mysqlurl'],
+		&quot;.$str_f.&quot;ourphp['mysqlname'],
+		&quot;.$str_f.&quot;ourphp['mysqlpass'],
+		&quot;.$str_f.&quot;ourphp['mysqldb']
+	);
+?&gt;&quot;;
+</code></pre>
+<p><img src="https://hi-kk.github.io//post-images/1563883610679.png" alt=""><br>
+由此可知，安全码是通过随机取一个32位字符，然后取32位的第6位之后的6位字符，拼接到后面形成</p>
+<p>由此就能得到后台访问的关键口令码和安全码</p>
+<p>再跟后台的文件管理模块，在<code>\client\manage\ourphp_filebox.php</code>45行</p>
+<p><img src="https://hi-kk.github.io//post-images/1563883622642.png" alt=""><br>
+由此可知，只要口令码、安全校验码正确就可以对文件进行操作（编辑、重命名）</p>
+<p>而且，835行的后缀名过滤，可用大小写绕过了</p>
+<p><img src="https://hi-kk.github.io//post-images/1563883639438.png" alt=""><br>
+至此，payload就可以构造好啦</p>
+<blockquote>
+<p>参考：https://xz.aliyun.com/t/4315</p>
+</blockquote>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[python发送定制报文与回包取特定值]]></title>
+        <id>https://hi-kk.github.io//post/python-fa-song-ding-zhi-bao-wen-yu-hui-bao-qu-te-ding-zhi</id>
+        <link href="https://hi-kk.github.io//post/python-fa-song-ding-zhi-bao-wen-yu-hui-bao-qu-te-ding-zhi">
+        </link>
+        <updated>2019-04-19T02:22:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>-_- 无FCUK说....</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>-_- 无FCUK说....</p>
+<!--more-->
+<p><img src="https://hi-kk.github.io//post-images/1563882268454.png" alt=""></p>
+<h2 id="需求">需求</h2>
+<p>使用Python编写一个脚本，实现向特定端口发送特定的探测payload报文，根据响应包，取特定字节范围的字符进行输出</p>
+<h2 id="实例">实例</h2>
+<p>这里就以工控设备：<strong>Mitsubishi（三菱） Q系列PLC CPU型号识别</strong> 作为案例<br>
+其实，在之前写的文章 ** Nmap NSE开发之三菱Q系列PLC以太网识别** 之中已经可以得出大体的设计思路</p>
+<ol>
+<li>
+<p>向设备的<code>5007</code> TCP端口，发送特定的识别数据报文<br>
+<code>57000000001111070000ffff030000fe03000014001c080a0800000000000000040101010000000001</code><br>
+<img src="https://hi-kk.github.io//post-images/1563882351879.png" alt=""></p>
+</li>
+<li>
+<p>接受设备返回的数据报文，提取出特定字节范围的 <code>设备CPU信息</code><br>
+<img src="https://hi-kk.github.io//post-images/1563882382138.png" alt=""><br>
+这里直接给出python代码</p>
+</li>
+</ol>
+<pre><code class="language-python">
+# -*- coding: utf-8 -*-
+
+from socket import *
+
+
+if __name__==&quot;__main__&quot;:
+
+	
+	host='xx.xx.xx.xx'
+	port=5007
+
+	s = socket(AF_INET,SOCK_STREAM) #TCP发包
+	s.connect((host,port))
+
+
+	cmd=&quot;57000000001111070000ffff030000fe03000014001c080a0800000000000000040101010000000001&quot;
+	
+	s.send(cmd.decode('hex'))  #TCP发包
+
+	#recv0_data=s.recvfrom(1024)
+
+	res_list = []
+
+	cur_data, _ = s.recvfrom(1024)
+
+	for cur_chr in cur_data:
+		res_list.append(cur_chr)
+
+	cpuinfo = ''.join(res_list[35:55]) #取特定字节范围 CPUINFO
+
+	print cpuinfo
+
+	s.close()
+</code></pre>
+<p><img src="https://hi-kk.github.io//post-images/1563882419533.png" alt=""></p>
 ]]></content>
     </entry>
     <entry>
