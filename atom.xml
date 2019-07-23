@@ -1,19 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <id>https://hi-kk.github.com/</id>
+    <id>https://hi-kk.github.io/</id>
     <title>KEYONE——PenTesting&amp;Security Research</title>
-    <updated>2019-07-23T07:53:47.922Z</updated>
+    <updated>2019-07-23T09:12:18.240Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
-    <link rel="alternate" href="https://hi-kk.github.com/"/>
-    <link rel="self" href="https://hi-kk.github.com//atom.xml"/>
+    <link rel="alternate" href="https://hi-kk.github.io/"/>
+    <link rel="self" href="https://hi-kk.github.io//atom.xml"/>
     <subtitle>LOVE &amp; PEACE ❤️</subtitle>
-    <logo>https://hi-kk.github.com//images/avatar.png</logo>
-    <icon>https://hi-kk.github.com//favicon.ico</icon>
+    <logo>https://hi-kk.github.io//images/avatar.png</logo>
+    <icon>https://hi-kk.github.io//favicon.ico</icon>
     <rights>All rights reserved 2019, KEYONE——PenTesting&amp;Security Research</rights>
     <entry>
+        <title type="html"><![CDATA[CentOS下安装KVM环境及VMWare与KVM互相转换]]></title>
+        <id>https://hi-kk.github.io//post/centos-xia-an-zhuang-kvm-huan-jing-ji-vmware-yu-kvm-hu-xiang-zhuan-huan</id>
+        <link href="https://hi-kk.github.io//post/centos-xia-an-zhuang-kvm-huan-jing-ji-vmware-yu-kvm-hu-xiang-zhuan-huan">
+        </link>
+        <updated>2019-07-23T08:03:49.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>在最近的工作任务中，需要部署KVM虚拟环境，并尝试把以前在VMware下制作的虚拟机镜像转换成KVM支持的文件。之前也没接触过kvm，就网上搜索一番资料来试试看，幸运的是这次搜到的资料竟然一次成功，没有任何报错，简直感激涕零啊......索性把这个过程记录一下，分享出来，能少踩坑就少踩坑。</p>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>在最近的工作任务中，需要部署KVM虚拟环境，并尝试把以前在VMware下制作的虚拟机镜像转换成KVM支持的文件。之前也没接触过kvm，就网上搜索一番资料来试试看，幸运的是这次搜到的资料竟然一次成功，没有任何报错，简直感激涕零啊......索性把这个过程记录一下，分享出来，能少踩坑就少踩坑。</p>
+<!-- more -->
+<h2 id="前期检查">前期检查</h2>
+<p><img src="https://hi-kk.github.io//post-images/1563870446694.png" alt=""><br>
+无论在物理机还是虚拟机都应该启用CPU的虚拟化功能Intel-VT，以更好地运行KVM或者VMware虚拟机</p>
+<h2 id="安装步骤">安装步骤</h2>
+<ol>
+<li>
+<p>检查CPU特性<br>
+<code>lscpu | grep vmx</code></p>
+</li>
+<li>
+<p>安装一些基础软件包（非必须）<br>
+<code>sudo yum install -y epel-release net-tools vim unzip zip wget ftp bridge-utils</code></p>
+</li>
+<li>
+<p>安装KVM及相关工具<br>
+<code>sudo yum install -y qemu-kvm libvirt</code><br>
+<code>sudo yum install -y libguestfs-tools libguestfs-tools libguestfs-tools-c</code></p>
+</li>
+<li>
+<p>验证安装结果</p>
+</li>
+</ol>
+<pre><code>$ lsmod | grep ^kvm
+kvm_intel             174250  0 
+kvm                   570658  1 kvm_intel
+</code></pre>
+<ol start="5">
+<li>
+<p>启动服务并设置为开机自动运行<br>
+<code>systemctl start libvirtd</code><br>
+<code>systemctl enable libvirtd</code></p>
+</li>
+<li>
+<p>检查服务状态<br>
+<code>systemctl status libvirtd</code><br>
+<code>systemctl is-enabled libvirtd</code></p>
+</li>
+<li>
+<p>创建网络环境<br>
+注意： 正常情况下，按之前的步骤一步步来是没有报错的，我这里实际测试也是如此，这时系统里已经有了virbr0这个网桥，则后面直接使用virbr0网桥即可。如果没有，就参看文末的引用链接原文寻找此处内容。</p>
+</li>
+</ol>
+<h2 id="vmware转化kvm">VMware转化KVM</h2>
+<ol>
+<li>
+<p>检查vmware虚拟机保存目录，查看是否为独立的vmdk文件，如果不是独立文件需要对其进行合并。还有，如果这台虚拟机有快照，需要将快照导出为完整虚拟机！</p>
+</li>
+<li>
+<p>合并方法：以管理员身份运行cmd，进入到<br>
+<code>C:\Program Files (x86)\VMware\VMware Workstation&gt;</code>（VMware安装目录，根据实际调整）<br>
+用vmware自带的工具vmware- vdiskmanager.exe来合并多个文件，命令如下<code>vmware-vdiskmanager.exe -r &quot;C:\Winxp\Winxp.vmdk&quot; -t 0 &quot;C:\Winxp-vm.vmdk&quot;</code><br>
+合并成功后，Winxpvm.vmdk就是合并后的独立文件。</p>
+</li>
+<li>
+<p>将vmdk文件拷贝到KVM Linux主机，运行命令：<br>
+<code>[root@localhost ~]# qemu-img convert Winxp-vm.vmdk -O qcow2 Winxp-kvm.img</code><br>
+转化之后，Winxp-kvm.img就是可以导入KVM的镜像文件</p>
+</li>
+<li>
+<p>启动virtmanager，导入镜像创建虚拟机。这时启动的虚拟机可能会发生蓝屏状况（windows虚拟机会有这种情况发生），你需要强制关闭蓝屏虚拟机。</p>
+</li>
+<li>
+<p>导入注册表</p>
+</li>
+</ol>
+<pre><code>[root@localhost ~]#wget https://github.com/jakobadam/kvm-mergeide/archive/master.zip
+
+[root@localhost ~]#yum install qemu-img *libguestfs*'
+
+[root@localhost kvm-mergeide-master]# virt-win-reg --merge XP mergeide.reg 
+</code></pre>
+<p>注意:这条命令里的XP是你之前创建kvm虚拟机的名称，virt-win-reg会自动搜索KVM中noactive的虚拟机名称，然后执行mergeide.reg。至此，转化已经完成<br>
+<img src="https://hi-kk.github.io//post-images/1563872596863.png" alt=""></p>
+<h2 id="kvm转化vmware">KVM转化VMWare</h2>
+<ol>
+<li>找到kvm虚拟机使用的img文件，将其转换成vmdk格式。<br>
+<code>qemu-img convert testvm1.img –O vmdk /tmp/testvm1.vmdk</code></li>
+<li>在VMware 里创建一个虚拟机，要和kvm环境虚拟机配置相同， 在创建磁盘那一步，选择”使用现有虚拟磁盘“，就是刚刚转换好的vmdk文件，再开启虚拟机就OK了。</li>
+</ol>
+<h2 id="引用">引用</h2>
+<p><a href="https://blog.csdn.net/sch0120/article/details/83508879">在CentOS7上运行KVM虚拟机</a><br>
+<a href="https://www.jianshu.com/p/eb8bccc28335">2019-02-21 VMware15在Ubuntu16.04安装使用及转换KVM</a><br>
+<a href="https://blog.csdn.net/tianci_zzz/article/details/73896955">vmware虚拟机迁移到kvm</a></p>
+]]></content>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://hi-kk.github.com//post/hello-gridea</id>
-        <link href="https://hi-kk.github.com//post/hello-gridea">
+        <id>https://hi-kk.github.io//post/hello-gridea</id>
+        <link href="https://hi-kk.github.io//post/hello-gridea">
         </link>
         <updated>2018-12-11T16:00:00.000Z</updated>
         <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
