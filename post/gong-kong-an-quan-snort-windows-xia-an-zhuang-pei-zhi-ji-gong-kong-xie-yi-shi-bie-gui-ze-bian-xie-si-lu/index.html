@@ -1,0 +1,297 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>工控安全：snort-Windows下安装配置及工控协议识别规则编写 | KEYONE</title>
+<meta name="description" content="PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN" />
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1563939020421">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hi-kk.github.io/">
+  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1563939020421" alt="">
+  </a>
+  <h1 class="site-title">
+    KEYONE
+  </h1>
+  <p class="site-description">
+    PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              工控安全：snort-Windows下安装配置及工控协议识别规则编写
+            </h2>
+            <div class="post-info">
+              <span>
+                2019-03-29
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://hi-kk.github.io//tag/FUWg7TWMk" class="post-tag">
+                  # 规则
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/G7QS4bExG" class="post-tag">
+                  # 工控安全
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/DBUUNa5Rb" class="post-tag">
+                  # snort
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/EqhCCbtZ3r" class="post-tag">
+                  # 协议
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/Fgome_cw_" class="post-tag">
+                  # 记录
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hi-kk.github.io//post-images/gong-kong-an-quan-snort-windows-xia-an-zhuang-pei-zhi-ji-gong-kong-xie-yi-shi-bie-gui-ze-bian-xie-si-lu.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>先简单介绍windows环境下的snort安装和配置，主要是为了下面写工控协议识别snort规则和验证规则做铺垫。</p>
+<!--more-->
+<h2 id="下载安装">下载安装</h2>
+<p>官网下载：https://www.snort.org/<br>
+<img src="https://hi-kk.github.io//post-images/1563935405913.png" alt=""><br>
+直接默认安装<br>
+<img src="https://hi-kk.github.io//post-images/1563935447915.png" alt=""><br>
+进入安装目录：<code>C:\Snort</code><br>
+<img src="https://hi-kk.github.io//post-images/1563935466767.png" alt=""></p>
+<h2 id="配置文件">配置文件</h2>
+<p>编辑<code>C:\Snort\etc\snort.conf</code> 修改成如下图<br>
+<img src="https://hi-kk.github.io//post-images/1563935483657.png" alt=""></p>
+<pre><code class="language-bash"># Path to your rules files (this can be a relative path)
+# Note for Windows users:  You are advised to make this an absolute path,
+# such as:  c:\snort\rules
+var RULE_PATH c:\snort\rules
+var SO_RULE_PATH c:\snort\so_rules
+var PREPROC_RULE_PATH c:\snort\preproc_rules
+
+# If you are using reputation preprocessor set these
+# Currently there is a bug with relative paths, they are relative to where snort is
+# not relative to snort.conf like the above variables
+# This is completely inconsistent with how other vars work, BUG 89986
+# Set the absolute path appropriately
+var WHITE_LIST_PATH c:\snort\rules
+var BLACK_LIST_PATH c:\snort\rules
+</code></pre>
+<p><img src="https://hi-kk.github.io//post-images/1563935501116.png" alt=""></p>
+<pre><code># path to dynamic preprocessor libraries
+
+dynamicpreprocessor directory c:\snort\lib\snort_dynamicpreprocessor
+
+# path to base preprocessor engine
+
+dynamicengine c:\snort\lib\snort_dynamicengine\sf_engine.dll
+</code></pre>
+<p><img src="https://hi-kk.github.io//post-images/1563935513767.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1563935527636.png" alt=""></p>
+<p>此处安装参考:http://www.cnblogs.com/lasgalen/p/4512755.html</p>
+<h2 id="规则验证">规则验证</h2>
+<p>进入<code>C:\Snort\rules</code>，新建三个文件</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935541107.png" alt=""></p>
+<p>在文件<code>local.rules</code>添加我们的snort规则进行验证测试，例如：</p>
+<pre><code>alert tcp any any -&gt; any 1911 (msg:&quot;IDS: fox-info&quot;; content:&quot;|66 6f 78|&quot;;  sid:1112515; rev:1;)
+</code></pre>
+<p>CMD进入目录<code>C:\Snort\bin</code></p>
+<p>注意：snort只能识别pcap后缀的包文件，用wireshark的pcapng后缀会报错 需要再另存为一下 修改文件格式 不是直接改后缀哦</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935566053.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1563935577435.png" alt=""><br>
+然后运行：</p>
+<pre><code>PS C:\Snort\bin&gt; .\snort.exe  -c c:\snort\etc\snort.conf -l c:\snort\log -r .\fox_info.pcap
+</code></pre>
+<p>没有报错就说明成功运行了，去看看log有没有输出信息</p>
+<p>进入<code>C:\Snort\log</code></p>
+<p><img src="https://hi-kk.github.io//post-images/1563935592124.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1563935604411.png" alt=""><br>
+成功按规则进行了信息输出，到此规则验证成功</p>
+<h2 id="pcap规则编写思路">pcap规则编写思路</h2>
+<p>IEC61850-MMS协议</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935624772.png" alt=""></p>
+<p>先用wireshark打开对应的数据包文件，因为wireshark适配了mms协议的解析，所以可以很直观的分辨出哪个数据包对应什么功能</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935642261.png" alt=""></p>
+<p>从上图可知，选中的数据包执行的是<strong>start</strong>操作</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935658744.png" alt=""></p>
+<p>从上图可知，选中的数据包执行的是<strong>stop</strong>操作</p>
+<p>现在，我们把对应的数据包十六进制数据提取出来，做一下对比，就可以很轻松的写出对应的snort规则</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935678185.png" alt=""></p>
+<p>提取出snort规则，在文件<code>local.rules</code>添加我们的snort规则进行验证测试，例如：</p>
+<pre><code>alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-START&quot;; content:&quot;|bf 28 1b|&quot;;  sid:1112727; rev:1;)
+alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-STOP&quot;; content:&quot;|bf 29 19|&quot;;  sid:1112728; rev:1;)
+alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-RESET&quot;; content:&quot;|bf 2b 19|&quot;;  sid:1112729; rev:1;)
+</code></pre>
+<p>尝试验证一下数据包的规则，查看日志：</p>
+<p><img src="https://hi-kk.github.io//post-images/1563935695810.png" alt=""></p>
+<p>可以发现日志里记录了规则命中的输出信息，到此就算规则编写完成了。</p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E4%B8%8B%E8%BD%BD%E5%AE%89%E8%A3%85">下载安装</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">配置文件</a></li>
+<li><a href="#%E8%A7%84%E5%88%99%E9%AA%8C%E8%AF%81">规则验证</a></li>
+<li><a href="#pcap%E8%A7%84%E5%88%99%E7%BC%96%E5%86%99%E6%80%9D%E8%B7%AF">pcap规则编写思路</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hi-kk.github.io//post/gong-kong-an-quan-gong-kong-chang-jian-xie-yi-shi-bie">
+              <h3 class="post-title">
+                工控安全：工控常见协议识别
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'ad403fd7697bade5a7db',
+    clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
+    repo: 'hi-kk.github.io',
+    owner: 'hi-KK',
+    admin: ['hi-KK'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      console.log('section.offsetHeight', section.offsetHeight);
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
