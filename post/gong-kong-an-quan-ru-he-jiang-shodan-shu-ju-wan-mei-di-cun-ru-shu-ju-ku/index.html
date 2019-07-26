@@ -1,0 +1,275 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>工控安全：如何将Shodan数据完美地存入数据库 | KEYONE</title>
+<meta name="description" content="PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN" />
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1564130199678">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hi-kk.github.io/">
+  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1564130199678" alt="">
+  </a>
+  <h1 class="site-title">
+    KEYONE
+  </h1>
+  <p class="site-description">
+    PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              工控安全：如何将Shodan数据完美地存入数据库
+            </h2>
+            <div class="post-info">
+              <span>
+                2018-12-19
+              </span>
+              <span>
+                1 min read
+              </span>
+              
+                <a href="https://hi-kk.github.io//tag/0AtD0NXlo" class="post-tag">
+                  # shodan
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/G7QS4bExG" class="post-tag">
+                  # 工控安全
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/6nBhZ7wLk" class="post-tag">
+                  # 技巧
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hi-kk.github.io//post-images/gong-kong-an-quan-ru-he-jiang-shodan-shu-ju-wan-mei-di-cun-ru-shu-ju-ku.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h2 id="开局">开局</h2>
+<p><em>“ 开局一张图，内容全靠编 ”</em></p>
+<!--more-->
+<hr>
+<p>先从需求说起：现在需要将shodan上关于工控相关协议和产品设备的指纹数据下载下来，录入本地的数据库<br>
+好在shodan提供了data下载的功能，不过下载一次消耗<strong>1 export credit = 10,000 results</strong>,而这个<strong>credit</strong>是需要购买的。<br>
+<img src="https://hi-kk.github.io//post-images/1564126484518.png" alt=""><br>
+通过一些途径，我们的账户现在有了一些<strong>credit</strong>可供下载数据，而shodan也提供三种下载数据的文件格式（json、csv、xml）<br>
+<img src="https://hi-kk.github.io//post-images/1564126500170.png" alt=""><br>
+按说，这三种格式的文件是可以直接通过Navicat导入到数据库的<br>
+<img src="https://hi-kk.github.io//post-images/1564126514623.png" alt=""></p>
+<h2 id="困境">困境</h2>
+<p>但是，我们从shodan上下载的文件准备直接导入数据库时候发生了一些问题：</p>
+<ol>
+<li>shodan下载出的csv文件所存储的信息有效，缺少服务、产品型号、经纬度等<br>
+<img src="https://hi-kk.github.io//post-images/1564126563239.png" alt=""></li>
+<li>直接用下载出的json文件去导入数据库，发现只能导入字段名，而没有值<br>
+<img src="https://hi-kk.github.io//post-images/1564126578261.png" alt=""></li>
+</ol>
+<p>为了解决这个困惑，查阅相关资料，我们了解到shodan有python版的库，其中包含了格式化的命令功能</p>
+<blockquote>
+<p>pip install shodan<br>
+shodan<br>
+<img src="https://hi-kk.github.io//post-images/1564126595734.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1564126622839.png" alt=""></p>
+</blockquote>
+<p>可以通过以下命令来对json文件进行格式化操作，输出包含特定值的csv格式文件<br>
+<code>shodan parse --fields ip_str,hostnames,isp,org,timestamp --separator , xxx.json &gt;&gt; xx.csv</code></p>
+<hr>
+<p>然而，结果还没达到我们想要的结果，如下图是一个标准的shodan给的json数据格式<br>
+<img src="https://hi-kk.github.io//post-images/1564126649439.png" alt=""><br>
+我们执行<code>shodan parse</code>命令只能格式化出跟节点的数据，如<code>ip|isp|port|hostnames|timestamp</code>等，而对第二节点的数据却难以获取到，如<code>location</code>节点下的<code>city|region_code|area_code</code>等<br>
+那如果我们直接取<code>location</code>节点下的所有数据呢？输出的结果如下图<br>
+<img src="https://hi-kk.github.io//post-images/1564126661173.png" alt=""><br>
+可以看到，虽然这样是把<code>location</code>节点下所有的数据都取出来了，但是却有一些冗余数据，不符合要求，还得需要二次处理这些数据才能入库</p>
+<p>那还有其他可以直接取出格式化的数据、不需要二次处理、直接导入数据库的方法吗？</p>
+<h2 id="柳暗花明">柳暗花明</h2>
+<p>这里我们再次研究发现shodan还有个内置命令<br>
+<code>shodan convert</code></p>
+<blockquote>
+<p>convert命令可以把Shodan生成的JSON报告转化成KML和CSV格式</p>
+</blockquote>
+<p><img src="https://hi-kk.github.io//post-images/1564126675423.png" alt=""><br>
+输出的csv内容如下<br>
+<img src="https://hi-kk.github.io//post-images/1564126686864.png" alt=""><br>
+确实比上一次的数据要整洁的多了，但多了一些不需要的字段，得想想办法去除，要是能自定义输出的字段数据就好了<br>
+于是，我们想到可以研究下shodan的python库源码，看看能不能修改点代码什么的</p>
+<hr>
+<p>找到shodan的python安装包，寻找跟<code>convert</code>有关的功能模块代码<br>
+<code>shodan-1.10.4.tar\shodan-1.10.4\shodan\cli\converter</code><br>
+<img src="https://hi-kk.github.io//post-images/1564126713217.png" alt=""><br>
+看来我们要想修改的代码可能就是<code>csvc.py</code><br>
+我们按原代码的格式修改需要提取的字段值<br>
+<img src="https://hi-kk.github.io//post-images/1564126726790.png" alt=""><br>
+保存之后，再重新安装<code>shodan</code><br>
+此时输出的结果就已经达到我们想要的了<br>
+<img src="https://hi-kk.github.io//post-images/1564126737995.png" alt=""><br>
+现在，我们再用<code>Navicat</code>导入数据库就会非常顺利了<br>
+<img src="https://hi-kk.github.io//post-images/1564126747530.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1564126761350.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1564126782507.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1564126797994.png" alt=""></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li>
+<ul>
+<li><a href="#%E5%BC%80%E5%B1%80">开局</a></li>
+<li><a href="#%E5%9B%B0%E5%A2%83">困境</a></li>
+<li><a href="#%E6%9F%B3%E6%9A%97%E8%8A%B1%E6%98%8E">柳暗花明</a></li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hi-kk.github.io//post/hello-gridea">
+              <h3 class="post-title">
+                Hello Gridea
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'ad403fd7697bade5a7db',
+    clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
+    repo: 'hi-kk.github.io',
+    owner: 'hi-KK',
+    admin: ['hi-KK'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      console.log('section.offsetHeight', section.offsetHeight);
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

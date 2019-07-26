@@ -1,0 +1,366 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>工控安全：Nmap NSE扫描脚本列表 | KEYONE</title>
+<meta name="description" content="PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN" />
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1564130199678">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hi-kk.github.io/">
+  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1564130199678" alt="">
+  </a>
+  <h1 class="site-title">
+    KEYONE
+  </h1>
+  <p class="site-description">
+    PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              工控安全：Nmap NSE扫描脚本列表
+            </h2>
+            <div class="post-info">
+              <span>
+                2018-11-20
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://hi-kk.github.io//tag/WKgaKVV-5" class="post-tag">
+                  # 扫描
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/0ckZQWxan" class="post-tag">
+                  # nmap
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/G7QS4bExG" class="post-tag">
+                  # 工控安全
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/EqhCCbtZ3r" class="post-tag">
+                  # 协议
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hi-kk.github.io//post-images/gong-kong-an-quan-nmap-nse-sao-miao-jiao-ben-lie-biao.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>这里的nse脚本列表是针对工控协议的</p>
+<!--more-->
+<table>
+<thead>
+<tr>
+<th>Nmap NSE脚本</th>
+<th>端口</th>
+<th>插件信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mms-identify.nse</td>
+<td>102</td>
+<td>iec-61850-8-1 (mms) ics protocol</td>
+</tr>
+<tr>
+<td>s7-enumerate.nse</td>
+<td>102</td>
+<td>numerates Siemens S7 PLC Devices and collects their device information</td>
+</tr>
+<tr>
+<td>modbus-discover.nse</td>
+<td>502</td>
+<td>Enumerates SCADA Modbus slave ids (sids) and collects their device information</td>
+</tr>
+<tr>
+<td>modicon-info.nse</td>
+<td>502</td>
+<td>use Modbus to communicate to the PLC via Normal queries that are performed via engineering software</td>
+</tr>
+<tr>
+<td>cr3-fingerprint.nse</td>
+<td>789</td>
+<td>Fingerprints Red Lion HMI devices</td>
+</tr>
+<tr>
+<td>moxa-enum.nse</td>
+<td>4800</td>
+<td>MoxaNPort</td>
+</tr>
+<tr>
+<td>melsecq-discover.nse</td>
+<td>5007</td>
+<td>MELSEC-Q Series PLC CPUINFO</td>
+</tr>
+<tr>
+<td>melsecq-discover-udp.nse</td>
+<td>5006</td>
+<td>MELSEC-Q Series PLC CPUINFO</td>
+</tr>
+<tr>
+<td>BACnet-discover-enumerate.nse</td>
+<td>47808</td>
+<td>BACnet</td>
+</tr>
+<tr>
+<td>atg-info.nse</td>
+<td>10001</td>
+<td>Guardian AST I20100</td>
+</tr>
+<tr>
+<td>codesys-v2-discover.nse</td>
+<td>1200/2455</td>
+<td>received then the output will show that the port as CoDeSyS</td>
+</tr>
+<tr>
+<td>cspv4-info.nse</td>
+<td>2222</td>
+<td>cspv4-info</td>
+</tr>
+<tr>
+<td>dnp3-info.nse</td>
+<td>20000</td>
+<td>DNP3</td>
+</tr>
+<tr>
+<td>enip-enumerate.nse</td>
+<td>44818</td>
+<td>Information that is parsed includes Vendor ID, Device Type, Product name, Serial Number, Product code,Revision Number, as well as the Device IP</td>
+</tr>
+<tr>
+<td>fox-info.nse</td>
+<td>1911</td>
+<td>collect information from A Tridium Niagara system</td>
+</tr>
+<tr>
+<td>omrontcp-info.nse</td>
+<td>9600</td>
+<td>Controller Data Read Command and once a response is received</td>
+</tr>
+<tr>
+<td>omronudp-info.nse</td>
+<td>9600</td>
+<td>Controller Data Read Command and once a response is received</td>
+</tr>
+<tr>
+<td>pcworx-info.nse</td>
+<td>1962</td>
+<td>PCWorx info</td>
+</tr>
+<tr>
+<td>proconos-info.nse</td>
+<td>20547</td>
+<td>ProConOs</td>
+</tr>
+<tr>
+<td>Siemens-CommunicationsProcessor.nse</td>
+<td>80</td>
+<td>Checks for SCADA Siemens S7 Communications Processor devices</td>
+</tr>
+<tr>
+<td>Siemens-HMI-miniweb.nse</td>
+<td>80</td>
+<td>Checks for SCADA Siemens SIMATIC S7- devices</td>
+</tr>
+<tr>
+<td>Siemens-SIMATIC-PLC-S7.nse</td>
+<td>80</td>
+<td>Checks for SCADA Siemens Simatic S7 devices</td>
+</tr>
+<tr>
+<td>Siemens-Scalance-module.nse</td>
+<td>161</td>
+<td>Checks for SCADA Siemens SCALANCE modules</td>
+</tr>
+<tr>
+<td>Siemens-WINCC.nse</td>
+<td>137</td>
+<td>Checks for SCADA Siemens WINCC server</td>
+</tr>
+<tr>
+<td>bradford-networks-nac.nse</td>
+<td>8080</td>
+<td>Attempts to detect Bradford Networks Network Sentry appliance admin web interface</td>
+</tr>
+<tr>
+<td>iec-identify.nse</td>
+<td>2404</td>
+<td>Attemts to check tcp/2404 port supporting IEC 60870-5-104 ICS protocol</td>
+</tr>
+<tr>
+<td>minecraft.nse</td>
+<td>25565</td>
+<td>Checks for Minecraft Servers using the 0x02 &quot;Handshake&quot; protocol</td>
+</tr>
+<tr>
+<td>mop-discover.nse</td>
+<td>null</td>
+<td>Detect the Maintenance Operation Protocol (MOP) by sending layer 2 DEC DNA Remote Console hello/test messages</td>
+</tr>
+<tr>
+<td>stuxnet-detect.nse</td>
+<td>445</td>
+<td>Detects whether a host is infected with the Stuxnet worm</td>
+</tr>
+</tbody>
+</table>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://hi-kk.github.io//post/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi">
+              <h3 class="post-title">
+                工控安全：CTF赛前小知识
+              </h3>
+            </a>
+          </div>
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'ad403fd7697bade5a7db',
+    clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
+    repo: 'hi-kk.github.io',
+    owner: 'hi-KK',
+    admin: ['hi-KK'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      console.log('section.offsetHeight', section.offsetHeight);
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>

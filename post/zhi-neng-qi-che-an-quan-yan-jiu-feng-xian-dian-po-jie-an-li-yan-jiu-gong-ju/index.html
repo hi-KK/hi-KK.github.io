@@ -1,0 +1,404 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>智能汽车安全研究：风险点、破解案例、研究工具 | KEYONE</title>
+<meta name="description" content="PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN" />
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1564130199678">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
+
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://hi-kk.github.io/">
+  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1564130199678" alt="">
+  </a>
+  <h1 class="site-title">
+    KEYONE
+  </h1>
+  <p class="site-description">
+    PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              智能汽车安全研究：风险点、破解案例、研究工具
+            </h2>
+            <div class="post-info">
+              <span>
+                2018-11-01
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://hi-kk.github.io//tag/uBfGzcLXf" class="post-tag">
+                  # 汽车
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/TCRO9X6K_A" class="post-tag">
+                  # 汽车安全
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/8hTOpbrTRg" class="post-tag">
+                  # 工具
+                </a>
+              
+                <a href="https://hi-kk.github.io//tag/nfMLnOATe" class="post-tag">
+                  # 分享
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://hi-kk.github.io//post-images/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju.png" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="前言">前言</h1>
+<p>很幸运公司采购了一台荣威智能网联汽车给我们作研究（壕）<br>
+之前对关于网联汽车的安全研究只是道听途说，看着各种大佬对汽车一顿操作，实际上自己也没这条件去做这方面研究，所以现在既然有了这么宝贵的机会，就好好把握<br>
+于是就各种Google搜罗相关资料，这里就分享下自己对搜集到各种资料进行的一个入门性总结，希望能够帮助其他跟我一样刚接触、准备研究汽车安全的朋友对这块知识体系做一个大概了解。<br>
+这篇文章主要内容是智能网联汽车的风险点分析、已有的汽车破解案例以及入门汽车安全研究的一些工具</p>
+<!-- more -->
+<h1 id="智能网联汽车信息安全风险">智能网联汽车信息安全风险</h1>
+<p>智能网联汽车从架构上可分为四个不同的功能区，分别是基本控制功能区，如传感单元、底盘系统等；扩展功能区，如远程信息处理、信息娱乐管理、车体系统等；外部接口，譬如LTE-V、蓝牙、WIFI等；以及手机、存储器、各种诊断仪表、云服务等外部功能区。</p>
+<p>每个功能区对于安全的定义和需求都不相同，需要定义合理规范的系统架构，将不同功能区进行隔离，并对不同区域间的信息流转进行严格的控制，包括接入身份认证和数据加密，来保证信息安全传输，从而达到智能驾驶功能的高可用性、便利性和保护用户信息隐私的目的。</p>
+<p>根据分析研究，智能网联汽车系统面临的攻击主要来自两方面——内部攻击和远程攻击。其中，内部攻击主要由智能网联自身缺陷引起，比如总线、网关、ECU等安全程度不够所导致。未来智能网联汽车面临的信息安全威胁梳理为来自云端、通道、终端三个维度。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129333430.png" alt=""></p>
+<p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
+<h2 id="一终端层安全风险">（一）终端层安全风险</h2>
+<h3 id="1-t-box-安全风险">1、T-BOX 安全风险</h3>
+<p>T-BOX（Telematics BOX）的网络安全系数决定了汽车行驶和整个智能交通网络的安全，是车联网发展的核心技术之一，恶意攻击者通过分析固件内部代码能够轻易获取加密方法和密钥，可实现对消息会话内容的破解。</p>
+<h3 id="2-ivi-安全风险">2、IVI 安全风险</h3>
+<p>车载信息娱乐系统（In-Vehicle Infotainment，IVI）的高集成度使其所有接口都可能成为黑客的攻击节点，因此IVI的被攻击面将比其他任何车辆部件都多。</p>
+<h3 id="3-终端升级安全风险">3、终端升级安全风险</h3>
+<p>智能网联汽车如不及时升级更新，就会由于潜在安全漏洞而遭受各方面（如 4G、 USB、 SD 卡、 OBD 等渠道）的恶意攻击，导致车主个人隐私泄露、车载软件及数据被窃取或车辆控制系统遭受恶意攻击等安全问题。</p>
+<h3 id="4-车载-os-安全风险">4、车载 OS 安全风险</h3>
+<p>车载电脑系统常采用嵌入式 Linux、 QNX、 Android等作为操作系统，其代码庞大且存在不同程度的安全漏洞，且车联网应用系统复杂多样，某一种特定的安全技术不能完全解决应用系统的所有安全问题。而智能终端还存在被入侵、控制的风险。</p>
+<h3 id="5-移动app安全风险">5、移动App安全风险</h3>
+<p>对于没有进行保护的App进行逆向分析挖掘，可直接看到 TSP（远程服务提供商）的接口、参数等信息。</p>
+<h2 id="二传输通道安全风险">（二）传输通道安全风险</h2>
+<h3 id="1-车载诊断系统接口">1、车载诊断系统接口</h3>
+<p>基于车载诊断系统接口(OBD)的攻击现在的智能网联汽车内部都会有十几个到几十个不等的 ECU，不同 ECU 控制不同的模块。OBD 接口作为总线上的一个节点，不仅能监听总线上面的消息，而且还能伪造消息（如传感器消息）来欺骗 ECU，从而达到改变汽车行为状态的目的。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129353735.png" alt=""></p>
+<h3 id="2-车内无线传感器安全风险">2、车内无线传感器安全风险</h3>
+<p>传感器存在通讯信息被窃听、被中断、被注入等潜在威胁，甚至通过干扰传感器通信设备还会造成无人驾驶汽车偏行、紧急停车等危险动作。</p>
+<h3 id="3-车内网络传输安全风险">3、车内网络传输安全风险</h3>
+<p>汽车内部相对封闭的网络环境看似安全，但其中存在很多可被攻击的安全缺口，如胎压监测系统、 Wi-Fi、蓝牙等短距离通信设备等。</p>
+<h3 id="4-车载终端架构安全风险">4、车载终端架构安全风险</h3>
+<p>现在每辆智能网联汽车基本上都装有五六十个 ECU 来实现移动互联的不同功能，进入智能网联汽车时代后， 其接收的数据不仅包含从云端下载的内容，还有可能接收到那些通过网络连接端口植入的恶意软件，因此大大增加了智能网联汽车被“黑”的风险。</p>
+<h3 id="5-网络传输安全风险">5、网络传输安全风险</h3>
+<p>“车-X”（人、车、路、互联网等）通过 Wi-Fi、移动通信网(2.5G/3G/4G等)、DSRC等无线通信手段与其它车辆、交通专网、互联网等进行连接。网络传输安全威胁指车联网终端与网络中心的双向数据传输安全威胁。</p>
+<h2 id="三-云平台安全威胁">（三） 云平台安全威胁</h2>
+<p>目前大部分车联网数据使用分布式技术进行存储，主要面临的安全威胁包括黑客对数据恶意窃取和篡改、敏感数据被非法访问。<br>
+<img src="https://hi-kk.github.io//post-images/1564130095864.png" alt=""></p>
+<h1 id="汽车安全研究案例">汽车安全研究案例</h1>
+<h2 id="1-tcu-攻击案例">1. TCU 攻击案例</h2>
+<p>对 TBOX 的检测简单方式是找到集成电路板上 eSIM 卡， 使用漆包线将TBOX和手机以飞线的方式连接然后手机开启热点 把TBOX的网络共享出来，研究人员就可以通过手机共享的热点 连接到TBOX的内网探索车辆内部通讯网络。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129388927.png" alt=""></p>
+<p>检测TBOX的集成电路板，查找供应商预留的调试接口或者 隐藏的特殊功能的针脚并以飞线的方式使电脑与TBOX集成电路板相连接，使用串口调试工具对其调试输出打印日志，可以得到 一些敏感信息如APN名称、物联网卡号、ICCID、私网服务器IP 地址和本地监听端口等信息，为后续的深入研究打下基础。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129403932.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
+<h2 id="2-安全气囊攻击案例">2. 安全气囊攻击案例</h2>
+<p><strong>攻击条件：</strong></p>
+<ul>
+<li>
+<ol>
+<li>车辆点火且车辆的速度必须小于6公里/小时。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>通过获得CAN总线访问权限以及OBD接口向车内网络发 送恶意构造的UDS对安全气囊进行攻击。</li>
+</ol>
+</li>
+</ul>
+<p><strong>漏洞影响：</strong> 可对车内乘客造成物理伤害，该漏洞影响到2014年起生产的 乘用车。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129416013.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="3-斯巴鲁遥控钥匙系统攻击案例">3. 斯巴鲁遥控钥匙系统攻击案例</h2>
+<p>某些型号的斯巴鲁汽车所采用的钥匙系统在对车辆进行上锁、解锁或其他操作时，使用的是序列码。</p>
+<p>这种序列码也被称作是滚动代码或跳跃代码，为了避免攻击者发现车辆的序列码并使用这种设计缺陷来劫持汽车，这种序列码应该是随机的才对。</p>
+<p>通过接收钥匙系统所发送出的一个数据包（例如，用户在按下钥匙系统的任何一个按键之后，攻击者只需要在信号范围内 就可以捕捉到数据包），攻击者将能够利用该数据包来推测出该车辆钥匙系统下一次生成的滚动代码，接下来他就可以使用这个预测码或者直接重放来上锁或解锁车辆。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129430911.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="4-斯巴鲁车载娱乐系统攻击案例">4. 斯巴鲁车载娱乐系统攻击案例</h2>
+<p>Guzman 发现斯巴鲁的移动应用程序使用随机生成的认证令牌，以便在有用户认证后允许访问，通常来说客户端与服务端采用这样的认证方式是很正常的，根据良好的 Web 应用安全实践，令牌应在短时间内过期或失效，以防止重用。然而问题是，Starlink 允许用户利用令牌永久登录斯巴鲁，也就是说令牌一旦生成，永远不会失效。据 Guzman 透露，令牌通过一个 URL 发送，并且被存放在未被加密的数据库中。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129458116.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129473954.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="5-马自达车机娱乐系统破解案例">5. 马自达车机娱乐系统破解案例</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129491831.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129511314.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="6-特斯拉汽车车联网系统攻击案例分析">6. 特斯拉汽车车联网系统攻击案例分析</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129525905.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129541622.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129551215.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129566500.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129578107.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129589225.png" alt=""></p>
+<p>详见：《Zeronights 2016-特斯拉车载网关的安全研究Gateway_Internals_of_Tesla_Motors_v6》.pdf</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129598580.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="7-语音控制系统破解案例">7. 语音控制系统破解案例</h2>
+<p>“海豚音”的攻击原理是将语音命令频率转换成为超声波频率信号，“海豚音”的攻击原理是将语音命令声音调制后加载到载波的超声波上，因为超出人耳接收频率的范围，无法被人听见，却可以被手机、智能家居以及智能汽车等智能设备的语音控制系统接收到。</p>
+<p>由于麦克风的非线性特性，会将原本被调制的语音命令声音解调、恢复到调制之前的状态，之后滤波器会过滤掉人耳不可听到的部分，这样语音指令可以消无声息的被语音识别系统识别到，最终实现攻击。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129612012.png" alt=""><br>
+​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="8-车辆gps轨迹窃取案例">8. 车辆GPS轨迹窃取案例</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129624506.png" alt=""></p>
+<h2 id="9-主动刹车系统攻击案例">9. 主动刹车系统攻击案例</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129640756.png" alt=""></p>
+<p>​													——《智能网联汽车信息安全白皮书（2016）》</p>
+<h1 id="汽车研究硬件设备">汽车研究硬件设备</h1>
+<h2 id="canable2960">CANable——$29/$60</h2>
+<p>官网：https://canable.io/</p>
+<p>CANable是一个小型低成本的开放源码USB到CAN适配器。CANable显示为计算机上的虚拟串行端口，充当到CAN总线接口的串行线。使用备选的candleLight固件，CANable枚举为Linux上的本地CAN接口。原有CANable目前缺货，但很快就可以在Protofusion商店https://store.protofusion.org/和Tindie上买到！</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129655710.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129668398.png" alt=""></p>
+<p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
+<h2 id="obdlink49">OBDLink——$49+</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129680348.jpg" alt=""></p>
+<p>一款易于使用，价格低廉，防黑客，轻便快捷的蓝牙OBD适配器。可将您的智能手机，平板电脑，笔记本电脑或电脑转变为精密的诊断扫描工具，行程计算机和实时性能监视器。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129690307.png" alt=""></p>
+<p>官网：http://www.obdlink.com/</p>
+<h1 id="hackrf1000">HackRF——￥1000+</h1>
+<p><img src="https://hi-kk.github.io//post-images/1564129706212.jpg" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129717950.png" alt=""></p>
+<p>https://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-13257850194.10.77953d88aiMmMA&amp;id=526187854860</p>
+<h2 id="广成科技产品线">广成科技产品线</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129733448.png" alt=""></p>
+<p>淘宝店铺：https://shop72369840.taobao.com/</p>
+<p>官网：http://www.gcgd.net/</p>
+<h2 id="icsim">ICSim</h2>
+<p>http://opengarages.org/</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129751620.png" alt=""></p>
+<p>git clone https://github.com/zombieCraig/ICSim.git</p>
+<p>详见：《Car Hacking CAE Tech Talk》.pdf</p>
+<h2 id="scantool-free-open-source">ScanTool (free, open-source)</h2>
+<p>sudo apt-get install scantool</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129764625.png" alt=""></p>
+<p>详见：《Car Hacking CAE Tech Talk》.pdf</p>
+<h2 id="cantoolz">CANToolz</h2>
+<p>https://github.com/CANToolz/CANToolz</p>
+<p>CANToolz是一个分析CAN网络和设备的框架。它提供了多个模块，可以使用CANToolz的<code>pipe</code>系统由安全研究人员、汽车/OEM安全测试人员在黑箱分析中使用.</p>
+<p>CANToolz可用于ECU的发现，MITM的测试，模糊，畜力，扫描或研发，测试和验证.更多的可以很容易地用一个新的模块来实现。</p>
+<h3 id="this-framework-can-be-used-as">This framework can be used as:</h3>
+<ul>
+<li>Automated tests framework (on CAN bus)</li>
+<li>CAN ECU/tests prototyping</li>
+<li>Blackbox analysis of CAN traffic</li>
+<li>Traffic replay</li>
+<li>MITM</li>
+<li>Fuzzing</li>
+<li>UDS scanning</li>
+</ul>
+<p><img src="https://hi-kk.github.io//post-images/1564129777386.png" alt=""><br>
+详见：《Blackhat2016-eu-16-Sintsov-Pen-Testing-Vehicles-With-Cantoolz》.pdf</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129793503.png" alt=""></p>
+<p>​									——《2014_car_hackers_handbook_compressed》.pdf</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129811175.png" alt=""></p>
+<p>​						——《Car-Wars-Episode-I-Hacker-Menace-Matt-Carpenter》.pdf</p>
+<p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
+<li><a href="#%E6%99%BA%E8%83%BD%E7%BD%91%E8%81%94%E6%B1%BD%E8%BD%A6%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">智能网联汽车信息安全风险</a>
+<ul>
+<li><a href="#%E4%B8%80%E7%BB%88%E7%AB%AF%E5%B1%82%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">（一）终端层安全风险</a>
+<ul>
+<li><a href="#1-t-box-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">1、T-BOX 安全风险</a></li>
+<li><a href="#2-ivi-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">2、IVI 安全风险</a></li>
+<li><a href="#3-%E7%BB%88%E7%AB%AF%E5%8D%87%E7%BA%A7%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">3、终端升级安全风险</a></li>
+<li><a href="#4-%E8%BD%A6%E8%BD%BD-os-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">4、车载 OS 安全风险</a></li>
+<li><a href="#5-%E7%A7%BB%E5%8A%A8app%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">5、移动App安全风险</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BA%8C%E4%BC%A0%E8%BE%93%E9%80%9A%E9%81%93%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">（二）传输通道安全风险</a>
+<ul>
+<li><a href="#1-%E8%BD%A6%E8%BD%BD%E8%AF%8A%E6%96%AD%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3">1、车载诊断系统接口</a></li>
+<li><a href="#2-%E8%BD%A6%E5%86%85%E6%97%A0%E7%BA%BF%E4%BC%A0%E6%84%9F%E5%99%A8%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">2、车内无线传感器安全风险</a></li>
+<li><a href="#3-%E8%BD%A6%E5%86%85%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">3、车内网络传输安全风险</a></li>
+<li><a href="#4-%E8%BD%A6%E8%BD%BD%E7%BB%88%E7%AB%AF%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">4、车载终端架构安全风险</a></li>
+<li><a href="#5-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">5、网络传输安全风险</a></li>
+</ul>
+</li>
+<li><a href="#%E4%B8%89-%E4%BA%91%E5%B9%B3%E5%8F%B0%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81">（三） 云平台安全威胁</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B1%BD%E8%BD%A6%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E6%A1%88%E4%BE%8B">汽车安全研究案例</a>
+<ul>
+<li><a href="#1-tcu-%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">1. TCU 攻击案例</a></li>
+<li><a href="#2-%E5%AE%89%E5%85%A8%E6%B0%94%E5%9B%8A%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">2. 安全气囊攻击案例</a></li>
+<li><a href="#3-%E6%96%AF%E5%B7%B4%E9%B2%81%E9%81%A5%E6%8E%A7%E9%92%A5%E5%8C%99%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">3. 斯巴鲁遥控钥匙系统攻击案例</a></li>
+<li><a href="#4-%E6%96%AF%E5%B7%B4%E9%B2%81%E8%BD%A6%E8%BD%BD%E5%A8%B1%E4%B9%90%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">4. 斯巴鲁车载娱乐系统攻击案例</a></li>
+<li><a href="#5-%E9%A9%AC%E8%87%AA%E8%BE%BE%E8%BD%A6%E6%9C%BA%E5%A8%B1%E4%B9%90%E7%B3%BB%E7%BB%9F%E7%A0%B4%E8%A7%A3%E6%A1%88%E4%BE%8B">5. 马自达车机娱乐系统破解案例</a></li>
+<li><a href="#6-%E7%89%B9%E6%96%AF%E6%8B%89%E6%B1%BD%E8%BD%A6%E8%BD%A6%E8%81%94%E7%BD%91%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90">6. 特斯拉汽车车联网系统攻击案例分析</a></li>
+<li><a href="#7-%E8%AF%AD%E9%9F%B3%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%A0%B4%E8%A7%A3%E6%A1%88%E4%BE%8B">7. 语音控制系统破解案例</a></li>
+<li><a href="#8-%E8%BD%A6%E8%BE%86gps%E8%BD%A8%E8%BF%B9%E7%AA%83%E5%8F%96%E6%A1%88%E4%BE%8B">8. 车辆GPS轨迹窃取案例</a></li>
+<li><a href="#9-%E4%B8%BB%E5%8A%A8%E5%88%B9%E8%BD%A6%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">9. 主动刹车系统攻击案例</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B1%BD%E8%BD%A6%E7%A0%94%E7%A9%B6%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87">汽车研究硬件设备</a>
+<ul>
+<li><a href="#canable2960">CANable——$29/$60</a></li>
+<li><a href="#obdlink49">OBDLink——$49+</a></li>
+</ul>
+</li>
+<li><a href="#hackrf1000">HackRF——￥1000+</a>
+<ul>
+<li><a href="#%E5%B9%BF%E6%88%90%E7%A7%91%E6%8A%80%E4%BA%A7%E5%93%81%E7%BA%BF">广成科技产品线</a></li>
+<li><a href="#icsim">ICSim</a></li>
+<li><a href="#scantool-free-open-source">ScanTool (free, open-source)</a></li>
+<li><a href="#cantoolz">CANToolz</a>
+<ul>
+<li><a href="#this-framework-can-be-used-as">This framework can be used as:</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+
+        
+          
+            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+
+<div id="gitalk-container"></div>
+
+<script>
+
+  var gitalk = new Gitalk({
+    clientID: 'ad403fd7697bade5a7db',
+    clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
+    repo: 'hi-kk.github.io',
+    owner: 'hi-KK',
+    admin: ['hi-KK'],
+    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+    distractionFreeMode: false  // Facebook-like distraction free mode
+  })
+
+  gitalk.render('gitalk-container')
+
+</script>
+
+          
+
+          
+        
+
+        <div class="site-footer">
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
+  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+<script>
+  hljs.initHighlightingOnLoad()
+
+  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+  // This should probably be throttled.
+  // Especially because it triggers during smooth scrolling.
+  // https://lodash.com/docs/4.17.10#throttle
+  // You could do like...
+  // window.addEventListener("scroll", () => {
+  //    _.throttle(doThatStuff, 100);
+  // });
+  // Only not doing it here to keep this Pen dependency-free.
+
+  window.addEventListener("scroll", event => {
+    let fromTop = window.scrollY;
+
+    mainNavLinks.forEach((link, index) => {
+      let section = document.getElementById(decodeURI(link.hash).substring(1));
+      let nextSection = null
+      if (mainNavLinks[index + 1]) {
+        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+      }
+      console.log('section.offsetHeight', section.offsetHeight);
+      if (section.offsetTop <= fromTop) {
+        if (nextSection) {
+          if (nextSection.offsetTop > fromTop) {
+            link.classList.add("current");
+          } else {
+            link.classList.remove("current");    
+          }
+        } else {
+          link.classList.add("current");
+        }
+      } else {
+        link.classList.remove("current");
+      }
+    });
+  });
+
+</script>
+
+      </div>
+    </div>
+  </body>
+</html>
