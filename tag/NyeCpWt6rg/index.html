@@ -1,262 +1,316 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-  <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>命令执行 | KEYONE</title>
-<meta name="description" content="PenTesting&Security Research <br>
-LOVE & PEACE ❤️JUST FOR FUN" />
-<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1564130199678">
+    
+<meta charset="utf-8" >
+
+<title>命令执行 | KEYONE——三年级小学生</title>
+<meta name="description" content="PenTesting&amp;Security Research &lt;br&gt;
+LOVE &amp; PEACE ❤️JUST FOR FUN">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1568020129843">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://hi-kk.github.io/">
-  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1564130199678" alt="">
-  </a>
-  <h1 class="site-title">
-    KEYONE
-  </h1>
-  <p class="site-description">
-    PenTesting&Security Research <br>
-LOVE & PEACE ❤️JUST FOR FUN
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://hi-kk.github.io/">
+        <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1568020129843" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://hi-kk.github.io/">
+        <h1 class="site-title">KEYONE——三年级小学生</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+
         <div class="current-tag-container">
-            <h2 class="title">
-                标签：# 命令执行
-            </h2> 
+          <h2 class="title">
+            <i class="icon icon-pricetags-outline"></i> 命令执行
+          </h2> 
         </div>
-        <div class="post-container">
-  
-    <article class="post">
+
+        
+<section class="post-item">
+    <div class="content">
       <a href="https://hi-kk.github.io//post/shen-tou-ji-qiao-qiao-yong-whois-wai-dai-hui-xian-ming-ling-zhi-xing-jie-guo">
         <h2 class="post-title">渗透技巧：巧用whois外带回显命令执行结果</h2>
       </a>
-      <div class="post-info">
-        <span>
-          2019-03-05
-        </span>
-        <span>
-          1 min read
-        </span>
-        
-          <a href="https://hi-kk.github.io//tag/W0hrKvqDY" class="post-tag">
-            # 渗透
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/NyeCpWt6rg" class="post-tag">
-            # 命令执行
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/nfMLnOATe" class="post-tag">
-            # 分享
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/6nBhZ7wLk" class="post-tag">
-            # 技巧
-          </a>
-        
-      </div>
-      
-        <a href="https://hi-kk.github.io//post/shen-tou-ji-qiao-qiao-yong-whois-wai-dai-hui-xian-ming-ling-zhi-xing-jie-guo" class="post-feature-image" style="background-image: url('https://hi-kk.github.io//post-images/shen-tou-ji-qiao-qiao-yong-whois-wai-dai-hui-xian-ming-ling-zhi-xing-jie-guo.png')">
-        </a>
-      
       <div class="post-abstract">
         <p>在实战过程中，可能会遇到一些复杂的网络情况，导致需要执行的命令没办法看到返回结果，这就给后续渗透带来很大的不便，从twitter中看到一种新型的命令执行结果外带的方法，在这里分享记录一下。</p>
 
-      </di>
-    </article>
-  
-    <article class="post">
-      <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong">
-        <h2 class="post-title">漏洞实验：CVE-2017-16720-Advantech WebAccess远程命令执行</h2>
-      </a>
+      </div>
       <div class="post-info">
-        <span>
-          2019-01-08
-        </span>
-        <span>
-          1 min read
-        </span>
+        <span><i class="icon icon-calendar-outline"></i> 2019-03-05</span>
         
-          <a href="https://hi-kk.github.io//tag/6rZMKBuua" class="post-tag">
-            # 实验
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/FeWV10Xlx" class="post-tag">
-            # 复现
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/NyeCpWt6rg" class="post-tag">
-            # 命令执行
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/G7QS4bExG" class="post-tag">
-            # 工控安全
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/K_FPj1WAl" class="post-tag">
-            # 漏洞
-          </a>
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://hi-kk.github.io//tag/W0hrKvqDY">
+                渗透
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/NyeCpWt6rg">
+                命令执行
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/nfMLnOATe">
+                分享
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/6nBhZ7wLk">
+                技巧
+                
+              </a>
+            
+          </span>
         
       </div>
-      
-        <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong" class="post-feature-image" style="background-image: url('https://hi-kk.github.io//post-images/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong.png')">
-        </a>
-      
+    </div>
+    
+      <a href="https://hi-kk.github.io//post/shen-tou-ji-qiao-qiao-yong-whois-wai-dai-hui-xian-ming-ling-zhi-xing-jie-guo">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/shen-tou-ji-qiao-qiao-yong-whois-wai-dai-hui-xian-ming-ling-zhi-xing-jie-guo.png')">
+        </div>
+      </a>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong">
+        <h2 class="post-title">漏洞实验：Advantech WebAccess远程命令执行</h2>
+      </a>
       <div class="post-abstract">
         <h2 id="漏洞编号">漏洞编号</h2>
 <p>CVE-2017-16720</p>
-<p>此漏洞允许攻击者使用RPC协议通过TCP端口4592执行远程命令。<br>
-通过利用恶意分布式计算环境/远程过程调用（DCERPC），webvrpcs.exe服务将命令行指令传递给主机， webvrpcs.exe服务以管理员访问权限运行。版本小于8.3、8.3.1、8.3.2仍然存在特定的安全漏洞。</p>
 
-      </di>
-    </article>
-  
-    <article class="post">
-      <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing">
-        <h2 class="post-title">漏洞实验：CVE-2018-15982-Adobe Flash Player远程代码执行</h2>
-      </a>
+      </div>
       <div class="post-info">
-        <span>
-          2018-12-26
-        </span>
-        <span>
-          2 min read
-        </span>
+        <span><i class="icon icon-calendar-outline"></i> 2019-01-08</span>
         
-          <a href="https://hi-kk.github.io//tag/6rZMKBuua" class="post-tag">
-            # 实验
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/FeWV10Xlx" class="post-tag">
-            # 复现
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/NyeCpWt6rg" class="post-tag">
-            # 命令执行
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/K_FPj1WAl" class="post-tag">
-            # 漏洞
-          </a>
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://hi-kk.github.io//tag/6rZMKBuua">
+                实验
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/FeWV10Xlx">
+                复现
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/NyeCpWt6rg">
+                命令执行
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/G7QS4bExG">
+                工控安全
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/K_FPj1WAl">
+                漏洞
+                
+              </a>
+            
+          </span>
         
       </div>
+    </div>
+    
+      <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/lou-dong-shi-yan-cve-2017-16720-advantech-webaccess-yuan-cheng-ming-ling-zhi-xing-lou-dong.png')">
+        </div>
+      </a>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
+      <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing">
+        <h2 class="post-title">漏洞实验：Adobe Flash Player远程代码执行</h2>
+      </a>
+      <div class="post-abstract">
+        <p>漏洞编号：CVE-2018-15982</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2018-12-26</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://hi-kk.github.io//tag/6rZMKBuua">
+                实验
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/FeWV10Xlx">
+                复现
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/NyeCpWt6rg">
+                命令执行
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/K_FPj1WAl">
+                漏洞
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+      <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing.png')">
+        </div>
+      </a>
+    
+  </section>
+
+
+<div class="pagination-container">
+  
+  
+</div>
+
+
+      </div>
+
+      <div class="site-footer">
+  <div class="slogan">PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN</div>
+  <div class="social-container">
+    
       
-        <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing" class="post-feature-image" style="background-image: url('https://hi-kk.github.io//post-images/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing.png')">
+        <a href="https://github.com/hi-KK" target="_blank">
+          <i class="fab fa-github"></i>
         </a>
       
-      <div class="post-abstract">
-        
-      </di>
-    </article>
-  
+    
+      
+    
+      
+        <a href="https://weibo.com/M0L0K" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/soulk/" target="_blank">
+          <i class="fab fa-zhihu"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
-        <div class="pagination-container">
-  
-  
-</div>
 
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
-</div>
+    </div>
+    <script type="application/javascript">
 
-<script>
-  hljs.initHighlightingOnLoad()
+hljs.initHighlightingOnLoad()
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
-
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
-
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      console.log('section.offsetHeight', section.offsetHeight);
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
-      </div>
-    </div>
+
+
+
   </body>
 </html>

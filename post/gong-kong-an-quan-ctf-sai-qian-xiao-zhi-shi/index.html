@@ -1,97 +1,102 @@
+
+<!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>工控安全：CTF赛前小知识 | KEYONE</title>
-<meta name="description" content="PenTesting&Security Research <br>
-LOVE & PEACE ❤️JUST FOR FUN" />
-<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1564130199678">
+    
+<meta charset="utf-8" >
+
+<title>工控安全：CTF赛前小知识 | KEYONE——三年级小学生</title>
+<meta name="description" content="PenTesting&amp;Security Research &lt;br&gt;
+LOVE &amp; PEACE ❤️JUST FOR FUN">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1568020129843">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
 
+
+  
+    <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css" />
+  
+
+  
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://hi-kk.github.io/">
-  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1564130199678" alt="">
-  </a>
-  <h1 class="site-title">
-    KEYONE
-  </h1>
-  <p class="site-description">
-    PenTesting&Security Research <br>
-LOVE & PEACE ❤️JUST FOR FUN
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://hi-kk.github.io/">
+        <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1568020129843" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://hi-kk.github.io/">
+        <h1 class="site-title">KEYONE——三年级小学生</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
         <div class="post-detail">
-          <article class="post">
-            <h2 class="post-title">
-              工控安全：CTF赛前小知识
-            </h2>
-            <div class="post-info">
-              <span>
-                2018-11-09
-              </span>
-              <span>
-                3 min read
-              </span>
-              
+          
+            <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi.png')">
             </div>
+          
+          <h2 class="post-title">工控安全：CTF赛前小知识</h2>
+          <div class="post-info post-detail-info">
+            <span><i class="icon-calendar-outline"></i> 2018-11-09</span>
             
-              <img class="post-feature-image" src="https://hi-kk.github.io//post-images/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi.png" alt="">
-            
-            <div class="post-content-wrapper">
-              <div class="post-content">
-                <p>看到一篇有关工控CTF的赛前知识点介绍，感觉比较详细的，在此分享一下</p>
+          </div>
+          <div class="post-content">
+            <p>看到一篇有关工控CTF的赛前知识点介绍，感觉比较详细的，在此分享一下</p>
 <!--more-->
 <h2 id="工控比赛考察点">工控比赛考察点</h2>
 <p>采用 CTF 分类模型，总结分析当前工控 ICS 比赛中的关键点</p>
@@ -298,153 +303,99 @@ LOVE & PEACE ❤️JUST FOR FUN
 </ul>
 <p>转自：https://ctf-wiki.github.io/ctf-wiki/ics/</p>
 
-              </div>
-              <div class="toc-container">
-                <ul class="markdownIt-TOC">
-<li>
-<ul>
-<li><a href="#%E5%B7%A5%E6%8E%A7%E6%AF%94%E8%B5%9B%E8%80%83%E5%AF%9F%E7%82%B9">工控比赛考察点</a>
-<ul>
-<li><a href="#web-%E6%B8%97%E9%80%8F%E7%B1%BBweb">Web 渗透类（Web）</a></li>
-<li><a href="#%E9%80%86%E5%90%91%E5%88%86%E6%9E%90reverse">逆向分析（Reverse）</a></li>
-<li><a href="#%E5%B7%A5%E6%8E%A7%E5%8D%8F%E8%AE%AEprotocol">工控协议（Protocol）</a></li>
-<li><a href="#%E5%B7%A5%E6%8E%A7%E7%BC%96%E7%A8%8Bprogram">工控编程（Program）</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B7%A5%E6%8E%A7%E8%AE%BE%E5%A4%87%E5%8F%91%E7%8E%B0">工控设备发现</a>
-<ul>
-<li><a href="#%E5%B7%A5%E6%8E%A7%E6%89%AB%E6%8F%8F%E8%84%9A%E6%9C%AC">工控扫描脚本</a>
-<ul>
-<li><a href="#%E5%9F%BA%E4%BA%8E%E5%B7%A5%E6%8E%A7%E7%AB%AF%E5%8F%A3%E7%9A%84nmap%E6%89%AB%E6%8F%8F%E8%84%9A%E6%9C%AC">基于工控端口的nmap扫描脚本</a></li>
-<li><a href="#%E5%9F%BA%E4%BA%8E%E5%B7%A5%E6%8E%A7%E7%BB%84%E6%80%81%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%BB%84%E4%BB%B6%E6%89%AB%E6%8F%8F">基于工控组态软件的组件扫描</a></li>
-</ul>
-</li>
-<li><a href="#%E5%B7%A5%E6%8E%A7%E6%89%AB%E6%8F%8F%E4%B8%8E%E5%8F%91%E7%8E%B0%E5%BC%95%E6%93%8E">工控扫描与发现引擎</a>
-<ul>
-<li><a href="#shodan-%E5%BC%95%E6%93%8E">Shodan 引擎</a></li>
-<li><a href="#zoomeye-%E5%BC%95%E6%93%8E">Zoomeye 引擎</a></li>
-<li><a href="#fofa-%E5%BC%95%E6%93%8E">FOFA 引擎</a></li>
-<li><a href="#diting-%E5%85%A8%E7%BD%91%E5%BC%95%E6%93%8E">Diting 全网引擎</a></li>
-<li><a href="#censys-%E5%85%A8%E7%BD%91%E5%BC%95%E6%93%8E">Censys 全网引擎</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#%E5%B7%A5%E6%8E%A7%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8">工控漏洞利用</a>
-<ul>
-<li><a href="#%E7%BB%84%E6%80%81%E5%88%A9%E7%94%A8">组态利用</a>
-<ul>
-<li><a href="#%E7%BB%84%E6%80%81%E7%9A%84%E5%88%A9%E7%94%A8%E6%96%B9%E6%B3%95">组态的利用方法</a></li>
-</ul>
-</li>
-<li><a href="#%E9%80%9A%E4%BF%A1%E5%8A%AB%E6%8C%81">通信劫持</a>
-<ul>
-<li><a href="#%E9%80%9A%E4%BF%A1%E5%8A%AB%E6%8C%81%E7%9A%84%E6%96%B9%E6%B3%95">通信劫持的方法</a></li>
-</ul>
-</li>
-<li><a href="#web-%E6%B8%97%E9%80%8F">Web 渗透</a>
-<ul>
-<li><a href="#web%E6%B8%97%E9%80%8F%E7%9A%84%E5%B8%B8%E7%94%A8%E6%96%B9%E6%B3%95">Web渗透的常用方法</a></li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-              </div>
-            </div>
-          </article>
+          </div>
         </div>
 
         
           <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://hi-kk.github.io//post/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju">
+            <a class="purple-link" href="https://hi-kk.github.io//post/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju">
               <h3 class="post-title">
-                智能汽车安全研究：风险点、破解案例、研究工具
+                下一篇：智能汽车安全研究：风险点、破解案例、研究工具
               </h3>
             </a>
           </div>
+          
+      </div>
+
+      
+        
+          <div id="gitalk-container"></div>
         
 
         
-          
-            <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
-<script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+      
 
-<div id="gitalk-container"></div>
-
-<script>
-
-  var gitalk = new Gitalk({
-    clientID: 'ad403fd7697bade5a7db',
-    clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
-    repo: 'hi-kk.github.io',
-    owner: 'hi-KK',
-    admin: ['hi-KK'],
-    id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
-    distractionFreeMode: false  // Facebook-like distraction free mode
-  })
-
-  gitalk.render('gitalk-container')
-
-</script>
-
-          
-
-          
-        
-
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+      <div class="site-footer">
+  <div class="slogan">PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hi-KK" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+        <a href="https://weibo.com/M0L0K" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/soulk/" target="_blank">
+          <i class="fab fa-zhihu"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+    </div>
+    <script type="application/javascript">
 
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
+hljs.initHighlightingOnLoad()
 
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
-
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      console.log('section.offsetHeight', section.offsetHeight);
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
-      </div>
-    </div>
+
+
+  
+    <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+    <script>
+
+      var gitalk = new Gitalk({
+        clientID: 'ad403fd7697bade5a7db',
+        clientSecret: '79897ccf8604c3b962eb063a6eb25f322126ff91',
+        repo: 'hi-kk.github.io',
+        owner: 'hi-KK',
+        admin: ['hi-KK'],
+        id: (location.pathname).substring(0, 49),      // Ensure uniqueness and length less than 50
+        distractionFreeMode: false  // Facebook-like distraction free mode
+      })
+
+      gitalk.render('gitalk-container')
+
+    </script>
+  
+
+  
+
+
+
+
   </body>
 </html>

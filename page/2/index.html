@@ -1,239 +1,298 @@
+
 <html>
   <head>
-    <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>KEYONE</title>
-<meta name="description" content="PenTesting&Security Research <br>
-LOVE & PEACE ❤️JUST FOR FUN" />
-<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1564130199678">
+    
+<meta charset="utf-8" >
+
+<title>KEYONE——三年级小学生</title>
+<meta name="description" content="PenTesting&amp;Security Research &lt;br&gt;
+LOVE &amp; PEACE ❤️JUST FOR FUN">
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
+
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1568020129843">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
 
+
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
   </head>
   <body>
-    <div class="main">
-      <div class="main-content">
-        <div class="site-header">
-  <a href="https://hi-kk.github.io/">
-  <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1564130199678" alt="">
-  </a>
-  <h1 class="site-title">
-    KEYONE
-  </h1>
-  <p class="site-description">
-    PenTesting&Security Research <br>
-LOVE & PEACE ❤️JUST FOR FUN
-  </p>
-  <div class="menu-container">
-    
-      
-        <a href="/" class="menu">
-          首页
-        </a>
-      
-    
-      
-        <a href="/archives" class="menu">
-          归档
-        </a>
-      
-    
-      
-        <a href="/tags" class="menu">
-          标签
-        </a>
-      
-    
-      
-        <a href="/post/about" class="menu">
-          关于
-        </a>
-      
-    
-  </div>
-  <div class="social-container">
-    
-      
-    
-      
-    
-      
-    
-      
-    
-      
-    
+    <div id="app" class="main">
+      <div class="site-header-container">
+  <div class="site-header">
+    <div class="left">
+      <a href="https://hi-kk.github.io/">
+        <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1568020129843" alt="" width="32px" height="32px">
+      </a>
+      <a href="https://hi-kk.github.io/">
+        <h1 class="site-title">KEYONE——三年级小学生</h1>
+      </a>
+    </div>
+    <div class="right">
+      <transition name="fade">
+        <i class="icon" :class="{ 'icon-close-outline': menuVisible, 'icon-menu-outline': !menuVisible }" @click="menuVisible = !menuVisible"></i>
+      </transition>
+    </div>
   </div>
 </div>
 
+<transition name="fade">
+  <div class="menu-container" style="display: none;" v-show="menuVisible">
+    <div class="menu-list">
+      
+        
+          <a href="/" class="menu purple-link">
+            首页
+          </a>
+        
+      
+        
+          <a href="/archives" class="menu purple-link">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="menu purple-link">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="menu purple-link">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+</transition>
+
+
+      <div class="content-container">
+        
+        
+<section class="post-item">
+    <div class="content">
+      <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing">
+        <h2 class="post-title">漏洞实验：Adobe Flash Player远程代码执行</h2>
+      </a>
+      <div class="post-abstract">
+        <p>漏洞编号：CVE-2018-15982</p>
+
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2018-12-26</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://hi-kk.github.io//tag/6rZMKBuua">
+                实验
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/FeWV10Xlx">
+                复现
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/NyeCpWt6rg">
+                命令执行
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/K_FPj1WAl">
+                漏洞
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
     
-        <div class="post-container">
-  
-    <article class="post">
+      <a href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing.png')">
+        </div>
+      </a>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
       <a href="https://hi-kk.github.io//post/gong-kong-an-quan-ru-he-jiang-shodan-shu-ju-wan-mei-di-cun-ru-shu-ju-ku">
         <h2 class="post-title">工控安全：如何将Shodan数据完美地存入数据库</h2>
       </a>
-      <div class="post-info">
-        <span>
-          2018-12-19
-        </span>
-        <span>
-          1 min read
-        </span>
-        
-          <a href="https://hi-kk.github.io//tag/0AtD0NXlo" class="post-tag">
-            # shodan
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/G7QS4bExG" class="post-tag">
-            # 工控安全
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/6nBhZ7wLk" class="post-tag">
-            # 技巧
-          </a>
-        
-      </div>
-      
-        <a href="https://hi-kk.github.io//post/gong-kong-an-quan-ru-he-jiang-shodan-shu-ju-wan-mei-di-cun-ru-shu-ju-ku" class="post-feature-image" style="background-image: url('https://hi-kk.github.io//post-images/gong-kong-an-quan-ru-he-jiang-shodan-shu-ju-wan-mei-di-cun-ru-shu-ju-ku.png')">
-        </a>
-      
       <div class="post-abstract">
         <h2 id="开局">开局</h2>
 <p><em>“ 开局一张图，内容全靠编 ”</em></p>
 
-      </di>
-    </article>
-  
-    <article class="post">
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2018-12-19</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://hi-kk.github.io//tag/0AtD0NXlo">
+                shodan
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/G7QS4bExG">
+                工控安全
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/6nBhZ7wLk">
+                技巧
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+      <a href="https://hi-kk.github.io//post/gong-kong-an-quan-ru-he-jiang-shodan-shu-ju-wan-mei-di-cun-ru-shu-ju-ku">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/gong-kong-an-quan-ru-he-jiang-shodan-shu-ju-wan-mei-di-cun-ru-shu-ju-ku.png')">
+        </div>
+      </a>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
       <a href="https://hi-kk.github.io//post/hello-gridea">
         <h2 class="post-title">Hello Gridea</h2>
       </a>
-      <div class="post-info">
-        <span>
-          2018-12-12
-        </span>
-        <span>
-          1 min read
-        </span>
-        
-          <a href="https://hi-kk.github.io//tag/xFuxegg6-" class="post-tag">
-            # Gridea
-          </a>
-        
-      </div>
-      
-        <a href="https://hi-kk.github.io//post/hello-gridea" class="post-feature-image" style="background-image: url('https://hi-kk.github.io//post-images/hello-gridea.png')">
-        </a>
-      
       <div class="post-abstract">
         <p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
 ✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
 
-      </di>
-    </article>
-  
-    <article class="post">
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2018-12-12</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://hi-kk.github.io//tag/xFuxegg6-">
+                Gridea
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+      <a href="https://hi-kk.github.io//post/hello-gridea">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/hello-gridea.png')">
+        </div>
+      </a>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
       <a href="https://hi-kk.github.io//post/gong-kong-an-quan-nmap-nse-sao-miao-jiao-ben-lie-biao">
         <h2 class="post-title">工控安全：Nmap NSE扫描脚本列表</h2>
       </a>
-      <div class="post-info">
-        <span>
-          2018-11-20
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-          <a href="https://hi-kk.github.io//tag/WKgaKVV-5" class="post-tag">
-            # 扫描
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/0ckZQWxan" class="post-tag">
-            # nmap
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/G7QS4bExG" class="post-tag">
-            # 工控安全
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/EqhCCbtZ3r" class="post-tag">
-            # 协议
-          </a>
-        
-      </div>
-      
-        <a href="https://hi-kk.github.io//post/gong-kong-an-quan-nmap-nse-sao-miao-jiao-ben-lie-biao" class="post-feature-image" style="background-image: url('https://hi-kk.github.io//post-images/gong-kong-an-quan-nmap-nse-sao-miao-jiao-ben-lie-biao.png')">
-        </a>
-      
       <div class="post-abstract">
         <p>这里的nse脚本列表是针对工控协议的</p>
 
-      </di>
-    </article>
-  
-    <article class="post">
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2018-11-20</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://hi-kk.github.io//tag/WKgaKVV-5">
+                扫描
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/0ckZQWxan">
+                nmap
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/G7QS4bExG">
+                工控安全
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/EqhCCbtZ3r">
+                协议
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
+    
+      <a href="https://hi-kk.github.io//post/gong-kong-an-quan-nmap-nse-sao-miao-jiao-ben-lie-biao">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/gong-kong-an-quan-nmap-nse-sao-miao-jiao-ben-lie-biao.png')">
+        </div>
+      </a>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
       <a href="https://hi-kk.github.io//post/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi">
         <h2 class="post-title">工控安全：CTF赛前小知识</h2>
       </a>
-      <div class="post-info">
-        <span>
-          2018-11-09
-        </span>
-        <span>
-          3 min read
-        </span>
-        
-      </div>
-      
-        <a href="https://hi-kk.github.io//post/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi" class="post-feature-image" style="background-image: url('https://hi-kk.github.io//post-images/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi.png')">
-        </a>
-      
       <div class="post-abstract">
         <p>看到一篇有关工控CTF的赛前知识点介绍，感觉比较详细的，在此分享一下</p>
 
-      </di>
-    </article>
-  
-    <article class="post">
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2018-11-09</span>
+        
+      </div>
+    </div>
+    
+      <a href="https://hi-kk.github.io//post/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/gong-kong-an-quan-ctf-sai-qian-xiao-zhi-shi.png')">
+        </div>
+      </a>
+    
+  </section>
+
+<section class="post-item">
+    <div class="content">
       <a href="https://hi-kk.github.io//post/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju">
         <h2 class="post-title">智能汽车安全研究：风险点、破解案例、研究工具</h2>
       </a>
-      <div class="post-info">
-        <span>
-          2018-11-01
-        </span>
-        <span>
-          2 min read
-        </span>
-        
-          <a href="https://hi-kk.github.io//tag/uBfGzcLXf" class="post-tag">
-            # 汽车
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/TCRO9X6K_A" class="post-tag">
-            # 汽车安全
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/8hTOpbrTRg" class="post-tag">
-            # 工具
-          </a>
-        
-          <a href="https://hi-kk.github.io//tag/nfMLnOATe" class="post-tag">
-            # 分享
-          </a>
-        
-      </div>
-      
-        <a href="https://hi-kk.github.io//post/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju" class="post-feature-image" style="background-image: url('https://hi-kk.github.io//post-images/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju.png')">
-        </a>
-      
       <div class="post-abstract">
         <h1 id="前言">前言</h1>
 <p>很幸运公司采购了一台荣威智能网联汽车给我们作研究（壕）<br>
@@ -241,68 +300,110 @@ LOVE & PEACE ❤️JUST FOR FUN
 于是就各种Google搜罗相关资料，这里就分享下自己对搜集到各种资料进行的一个入门性总结，希望能够帮助其他跟我一样刚接触、准备研究汽车安全的朋友对这块知识体系做一个大概了解。<br>
 这篇文章主要内容是智能网联汽车的风险点分析、已有的汽车破解案例以及入门汽车安全研究的一些工具</p>
 
-      </di>
-    </article>
-  
-</div>
-
+      </div>
+      <div class="post-info">
+        <span><i class="icon icon-calendar-outline"></i> 2018-11-01</span>
+        
+          <span>
+            <i class="icon icon-pricetags-outline"></i>
+            
+              <a href="https://hi-kk.github.io//tag/uBfGzcLXf">
+                汽车
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/TCRO9X6K_A">
+                汽车安全
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/8hTOpbrTRg">
+                工具
+                
+                  ，
+                
+              </a>
+            
+              <a href="https://hi-kk.github.io//tag/nfMLnOATe">
+                分享
+                
+              </a>
+            
+          </span>
+        
+      </div>
+    </div>
     
-        <div class="pagination-container">
-  
-    <a href="https://hi-kk.github.io//" class="prev-page">上一页</a>
-  
-  
-</div>
-
+      <a href="https://hi-kk.github.io//post/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju">
+        <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/zhi-neng-qi-che-an-quan-yan-jiu-feng-xian-dian-po-jie-an-li-yan-jiu-gong-ju.png')">
+        </div>
+      </a>
     
-        <div class="site-footer">
-  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | 
-  <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+  </section>
+
+
+<div class="pagination-container">
+  
+    <a href="https://hi-kk.github.io//" class="prev"><i class="icon-arrow-ios-back-outline"></i> 上一页</a>
+  
+  
 </div>
 
-<script>
-  hljs.initHighlightingOnLoad()
 
-  let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+      </div>
 
-  // This should probably be throttled.
-  // Especially because it triggers during smooth scrolling.
-  // https://lodash.com/docs/4.17.10#throttle
-  // You could do like...
-  // window.addEventListener("scroll", () => {
-  //    _.throttle(doThatStuff, 100);
-  // });
-  // Only not doing it here to keep this Pen dependency-free.
+      <div class="site-footer">
+  <div class="slogan">PenTesting&Security Research <br>
+LOVE & PEACE ❤️JUST FOR FUN</div>
+  <div class="social-container">
+    
+      
+        <a href="https://github.com/hi-KK" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
+      
+    
+      
+    
+      
+        <a href="https://weibo.com/M0L0K" target="_blank">
+          <i class="fab fa-weibo"></i>
+        </a>
+      
+    
+      
+        <a href="https://www.zhihu.com/people/soulk/" target="_blank">
+          <i class="fab fa-zhihu"></i>
+        </a>
+      
+    
+      
+    
+  </div>
+  Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://hi-kk.github.io//atom.xml" target="_blank">RSS</a>
+</div>
 
-  window.addEventListener("scroll", event => {
-    let fromTop = window.scrollY;
 
-    mainNavLinks.forEach((link, index) => {
-      let section = document.getElementById(decodeURI(link.hash).substring(1));
-      let nextSection = null
-      if (mainNavLinks[index + 1]) {
-        nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
-      }
-      console.log('section.offsetHeight', section.offsetHeight);
-      if (section.offsetTop <= fromTop) {
-        if (nextSection) {
-          if (nextSection.offsetTop > fromTop) {
-            link.classList.add("current");
-          } else {
-            link.classList.remove("current");    
-          }
-        } else {
-          link.classList.add("current");
-        }
-      } else {
-        link.classList.remove("current");
-      }
-    });
-  });
+    </div>
+    <script type="application/javascript">
+
+hljs.initHighlightingOnLoad()
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
 
 </script>
 
-      </div>
-    </div>
+
+
+
   </body>
 </html>
