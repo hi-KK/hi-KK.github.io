@@ -13,7 +13,7 @@ LOVE &amp; PEACE ❤️JUST FOR FUN">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css">
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1569727084995">
+<link rel="shortcut icon" href="https://hi-kk.github.io//favicon.ico?v=1571037746405">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
 <link rel="stylesheet" href="https://hi-kk.github.io//styles/main.css">
 
@@ -37,7 +37,7 @@ LOVE &amp; PEACE ❤️JUST FOR FUN">
   <div class="site-header">
     <div class="left">
       <a href="https://hi-kk.github.io/">
-        <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1569727084995" alt="" width="32px" height="32px">
+        <img class="avatar" src="https://hi-kk.github.io//images/avatar.png?v=1571037746405" alt="" width="32px" height="32px">
       </a>
       <a href="https://hi-kk.github.io/">
         <h1 class="site-title">KEYONE——三年级小学生</h1>
@@ -161,7 +161,7 @@ var PREPROC_RULE_PATH c:\snort\preproc_rules
 var WHITE_LIST_PATH c:\snort\rules
 var BLACK_LIST_PATH c:\snort\rules
 </code></pre>
-<p><img src="https://hi-kk.github.io//post-images/1563935501116.png" alt=""></p>
+<figure data-type="image" tabindex="1"><img src="https://hi-kk.github.io//post-images/1563935501116.png" alt=""></figure>
 <pre><code># path to dynamic preprocessor libraries
 
 dynamicpreprocessor directory c:\snort\lib\snort_dynamicpreprocessor
@@ -170,44 +170,44 @@ dynamicpreprocessor directory c:\snort\lib\snort_dynamicpreprocessor
 
 dynamicengine c:\snort\lib\snort_dynamicengine\sf_engine.dll
 </code></pre>
-<p><img src="https://hi-kk.github.io//post-images/1563935513767.png" alt=""></p>
-<p><img src="https://hi-kk.github.io//post-images/1563935527636.png" alt=""></p>
+<figure data-type="image" tabindex="2"><img src="https://hi-kk.github.io//post-images/1563935513767.png" alt=""></figure>
+<figure data-type="image" tabindex="3"><img src="https://hi-kk.github.io//post-images/1563935527636.png" alt=""></figure>
 <p>此处安装参考:http://www.cnblogs.com/lasgalen/p/4512755.html</p>
 <h2 id="规则验证">规则验证</h2>
 <p>进入<code>C:\Snort\rules</code>，新建三个文件</p>
-<p><img src="https://hi-kk.github.io//post-images/1563935541107.png" alt=""></p>
+<figure data-type="image" tabindex="4"><img src="https://hi-kk.github.io//post-images/1563935541107.png" alt=""></figure>
 <p>在文件<code>local.rules</code>添加我们的snort规则进行验证测试，例如：</p>
 <pre><code>alert tcp any any -&gt; any 1911 (msg:&quot;IDS: fox-info&quot;; content:&quot;|66 6f 78|&quot;;  sid:1112515; rev:1;)
 </code></pre>
 <p>CMD进入目录<code>C:\Snort\bin</code></p>
 <p>注意：snort只能识别pcap后缀的包文件，用wireshark的pcapng后缀会报错 需要再另存为一下 修改文件格式 不是直接改后缀哦</p>
-<p><img src="https://hi-kk.github.io//post-images/1563935566053.png" alt=""></p>
+<figure data-type="image" tabindex="5"><img src="https://hi-kk.github.io//post-images/1563935566053.png" alt=""></figure>
 <p><img src="https://hi-kk.github.io//post-images/1563935577435.png" alt=""><br>
 然后运行：</p>
 <pre><code>PS C:\Snort\bin&gt; .\snort.exe  -c c:\snort\etc\snort.conf -l c:\snort\log -r .\fox_info.pcap
 </code></pre>
 <p>没有报错就说明成功运行了，去看看log有没有输出信息</p>
 <p>进入<code>C:\Snort\log</code></p>
-<p><img src="https://hi-kk.github.io//post-images/1563935592124.png" alt=""></p>
+<figure data-type="image" tabindex="6"><img src="https://hi-kk.github.io//post-images/1563935592124.png" alt=""></figure>
 <p><img src="https://hi-kk.github.io//post-images/1563935604411.png" alt=""><br>
 成功按规则进行了信息输出，到此规则验证成功</p>
 <h2 id="pcap规则编写思路">pcap规则编写思路</h2>
 <p>IEC61850-MMS协议</p>
-<p><img src="https://hi-kk.github.io//post-images/1563935624772.png" alt=""></p>
+<figure data-type="image" tabindex="7"><img src="https://hi-kk.github.io//post-images/1563935624772.png" alt=""></figure>
 <p>先用wireshark打开对应的数据包文件，因为wireshark适配了mms协议的解析，所以可以很直观的分辨出哪个数据包对应什么功能</p>
-<p><img src="https://hi-kk.github.io//post-images/1563935642261.png" alt=""></p>
+<figure data-type="image" tabindex="8"><img src="https://hi-kk.github.io//post-images/1563935642261.png" alt=""></figure>
 <p>从上图可知，选中的数据包执行的是<strong>start</strong>操作</p>
-<p><img src="https://hi-kk.github.io//post-images/1563935658744.png" alt=""></p>
+<figure data-type="image" tabindex="9"><img src="https://hi-kk.github.io//post-images/1563935658744.png" alt=""></figure>
 <p>从上图可知，选中的数据包执行的是<strong>stop</strong>操作</p>
 <p>现在，我们把对应的数据包十六进制数据提取出来，做一下对比，就可以很轻松的写出对应的snort规则</p>
-<p><img src="https://hi-kk.github.io//post-images/1563935678185.png" alt=""></p>
+<figure data-type="image" tabindex="10"><img src="https://hi-kk.github.io//post-images/1563935678185.png" alt=""></figure>
 <p>提取出snort规则，在文件<code>local.rules</code>添加我们的snort规则进行验证测试，例如：</p>
 <pre><code>alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-START&quot;; content:&quot;|bf 28 1b|&quot;;  sid:1112727; rev:1;)
 alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-STOP&quot;; content:&quot;|bf 29 19|&quot;;  sid:1112728; rev:1;)
 alert tcp any any -&gt; any 102 (msg:&quot;IDS: mms-RESET&quot;; content:&quot;|bf 2b 19|&quot;;  sid:1112729; rev:1;)
 </code></pre>
 <p>尝试验证一下数据包的规则，查看日志：</p>
-<p><img src="https://hi-kk.github.io//post-images/1563935695810.png" alt=""></p>
+<figure data-type="image" tabindex="11"><img src="https://hi-kk.github.io//post-images/1563935695810.png" alt=""></figure>
 <p>可以发现日志里记录了规则命中的输出信息，到此就算规则编写完成了。</p>
 
           </div>

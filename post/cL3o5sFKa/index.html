@@ -5,7 +5,7 @@
     
 <meta charset="utf-8" >
 
-<title>工控安全：S7-1200 PLC远程启停攻击实验 | KEYONE——三年级小学生</title>
+<title>代码审计技巧：实时查看mysql执行语句 | KEYONE——三年级小学生</title>
 <meta name="description" content="PenTesting&amp;Security Research &lt;br&gt;
 LOVE &amp; PEACE ❤️JUST FOR FUN">
 
@@ -87,32 +87,53 @@ LOVE &amp; PEACE ❤️JUST FOR FUN">
       <div class="content-container">
         <div class="post-detail">
           
-            <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/gong-kong-an-quan-s7-1200-plc-yuan-cheng-qi-ting-gong-ji-shi-yan.jpg')">
+            <div class="feature-container" style="background-image: url('https://hi-kk.github.io//post-images/cL3o5sFKa.jpg')">
             </div>
           
-          <h2 class="post-title">工控安全：S7-1200 PLC远程启停攻击实验</h2>
+          <h2 class="post-title">代码审计技巧：实时查看mysql执行语句</h2>
           <div class="post-info post-detail-info">
-            <span><i class="icon-calendar-outline"></i> 2018-12-29</span>
+            <span><i class="icon-calendar-outline"></i> 2019-10-14</span>
             
               <span>
                 <i class="icon-pricetags-outline"></i>
                 
-                  <a href="https://hi-kk.github.io//tag/R3D6Rg0VJ">
-                    攻击
+                  <a href="https://hi-kk.github.io//tag/8hTOpbrTRg">
+                    工具
                     
                       ，
                     
                   </a>
                 
-                  <a href="https://hi-kk.github.io//tag/6rZMKBuua">
-                    实验
+                  <a href="https://hi-kk.github.io//tag/93b9AwaLX">
+                    web安全
                     
                       ，
                     
                   </a>
                 
-                  <a href="https://hi-kk.github.io//tag/G7QS4bExG">
-                    工控安全
+                  <a href="https://hi-kk.github.io//tag/3SN5eZTOEM">
+                    代码审计
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/iksoNDeNd">
+                    原创
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/nfMLnOATe">
+                    分享
+                    
+                      ，
+                    
+                  </a>
+                
+                  <a href="https://hi-kk.github.io//tag/6nBhZ7wLk">
+                    技巧
                     
                   </a>
                 
@@ -120,47 +141,31 @@ LOVE &amp; PEACE ❤️JUST FOR FUN">
             
           </div>
           <div class="post-content">
-            <p>公司刚好有此PLC设备，于是利用github上的开源脚本对S7-1200 PLC进行远程启停攻击实验</p>
-<!--more-->
-<h2 id="工具及运行环境">工具及运行环境</h2>
-<pre><code class="language-bash">root@kali:~# git clone https://github.com/dark-lbp/isf/
-root@kali:~# cd isf/
-root@kali:~/isf# python isf.py 
-root@kali:~/isf# pip install -r requirements.txt
+            <p>当我们进行代码审计，测试sql注入的时候，如果能实时查看执行每个系统操作对应的sql语句执行情况，势必能事半功倍。</p>
+<!-- more -->
+<h3 id="第一种">第一种</h3>
+<p>使用linux命令<code>tail -f</code>来实时查看mysql日志中执行的sql语句（其他数据库也可用类似方法）<br>
+步骤如下：<br>
+1.打开mysql的配置文件:<code>/etc/mysql/mysql.conf.d/mysqld.cnf</code></p>
+<p>2.在[mysqld]下面加上这两行，然后保存：</p>
+<pre><code>general_log_file        = /var/log/mysql/mysql.log
+general_log             = 1
 </code></pre>
-<p>安装好所需python模块，运行isf.py无报错<br>
-<img src="https://hi-kk.github.io//post-images/1563938824684.png" alt=""></p>
-<h2 id="网络设置与plc连接">网络设置与PLC连接</h2>
-<p>本次实验所用的PLC设备如下，设备型号为<code>SIMATIC S7-1200</code><br>
-<img src="https://hi-kk.github.io//post-images/1563938844104.png" alt=""></p>
-<p>将设备接通电源后，此时PLC 指示灯<code>RUN/STOP</code>点亮 绿灯<br>
-<img src="https://hi-kk.github.io//post-images/1563938863112.png" alt=""></p>
-<p>此时使用网线将PLC与主机相连，配置主机网卡IP地址<br>
-<img src="https://hi-kk.github.io//post-images/1563938884154.png" alt=""></p>
-<p>此时我们还不知道PLC设定的IP地址，所以需要对网段进行扫描<br>
-<img src="https://hi-kk.github.io//post-images/1563938898774.png" alt=""></p>
-<p>可以看到：使用nmap扫描出的设备除了本机IP就是<code>PLC</code>设备的IP了，其对应的MAC地址也与设备上的标识一致</p>
-<h2 id="远程攻击演示">远程攻击演示</h2>
-<p>这里我们用的到的攻击模块是<br>
-<code>exploits/plcs/siemens/s7_1200_plc_control</code><br>
-<img src="https://hi-kk.github.io//post-images/1563938919118.png" alt=""></p>
-<p><code>show options查看该模块的配置信息</code><br>
-<code>target: 攻击PLC目标IP地址</code><br>
-<code>port: 攻击PLC目标端口（默认是102端口）</code><br>
-<code>command：攻击指令（0-启动PLC、1-停止PLC、2-重置PLC、3-重置PLC和IP）</code><br>
-<img src="https://hi-kk.github.io//post-images/1563938934709.png" alt=""></p>
-<p>设置好后，输入run指令 开始远程攻击<code>PLC</code><br>
-<img src="https://hi-kk.github.io//post-images/1563938954082.png" alt=""></p>
-<p>此时<code>PLC</code>指示灯 <code>RUN/STOP</code> 变成 黄灯，说明PLC设备已经停止运行，远程攻击成功！</p>
+<p>3.通过tail命令进行实时查看<br>
+<code>sudo tail -f /var/log/mysql/mysql.log</code></p>
+<p>如此，当进行各种操作，执行sql语句之后，此窗口能实时显示sql执行情况，如果sql语句报错，则不会显示在日志中，这样来审计sql注入就会很方便。</p>
+<h3 id="第二种">第二种</h3>
+<p>使用<code>mysql审计插件</code>（法师的Seay代码审计系统），也有单独提取版，工具是在windows环境运行<br>
+<img src="https://hi-kk.github.io//post-images/1571037519753.jpg" alt=""></p>
 
           </div>
         </div>
 
         
           <div class="next-post">
-            <a class="purple-link" href="https://hi-kk.github.io//post/lou-dong-shi-yan-cve-2018-15982-adobe-flash-player-yuan-cheng-dai-ma-zhi-xing">
+            <a class="purple-link" href="https://hi-kk.github.io//post/GR3fDMiWL">
               <h3 class="post-title">
-                下一篇：漏洞实验：Adobe Flash Player远程代码执行
+                下一篇：工控安全：工控协议仿真模拟器
               </h3>
             </a>
           </div>
